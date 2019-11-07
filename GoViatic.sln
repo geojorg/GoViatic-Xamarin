@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29430.225
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoViatic.Android", "GoViatic.Android\GoViatic.Android.csproj", "{EE389826-A367-487E-8BFC-932F537965EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoViatic", "GoViatic\GoViatic.csproj", "{06644074-00B1-4811-8328-F8B0233E6FCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE389826-A367-487E-8BFC-932F537965EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE389826-A367-487E-8BFC-932F537965EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE389826-A367-487E-8BFC-932F537965EB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EE389826-A367-487E-8BFC-932F537965EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE389826-A367-487E-8BFC-932F537965EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE389826-A367-487E-8BFC-932F537965EB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{06644074-00B1-4811-8328-F8B0233E6FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06644074-00B1-4811-8328-F8B0233E6FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06644074-00B1-4811-8328-F8B0233E6FCD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{06644074-00B1-4811-8328-F8B0233E6FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06644074-00B1-4811-8328-F8B0233E6FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06644074-00B1-4811-8328-F8B0233E6FCD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94C881B2-C649-41E3-9A34-5F7A8FC3FA72}
+	EndGlobalSection
+EndGlobal
