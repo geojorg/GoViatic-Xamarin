@@ -6,6 +6,22 @@
              mc:Ignorable="d"
              x:Class="GoViatic.App">
     <Application.Resources>
-
+        <Style TargetType="Label">
+            <Setter Property="FontFamily">
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">ubuntu.ttf#Ubuntu</On>
+                </OnPlatform>
+            </Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily">
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android">ubuntu.ttf#Ubuntu</On>
+                </OnPlatform>
+            </Setter>
+        </Style>
+        <OnPlatform x:TypeArguments="x:String" x:Key="UbuntuBold">
+            <On Platform="Android">ubuntu_bold.ttf#Ubuntu-B</On>
+        </OnPlatform>
     </Application.Resources>
 </Application>

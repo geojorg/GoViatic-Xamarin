@@ -1,6 +1,5 @@
-﻿using System;
+﻿using GoViatic.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace GoViatic
 {
@@ -10,7 +9,7 @@ namespace GoViatic
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new WelcomePage();
         }
 
         protected override void OnStart()

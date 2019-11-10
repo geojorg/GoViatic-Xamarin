@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+             xmlns:models="clr-namespace:GoViatic.Model"
+             mc:Ignorable="d"
+             x:Class="GoViatic.Views.WelcomePage"
+             x:DataType="viewModels:WelcomeViewModel">
+
+    <ContentPage.Content>
+        <StackLayout x:DataType="viewModels:WelcomeViewModel">
+            <CarouselView
+                ItemsSource="{Binding Carousels}"
+                PeekAreaInsets="0"
+                PositionChangedCommand="{Binding PositionChangedCommand}"
+                PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Carousel">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image
+                                Margin="0,130,0,0"
+                                HeightRequest="250"
+                                Grid.Row="0"
+                                Source="{Binding Icon}"
+                                WidthRequest="220">
+                            </Image>
+                            <Label
+                                FontSize="Title"
+                                FontFamily="{StaticResource UbuntuBold}"
+                                Grid.Row="1"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Header}"
+                                Padding="0,30,0,0">
+                            </Label>
+                            <Label
+                                Grid.Row="2"
+                                FontSize="Body"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Body}"
+                                Padding="20,30,20,0">
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Margin="0,0,0,10">
+                <BoxView
+                        BackgroundColor="{Binding BoxView0}"
+                        CornerRadius="100"
+                        HeightRequest="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="10">
+                </BoxView>
+                <BoxView
+                        BackgroundColor="{Binding BoxView1}"
+                        CornerRadius="100"
+                        HeightRequest="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="10">
+                </BoxView>
+                <BoxView
+                        BackgroundColor="{Binding BoxView2}"
+                        CornerRadius="100"
+                        HeightRequest="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="10">
+                </BoxView>
+            </StackLayout>
+            <Button
+                BackgroundColor="#247D4D"
+                CornerRadius="18"
+                HeightRequest="36"
+                HorizontalOptions="Center"
+                Margin="0,0,0,50"
+                Text="Empezar Ahora"
+                TextColor="White"
+                WidthRequest="190">
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
