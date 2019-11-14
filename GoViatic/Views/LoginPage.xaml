@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+             mc:Ignorable="d"
+             x:Class="GoViatic.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White"
+             Visual="Material">
+    
+    <ContentPage.Content>
+        <Grid x:DataType="viewModels:LoginViewModel"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image
+                Aspect="AspectFit"
+                Grid.Row="0"
+                Source="loginheader"
+                Margin="0,0,0,20">
+            </Image>
+            <Label
+                Grid.Row="1"
+                HeightRequest="57"
+                FontSize="26"
+                FontFamily="{StaticResource UbuntuBold}"
+                Text="HELLO THERE, TIME TO TRAVEL"
+                TextColor="#247D4D"
+                Margin="30,0,150,0"
+                WidthRequest="200">
+            </Label>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="2"
+                FontFamily="{StaticResource UbuntuBold}"
+                Margin="25,0,25,0"
+                Placeholder="Email">
+            </Entry>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="3"
+                IsPassword="True"
+                FontFamily="{StaticResource UbuntuBold}"
+                Margin="25,0,25,0"
+                Placeholder="Password">
+            </Entry>
+            <StackLayout
+                Grid.Row="4"
+                Orientation="Horizontal"
+                Spacing="0"
+                Margin="25,0,25,0"
+                VerticalOptions="StartAndExpand">
+                <CheckBox 
+                Grid.Row="4"
+                x:Name="CheckBoxPassword"
+                Color="Gray">
+                </CheckBox>
+                <Label
+                    FontSize="Body"
+                    Text="Show Password"
+                    VerticalOptions="Center">
+                </Label>
+            </StackLayout>
+            <Label
+                FontSize="Body"
+                HorizontalOptions="Center"
+                Grid.Row="5"
+                Margin="0,60,0,0"
+                Text="Forgot your Password ?">
+            </Label>
+            <Button
+                BackgroundColor="#247D4D"
+                CornerRadius="7"
+                Grid.Row="6"
+                HeightRequest="36"
+                HorizontalOptions="Center"
+                Margin="0,0,0,50"
+                Text="SIGN IN"
+                TextColor="White"
+                WidthRequest="190">
+            </Button>
+            <Label
+                Grid.Row="7"
+                HorizontalOptions="Center"
+                FontSize="Body"
+                Text="New Here ? Sign Up">
+            </Label>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

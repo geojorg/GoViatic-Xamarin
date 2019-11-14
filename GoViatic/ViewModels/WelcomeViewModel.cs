@@ -1,4 +1,6 @@
-﻿using GoViatic.Model;
+﻿using GalaSoft.MvvmLight.Command;
+using GoViatic.Model;
+using GoViatic.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -89,6 +91,19 @@ namespace GoViatic.ViewModels
                     BoxView2 = "#247D4D";
                     break;
             }
+        }
+
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return new RelayCommand(Login);
+            }
+        }
+
+        private void Login()
+        {
+            Shell.Current.GoToAsync("//Login");
         }
     }
 }
