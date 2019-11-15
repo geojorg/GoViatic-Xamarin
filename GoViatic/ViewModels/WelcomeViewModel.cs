@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
@@ -42,6 +43,7 @@ namespace GoViatic.ViewModels
             source = new List<Carousel>();
             CreateCarouselCollection();
             OnPropertyChanged("CurrentItem");
+            Preferences.Set("firstRun", "Yes");
         }
 
         private void CreateCarouselCollection()

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+             mc:Ignorable="d"
+             x:Class="GoViatic.Views.RegisterPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White"
+             Visual="Material">
+
+    <ContentPage.Content>
+        <Grid x:DataType="viewModels:RegisterViewModel"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image
+                Aspect="AspectFit"
+                Grid.Row="0"
+                Source="loginheader"
+                Margin="0,0,0,20">
+            </Image>
+            <Label
+                Grid.Row="1"
+                HeightRequest="57"
+                FontSize="26"
+                FontFamily="{StaticResource UbuntuBold}"
+                Text="GET ON BOARD"
+                TextColor="#247D4D"
+                Margin="30,0,150,0"
+                WidthRequest="200">
+            </Label>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="2"
+                Margin="25,0,25,0"
+                Placeholder="Name">
+            </Entry>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="3"
+                Margin="25,0,25,0"
+                Placeholder="Company">
+            </Entry>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="4"
+                Keyboard="Email"
+                Margin="25,0,25,0"
+                Placeholder="Email">
+            </Entry>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="5"
+                Margin="25,0,25,0"
+                Placeholder="Password">
+            </Entry>
+            <Entry
+                BackgroundColor="Transparent"
+                Grid.Row="6"
+                Margin="25,0,25,0"
+                Placeholder="Confirm Password">
+            </Entry>
+            <Label
+                FontSize="Body"
+                HorizontalOptions="Center"
+                Grid.Row="7"
+                Margin="60,20,60,0"
+                HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="By creatin an account, you agree to the "/>
+                        <Span Text="Terms and Use" TextDecorations="Underline"/>
+                        <Span Text=" and "/>
+                        <Span Text="Privacy Policy" TextDecorations="Underline"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Button
+                BackgroundColor="#247D4D"
+                Grid.Row="8"
+                HorizontalOptions="Center"
+                HeightRequest="36"
+                Text="SIGN UP"
+                Margin="0,0,0,30"
+                TextColor="White"
+                WidthRequest="190">
+            </Button>
+            <Label
+                Grid.Row="9"
+                HorizontalOptions="Center"
+                Text="I am already a member"
+                FontSize="Body"
+                TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

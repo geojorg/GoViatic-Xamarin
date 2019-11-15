@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms.Xaml;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace GoViatic
 {
@@ -9,7 +10,17 @@ namespace GoViatic
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
+
+            var firstime = Preferences.Get("firstRun", string.Empty);
+            if (firstime == "Yes")
+            {
+                MainPage = new AppShell();
+                Shell.Current.GoToAsync("//Login");
+            }
+            else
+            {
+                MainPage = new AppShell();
+            }
         }
 
         protected override void OnStart()

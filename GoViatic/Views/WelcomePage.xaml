@@ -12,8 +12,14 @@
              Visual="Material">
 
     <ContentPage.Content>
-        <StackLayout x:DataType="viewModels:WelcomeViewModel">
+        <Grid x:DataType="viewModels:WelcomeViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <CarouselView
+                Grid.Row="0"
                 ItemsSource="{Binding Carousels}"
                 PeekAreaInsets="0"
                 PositionChangedCommand="{Binding PositionChangedCommand}"
@@ -55,6 +61,7 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <StackLayout
+                Grid.Row="1"
                 HorizontalOptions="Center"
                 Orientation="Horizontal"
                 Margin="0,0,0,10">
@@ -84,16 +91,17 @@
                 </BoxView>
             </StackLayout>
             <Button
+                Grid.Row="2"
                 BackgroundColor="#247D4D"
                 Command="{Binding LoginCommand}"
                 CornerRadius="7"
-                HeightRequest="36"
+                HeightRequest="46"
                 HorizontalOptions="Center"
                 Margin="0,0,0,50"
                 Text="Empezar Ahora"
                 TextColor="White"
                 WidthRequest="190">
             </Button>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

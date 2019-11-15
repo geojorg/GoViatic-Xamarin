@@ -34,18 +34,26 @@
             </Label>
             <Entry
                 BackgroundColor="Transparent"
-                Grid.Row="2"
                 FontFamily="{StaticResource UbuntuBold}"
+                Grid.Row="2"
+                Keyboard="Email"
                 Margin="25,0,25,0"
                 Placeholder="Email">
             </Entry>
             <Entry
                 BackgroundColor="Transparent"
                 Grid.Row="3"
-                IsPassword="True"
                 FontFamily="{StaticResource UbuntuBold}"
                 Margin="25,0,25,0"
+                Text="{Binding Password}"
                 Placeholder="Password">
+                <Entry.Triggers>
+                    <DataTrigger
+                        TargetType="Entry"
+                        Binding="{Binding Source={x:Reference CheckBoxPassword}, Path=IsChecked}" Value="False">
+                        <Setter Property="IsPassword" Value="True"/>
+                    </DataTrigger>
+                </Entry.Triggers>
             </Entry>
             <StackLayout
                 Grid.Row="4"
@@ -56,11 +64,21 @@
                 <CheckBox 
                 Grid.Row="4"
                 x:Name="CheckBoxPassword"
-                Color="Gray">
+                Color="#247D4D">
                 </CheckBox>
                 <Label
                     FontSize="Body"
                     Text="Show Password"
+                    VerticalOptions="Center">
+                </Label>
+                <Switch
+                    Margin="60,0,0,0"
+                    IsToggled="{Binding IsRemembered, Mode=TwoWay}"
+                    OnColor="#ABABAB">
+                </Switch>
+                <Label
+                    FontSize="Body"
+                    Text="Remember Me"
                     VerticalOptions="Center">
                 </Label>
             </StackLayout>
@@ -70,6 +88,9 @@
                 Grid.Row="5"
                 Margin="0,60,0,0"
                 Text="Forgot your Password ?">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RecoverPswCommand}"/>
+                </Label.GestureRecognizers>
             </Label>
             <Button
                 BackgroundColor="#247D4D"
@@ -83,10 +104,20 @@
                 WidthRequest="190">
             </Button>
             <Label
+                LineBreakMode="WordWrap"
                 Grid.Row="7"
                 HorizontalOptions="Center"
-                FontSize="Body"
-                Text="New Here ? Sign Up">
+                FontSize="Body">
+                <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="New Here ? "/>
+                        <Span Text="Sign Up" TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
             </Label>
         </Grid>
     </ContentPage.Content>
