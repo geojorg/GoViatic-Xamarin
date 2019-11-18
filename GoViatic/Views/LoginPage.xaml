@@ -15,6 +15,14 @@
             RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Image
                 Aspect="AspectFit"
@@ -37,12 +45,14 @@
                 FontFamily="{StaticResource UbuntuBold}"
                 Grid.Row="2"
                 Keyboard="Email"
+                Text="{Binding Email}"
                 Margin="25,0,25,0"
                 Placeholder="Email">
             </Entry>
             <Entry
                 BackgroundColor="Transparent"
                 Grid.Row="3"
+                Keyboard="Default"
                 FontFamily="{StaticResource UbuntuBold}"
                 Margin="25,0,25,0"
                 Text="{Binding Password}"
@@ -83,9 +93,16 @@
                 </Label>
             </StackLayout>
             <Label
+                Grid.Row="5"
+                HorizontalOptions="Center"
+                Text="Please Check your Email or Password"
+                TextColor="{Binding EmptyString}"
+                FontSize="Body">
+            </Label>
+            <Label
                 FontSize="Body"
                 HorizontalOptions="Center"
-                Grid.Row="5"
+                Grid.Row="6"
                 Margin="0,60,0,0"
                 Text="Forgot your Password ?">
                 <Label.GestureRecognizers>
@@ -95,7 +112,8 @@
             <Button
                 BackgroundColor="#247D4D"
                 CornerRadius="7"
-                Grid.Row="6"
+                Command="{Binding LoginCommand}"
+                Grid.Row="7"
                 HeightRequest="36"
                 HorizontalOptions="Center"
                 Margin="0,0,0,50"
@@ -105,7 +123,7 @@
             </Button>
             <Label
                 LineBreakMode="WordWrap"
-                Grid.Row="7"
+                Grid.Row="8"
                 HorizontalOptions="Center"
                 FontSize="Body">
                 <Label.FormattedText>

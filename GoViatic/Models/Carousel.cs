@@ -1,4 +1,4 @@
-﻿namespace GoViatic.Model
+﻿namespace GoViatic.Models
 {
     public class Carousel
     {

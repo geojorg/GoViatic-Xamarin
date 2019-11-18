@@ -1,7 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GoViatic.Model;
-using GoViatic.Views;
-using System;
+﻿using GoViatic.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -70,7 +67,6 @@ namespace GoViatic.ViewModels
         }
 
         public ICommand PositionChangedCommand => new Command<int>(PositionChanged);
-
         void PositionChanged(int position)
         {
             CurrentPosition = position;
@@ -94,18 +90,13 @@ namespace GoViatic.ViewModels
                     break;
             }
         }
-
         public ICommand LoginCommand
         {
             get
             {
-                return new RelayCommand(Login);
+                return new Command(() =>
+                { Shell.Current.GoToAsync("//Login"); });
             }
-        }
-
-        private void Login()
-        {
-            Shell.Current.GoToAsync("//Login");
         }
     }
 }
