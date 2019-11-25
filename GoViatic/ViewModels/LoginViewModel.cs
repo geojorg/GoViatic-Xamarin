@@ -9,11 +9,18 @@ namespace GoViatic.ViewModels
         private string _email;
         private string _emptyString;
         private bool _isRemembered;
+        private string _message;
 
         public LoginViewModel()
         {
             EmptyString = "Transparent";
             IsRemembered = true;
+        }
+
+        public string Message
+        {
+            get { return _message; }
+            set { SetProperty(ref _message, value); }
         }
 
         public string EmptyString 
@@ -45,15 +52,25 @@ namespace GoViatic.ViewModels
             {
                 return new Command(() =>
                 {
-                    if (string.IsNullOrEmpty(_email) || string.IsNullOrEmpty(_password))
+                    if (string.IsNullOrEmpty(_email) && string.IsNullOrEmpty(_password))
                     {
+                        Message = "Please Check your Email and Password";
+                        EmptyString = "Red";
+                    }
+                    else if (string.IsNullOrEmpty(_email))
+                    {
+                        Message = "Please Check your Email";
+                        EmptyString = "Red";
+                    }
+                    else if (string.IsNullOrEmpty(_password))
+                    {
+                        Message = "Please Check your Password";
                         EmptyString = "Red";
                     }
                     else
                     {
                         EmptyString = "Transparent";
-                        Email = string.Empty;
-                        Password = string.Empty;
+                        Message = string.Empty;
                     }
                 });
             }

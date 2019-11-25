@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-             xmlns:models="clr-namespace:GoViatic.Model"
+             xmlns:models="clr-namespace:GoViatic.Models"
              mc:Ignorable="d"
              x:Class="GoViatic.Views.WelcomePage"
              Shell.NavBarIsVisible="False"

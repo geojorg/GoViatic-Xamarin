@@ -20,8 +20,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto "/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Image
@@ -95,7 +95,7 @@
             <Label
                 Grid.Row="5"
                 HorizontalOptions="Center"
-                Text="Please Check your Email or Password"
+                Text="{Binding Message}"
                 TextColor="{Binding EmptyString}"
                 FontSize="Body">
             </Label>
@@ -103,7 +103,7 @@
                 FontSize="Body"
                 HorizontalOptions="Center"
                 Grid.Row="6"
-                Margin="0,60,0,0"
+                Margin="0,50,0,20"
                 Text="Forgot your Password ?">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding RecoverPswCommand}"/>
