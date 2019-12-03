@@ -7,27 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GoViatic.Web.Controllers
 {
-    [Authorize(Roles = "Manager")]
-    public class ManagersController : Controller
+    public class ViaticsController : Controller
     {
         private readonly DataContext _context;
 
-        public ManagersController(DataContext context)
+        public ViaticsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Managers
+        // GET: Viatics
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Managers.ToListAsync());
+            return View(await _context.Viatics.ToListAsync());
         }
 
-        // GET: Managers/Details/5
+        // GET: Viatics/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +33,39 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers
+            var viatic = await _context.Viatics
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (manager == null)
+            if (viatic == null)
             {
                 return NotFound();
             }
 
-            return View(manager);
+            return View(viatic);
         }
 
-        // GET: Managers/Create
+        // GET: Viatics/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Managers/Create
+        // POST: Viatics/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Manager manager)
+        public async Task<IActionResult> Create([Bind("Id,ViaticName,Description,InvoiceDate,ImageUrl")] Viatic viatic)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(manager);
+                _context.Add(viatic);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(manager);
+            return View(viatic);
         }
 
-        // GET: Managers/Edit/5
+        // GET: Viatics/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +73,22 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers.FindAsync(id);
-            if (manager == null)
+            var viatic = await _context.Viatics.FindAsync(id);
+            if (viatic == null)
             {
                 return NotFound();
             }
-            return View(manager);
+            return View(viatic);
         }
 
-        // POST: Managers/Edit/5
+        // POST: Viatics/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Manager manager)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ViaticName,Description,InvoiceDate,ImageUrl")] Viatic viatic)
         {
-            if (id != manager.Id)
+            if (id != viatic.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace GoViatic.Web.Controllers
             {
                 try
                 {
-                    _context.Update(manager);
+                    _context.Update(viatic);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ManagerExists(manager.Id))
+                    if (!ViaticExists(viatic.Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +113,10 @@ namespace GoViatic.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(manager);
+            return View(viatic);
         }
 
-        // GET: Managers/Delete/5
+        // GET: Viatics/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +124,30 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers
+            var viatic = await _context.Viatics
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (manager == null)
+            if (viatic == null)
             {
                 return NotFound();
             }
 
-            return View(manager);
+            return View(viatic);
         }
 
-        // POST: Managers/Delete/5
+        // POST: Viatics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var manager = await _context.Managers.FindAsync(id);
-            _context.Managers.Remove(manager);
+            var viatic = await _context.Viatics.FindAsync(id);
+            _context.Viatics.Remove(viatic);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ManagerExists(int id)
+        private bool ViaticExists(int id)
         {
-            return _context.Managers.Any(e => e.Id == id);
+            return _context.Viatics.Any(e => e.Id == id);
         }
     }
 }

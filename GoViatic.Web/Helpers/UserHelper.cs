@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using GoViatic.Web.Data.Entities;
 using System.Threading.Tasks;
+using GoViatic.Web.Models;
 
 namespace GoViatic.Web.Helpers
 {
@@ -50,6 +51,32 @@ namespace GoViatic.Web.Helpers
         public async Task<bool> IsUserInRoleAsync(User user, string roleName)
         {
             return await _userManager.IsInRoleAsync(user, roleName);
+        }
+
+        public async Task<SignInResult> LoginAsync(LoginViewModel model)
+        {
+            return await _signInManager.PasswordSignInAsync(
+                model.Username,
+                model.Password,
+                model.RememberMe,
+                false);
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
+        public async Task<bool> DeleteUserAsync(string email)
+        {
+            var user = await GetUserByEmailAsync(email);
+            if (user == null)
+            {
+                return true;
+            }
+
+            var response = await _userManager.DeleteAsync(user);
+            return response.Succeeded;
         }
     }
 }

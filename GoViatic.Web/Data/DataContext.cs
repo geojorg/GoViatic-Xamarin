@@ -1,6 +1,7 @@
 ﻿using GoViatic.Web.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using GoViatic.Web.Models;
 
 namespace GoViatic.Web.Data
 {
@@ -15,5 +16,6 @@ namespace GoViatic.Web.Data
         public DbSet<Trip> Trips  { get; set; }
         public DbSet<Viatic> Viatics { get; set; }
         public DbSet<ViaticType> ViaticTypes { get; set; }
+        public DbSet<GoViatic.Web.Models.TripViewModel> TripViewModel { get; set; }
     }
 }

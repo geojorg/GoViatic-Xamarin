@@ -4,15 +4,89 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Traveler</h2>
 
 <div>
-    <h4>Traveler</h4>
+    <h4>Details</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Document)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Document)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Company)
+        </dd>
+        <dt>
+            # Trips
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Trips.Count)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="AddTrip" asp-route-id="@Model.Id" class="btn btn-primary">Add Trip</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>
+@if (Model.Trips.Count == 0)
+{
+    <h4> No Trips added</h4>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trips.FirstOrDefault().City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trips.FirstOrDefault().DateLocal)
+                </th>
+                <th>
+                    # Viatics
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Trips)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Viatics.Count)
+                    </td>
+                    <td>
+                        <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> 
+                        <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-success">Details</a> 
+                        <a asp-action="DeleteTrip" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

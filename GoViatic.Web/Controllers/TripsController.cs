@@ -7,27 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GoViatic.Web.Controllers
 {
-    [Authorize(Roles = "Manager")]
-    public class ManagersController : Controller
+    public class TripsController : Controller
     {
         private readonly DataContext _context;
 
-        public ManagersController(DataContext context)
+        public TripsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Managers
+        // GET: Trips
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Managers.ToListAsync());
+            return View(await _context.Trips.ToListAsync());
         }
 
-        // GET: Managers/Details/5
+        // GET: Trips/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +33,39 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers
+            var trip = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (manager == null)
+            if (trip == null)
             {
                 return NotFound();
             }
 
-            return View(manager);
+            return View(trip);
         }
 
-        // GET: Managers/Create
+        // GET: Trips/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Managers/Create
+        // POST: Trips/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Manager manager)
+        public async Task<IActionResult> Create([Bind("Id,City,Date,EndDate")] Trip trip)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(manager);
+                _context.Add(trip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(manager);
+            return View(trip);
         }
 
-        // GET: Managers/Edit/5
+        // GET: Trips/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +73,22 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers.FindAsync(id);
-            if (manager == null)
+            var trip = await _context.Trips.FindAsync(id);
+            if (trip == null)
             {
                 return NotFound();
             }
-            return View(manager);
+            return View(trip);
         }
 
-        // POST: Managers/Edit/5
+        // POST: Trips/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Manager manager)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Date,EndDate")] Trip trip)
         {
-            if (id != manager.Id)
+            if (id != trip.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace GoViatic.Web.Controllers
             {
                 try
                 {
-                    _context.Update(manager);
+                    _context.Update(trip);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ManagerExists(manager.Id))
+                    if (!TripExists(trip.Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +113,10 @@ namespace GoViatic.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(manager);
+            return View(trip);
         }
 
-        // GET: Managers/Delete/5
+        // GET: Trips/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +124,30 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers
+            var trip = await _context.Trips
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (manager == null)
+            if (trip == null)
             {
                 return NotFound();
             }
 
-            return View(manager);
+            return View(trip);
         }
 
-        // POST: Managers/Delete/5
+        // POST: Trips/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var manager = await _context.Managers.FindAsync(id);
-            _context.Managers.Remove(manager);
+            var trip = await _context.Trips.FindAsync(id);
+            _context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ManagerExists(int id)
+        private bool TripExists(int id)
         {
-            return _context.Managers.Any(e => e.Id == id);
+            return _context.Trips.Any(e => e.Id == id);
         }
     }
 }

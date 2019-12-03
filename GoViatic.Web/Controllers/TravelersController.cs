@@ -7,33 +7,45 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
+using GoViatic.Web.Models;
+using GoViatic.Web.Helpers;
 
 namespace GoViatic.Web.Controllers
 {
+    [Authorize(Roles ="Manager")]
     public class TravelersController : Controller
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
+        private readonly IComboHelper _comboHelper;
 
-        public TravelersController(DataContext context)
+        public TravelersController(DataContext context, IUserHelper userHelper, IComboHelper comboHelper)
         {
             _context = context;
+            _userHelper = userHelper;
+            _comboHelper = comboHelper;
         }
 
-        // GET: Travelers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Travelers.ToListAsync());
+            return View(_context.Travelers
+                .Include(t => t.User)
+                .Include(t => t.Trips));
         }
 
-        // GET: Travelers/Details/5
+        //DETAILS OF THE USER
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var traveler = await _context.Travelers
+                .Include(t => t.User)
+                .Include(t => t.Trips)
+                .ThenInclude(v => v.Viatics)
+                .ThenInclude(o => o.ViaticType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (traveler == null)
             {
@@ -43,29 +55,58 @@ namespace GoViatic.Web.Controllers
             return View(traveler);
         }
 
-        // GET: Travelers/Create
+        //CREATION OF THE USER
         public IActionResult Create()
         {
             return View();
         }
-
-        // POST: Travelers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Traveler traveler)
+        public async Task<IActionResult> Create(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(traveler);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = new User
+                {
+                    FirstName = model.FirstName,
+                    Email = model.Username,
+                    Document = model.Document,
+                    Company = model.Company,
+                    UserName = model.Username
+                };
+
+                var response = await _userHelper.AddUserAsync(user, model.Password);
+                if (response.Succeeded)
+                {
+                    var userInDB = await _userHelper.GetUserByEmailAsync(model.Username);
+                    await _userHelper.AddUserToRoleAsync(userInDB, "Traveler");
+                    var traveler = new Traveler
+                    {
+                        Trips = new List<Trip>(),
+                        Viatics = new List<Viatic>(),
+                        User = userInDB
+                    };
+                    _context.Travelers.Add(traveler);
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, ex.ToString());
+                        return View(model);
+                    }                    
+                }
+                ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
             }
-            return View(traveler);
+            return View(model);
         }
 
-        // GET: Travelers/Edit/5
+
+
+        //EDIT USER
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +122,6 @@ namespace GoViatic.Web.Controllers
             return View(traveler);
         }
 
-        // POST: Travelers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id")] Traveler traveler)
@@ -149,5 +187,48 @@ namespace GoViatic.Web.Controllers
         {
             return _context.Travelers.Any(e => e.Id == id);
         }
+
+        //ADD TRIP
+        public async Task<IActionResult> AddTrip(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var traveler = await _context.Travelers.FindAsync(id.Value);
+            if (traveler == null)
+            {
+                return NotFound();
+            }
+            var model = new TripViewModel
+            {
+                City = "Bogota",
+                TravelerId = traveler.Id,
+                Date = DateTime.Today
+            };
+            return View(model);
+        }
+
+        //ADD VIATIC
+        public async Task<IActionResult> AddViatic(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var trip = await _context.Trips.FindAsync(id.Value);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+            var model = new ViaticViewModel
+            {
+                TripId = trip.Id,
+                ViaticType = _comboHelper.GetComboViaticType()
+            };
+            return View(model);
+        }
+
+        
     }
 }
