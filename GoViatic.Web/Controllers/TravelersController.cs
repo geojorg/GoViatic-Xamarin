@@ -10,6 +10,7 @@ using GoViatic.Web.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using GoViatic.Web.Models;
 using GoViatic.Web.Helpers;
+using System.IO;
 
 namespace GoViatic.Web.Controllers
 {
@@ -19,12 +20,14 @@ namespace GoViatic.Web.Controllers
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
         private readonly IComboHelper _comboHelper;
+        private readonly IConverterHelper _converterHelper;
 
-        public TravelersController(DataContext context, IUserHelper userHelper, IComboHelper comboHelper)
+        public TravelersController(DataContext context, IUserHelper userHelper, IComboHelper comboHelper, IConverterHelper converterHelper)
         {
             _context = context;
             _userHelper = userHelper;
             _comboHelper = comboHelper;
+            _converterHelper = converterHelper;
         }
 
         public IActionResult Index()
@@ -209,6 +212,20 @@ namespace GoViatic.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddTrip(TripViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var trip = await _converterHelper.ToTripAsync(model, true);
+                _context.Trips.Add(trip);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{model.TravelerId}");
+            };
+            return View(model);
+        }
+
+
         //ADD VIATIC
         public async Task<IActionResult> AddViatic(int? id)
         {
@@ -229,6 +246,34 @@ namespace GoViatic.Web.Controllers
             return View(model);
         }
 
-        
+        [HttpPost]
+        public async Task<IActionResult> AddViatic(ViaticViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var path = string.Empty;
+
+                if (model.ImageFile != null)
+                    {
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
+                        path = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot\\image\\Invoices",
+                            file);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await model.ImageFile.CopyToAsync(stream);
+                        }
+                        path = $"~/image/Invoices/{file}";
+                    }
+                var viatic = await _converterHelper.ToViaticAsync(model, path);
+                _context.Viatics.Add(viatic);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{model.TripId}");
+            }
+            return View(model);
+        }
     }
 }

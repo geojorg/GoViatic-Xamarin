@@ -63,6 +63,9 @@ else
                     @Html.DisplayNameFor(model => model.Trips.FirstOrDefault().DateLocal)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Trips.FirstOrDefault().EndDateLocal)
+                </th>
+                <th>
                     # Viatics
                 </th>
             </tr>
@@ -70,22 +73,25 @@ else
         <tbody>
             @foreach (var item in Model.Trips)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Viatics.Count)
-                    </td>
-                    <td>
-                        <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> 
-                        <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-success">Details</a> 
-                        <a asp-action="DeleteTrip" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Viatics.Count)
+                </td>
+                <td>
+                    <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+                    <a asp-action="DeleteTrip" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

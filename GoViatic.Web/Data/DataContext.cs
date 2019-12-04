@@ -16,6 +16,5 @@ namespace GoViatic.Web.Data
         public DbSet<Trip> Trips  { get; set; }
         public DbSet<Viatic> Viatics { get; set; }
         public DbSet<ViaticType> ViaticTypes { get; set; }
-        public DbSet<GoViatic.Web.Models.TripViewModel> TripViewModel { get; set; }
     }
 }
