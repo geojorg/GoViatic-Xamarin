@@ -8,21 +8,20 @@ namespace GoViatic.Web.Data
 {
     public class SeedDb
     {
-        private readonly DataContext _dataContext;
+        private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
 
         public SeedDb(
             DataContext context,
             IUserHelper userHelper)
         {
-            _dataContext = context;
+            _context = context;
             _userHelper = userHelper;
         }
         public async Task SeedAsync()
         {
-            await _dataContext.Database.EnsureCreatedAsync();
+            await _context.Database.EnsureCreatedAsync();
             await CheckRoles();
-            await CheckViaticTypesAsync();
             await CheckViaticAsync();
 
             var manager = await CheckUserAync("Jorge Guerrero", "geojorg@gmail.com", "78305713", "GeojorgCO", "Manager");
@@ -52,10 +51,10 @@ namespace GoViatic.Web.Data
 
         private async Task CheckManagerAsync(User user)
         {
-            if (!_dataContext.Managers.Any())
+            if (!_context.Managers.Any())
             {
-                _dataContext.Managers.Add(new Manager { User = user });
-                await _dataContext.SaveChangesAsync();
+                _context.Managers.Add(new Manager { User = user });
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -67,52 +66,32 @@ namespace GoViatic.Web.Data
 
         private async Task CheckViaticAsync()
         {
-            if (!_dataContext.Viatics.Any())
+            if (!_context.Viatics.Any())
             {
-                AddViatic("Gasolina Extra","Tanqueo de 8 Galones");
-                AddViatic("Almuerzo Creppes and Waffles","Almuerzo para invitar a cliente");
-                await _dataContext.SaveChangesAsync();
+                AddViatic("Gasolina Extra","Tanqueo de 8 Galones", "Fuel", 200);
+                AddViatic("Almuerzo Creppes and Waffles","Almuerzo para invitar a cliente","Food" ,400);
+                await _context.SaveChangesAsync();
             }
         }
-        private void AddViatic(string viaticName, string description)
+        private void AddViatic(string viaticName, string description, string viaticType, decimal invoiceAmmount)
         {
-            _dataContext.Viatics.Add(new Viatic
+            _context.Viatics.Add(new Viatic
             {
+                InvoiceDate = DateTime.Today,
                 ViaticName = viaticName,
                 Description = description,
+                ViaticType = viaticType,
+                InvoiceAmmount = invoiceAmmount
             });
         }
 
         private async Task CheckTravelerAsync(User user)
         {
-            if (!_dataContext.Travelers.Any())
+            if (!_context.Travelers.Any())
             {
-                _dataContext.Travelers.Add(new Traveler { User = user });
-                await _dataContext.SaveChangesAsync();
+                _context.Travelers.Add(new Traveler { User = user });
+                await _context.SaveChangesAsync();
             }
-        }
-
-        private async Task CheckViaticTypesAsync()
-        {
-            if (!_dataContext.ViaticTypes.Any())
-            {
-                AddViaticType("Food");
-                AddViaticType("Fuel");
-                AddViaticType("Parking");
-                AddViaticType("Personal Charges");
-                AddViaticType("Phone");
-                AddViaticType("Transport");
-                AddViaticType("Lodging");
-                AddViaticType("Others");
-                await _dataContext.SaveChangesAsync();
-            }
-        }
-        private void AddViaticType(string concept)
-        {
-            _dataContext.ViaticTypes.Add(new ViaticType
-            {
-                Concept = concept
-            });
         }
     }
 }

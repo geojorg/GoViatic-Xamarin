@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoViatic.Web.Data.Entities
@@ -18,6 +19,7 @@ namespace GoViatic.Web.Data.Entities
         public string Description { get; set; }
 
         [Display(Name = "Invoice Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime InvoiceDate { get; set; }
 
         [Display(Name = "Invoice Date")]
@@ -27,12 +29,20 @@ namespace GoViatic.Web.Data.Entities
         [Display(Name = "Invoice Image")]
         public string ImageUrl { get; set; }
 
+        [Display(Name = "Invoice Ammount")]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        public decimal InvoiceAmmount { get; set; }
+
+        [Display(Name = "Viatic Type")]
+        [Required]
+        [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
+        public string ViaticType { get; set; }
+
         //TODO Put the right Url
         public string ImageFullPath => string.IsNullOrEmpty(ImageUrl)
             ? null
             : $"https://TBD";
 
-        public ViaticType ViaticType { get; set; }
         public Traveler Traveler { get; set; }
         public Trip Trip { get; set; }
     }

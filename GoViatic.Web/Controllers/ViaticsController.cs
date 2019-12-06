@@ -54,7 +54,7 @@ namespace GoViatic.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ViaticName,Description,InvoiceDate,ImageUrl")] Viatic viatic)
+        public async Task<IActionResult> Create([Bind("Id,ViaticName,Description,InvoiceDate,ImageUrl,InvoiceAmmount,ViaticType")] Viatic viatic)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace GoViatic.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ViaticName,Description,InvoiceDate,ImageUrl")] Viatic viatic)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ViaticName,Description,InvoiceDate,ImageUrl,InvoiceAmmount,ViaticType")] Viatic viatic)
         {
             if (id != viatic.Id)
             {

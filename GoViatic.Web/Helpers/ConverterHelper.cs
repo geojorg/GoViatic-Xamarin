@@ -7,11 +7,11 @@ namespace GoViatic.Web.Helpers
 {
     public class ConverterHelper : IConverterHelper
     {
-        private readonly DataContext _dataContext;
+        private readonly DataContext _context;
 
-        public ConverterHelper(DataContext dataContext)
+        public ConverterHelper(DataContext context)
         {
-            _dataContext = dataContext;
+            _context = context;
         }
         public async Task<Trip> ToTripAsync (TripViewModel model, bool isNew)
         {
@@ -21,26 +21,26 @@ namespace GoViatic.Web.Helpers
                 City = model.City,
                 Date = model.Date.ToUniversalTime(),
                 EndDate = model.EndDate.ToUniversalTime(),
-                Traveler = await _dataContext.Travelers.FindAsync(model.TravelerId),
+                Traveler = await _context.Travelers.FindAsync(model.TravelerId),
                 Viatics = model.Viatics
             };
         }
         
-        
-        
-        public async Task<Viatic> ToViaticAsync(ViaticViewModel model, string path)
+        public async Task<Viatic> ToViaticAsync(ViaticViewModel model, string path, bool isNew)
         {
-            return new Viatic
+            var viatic = new Viatic
             {
-                Id = model.Id,
+                Id = isNew ? 0 : model.Id,
                 Description = model.Description,
                 ImageUrl = path,
                 InvoiceDate = model.InvoiceDate,
                 ViaticName = model.ViaticName,
-                Traveler = await _dataContext.Travelers.FindAsync(model.Traveler),
-                ViaticType = await _dataContext.ViaticTypes.FindAsync(model.ViaticTypeId),
-                Trip = await _dataContext.Trips.FindAsync(model.TripId),
+                ViaticType = model.ViaticType,
+                Traveler = await _context.Travelers.FindAsync(model.Traveler),
+                Trip = await _context.Trips.FindAsync(model.TripId),
+
             };
+            return viatic;
         }
     }
 }

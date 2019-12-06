@@ -6,9 +6,7 @@ namespace GoViatic.Web.Helpers
 {
     public interface IConverterHelper
     {
-        Task<Viatic> ToViaticAsync(ViaticViewModel model, string path);
+        Task<Viatic> ToViaticAsync(ViaticViewModel model, string path, bool isNew);
         Task<Trip> ToTripAsync(TripViewModel model, bool isNew);
-
-
     }
 }

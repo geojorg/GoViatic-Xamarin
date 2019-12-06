@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,15 +17,16 @@ namespace GoViatic.Web.Controllers
     {
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
-        private readonly IComboHelper _comboHelper;
+        
         private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
 
-        public TravelersController(DataContext context, IUserHelper userHelper, IComboHelper comboHelper, IConverterHelper converterHelper)
+        public TravelersController(DataContext context, IUserHelper userHelper, IConverterHelper converterHelper, IImageHelper imageHelper)
         {
             _context = context;
             _userHelper = userHelper;
-            _comboHelper = comboHelper;
             _converterHelper = converterHelper;
+            _imageHelper = imageHelper;
         }
         
         public IActionResult CreateTraveler()
@@ -190,7 +190,8 @@ namespace GoViatic.Web.Controllers
             var model = new TripViewModel
             {
                 TravelerId = traveler.Id,
-                Date = DateTime.Today
+                Date = DateTime.Today,
+                EndDate = DateTime.Today.AddDays(2)
             };
             return View(model);
         }
@@ -218,7 +219,6 @@ namespace GoViatic.Web.Controllers
             var trip = await _context.Trips
                 .Include(t => t.Traveler)
                 .Include(t => t.Viatics)
-                .ThenInclude(v => v.ViaticType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             
             if (trip == null)
@@ -317,8 +317,9 @@ namespace GoViatic.Web.Controllers
             var model = new ViaticViewModel
             {
                 TripId = trip.Id,
-                ViaticTypes = _comboHelper.GetComboViaticTypes()
+                InvoiceDate = DateTime.Today
             };
+           
             return View(model);
         }
 
@@ -328,27 +329,16 @@ namespace GoViatic.Web.Controllers
             if (ModelState.IsValid)
             {
                 var path = string.Empty;
-
                 if (model.ImageFile != null)
                 {
-                    var guid = Guid.NewGuid().ToString();
-                    var file = $"{guid}.jpg";
-                    path = Path.Combine(
-                        Directory.GetCurrentDirectory(),
-                        "wwwroot\\image\\Invoices",
-                        file);
-
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await model.ImageFile.CopyToAsync(stream);
-                    }
-                    path = $"~/image/Invoices/{file}";
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
                 }
-                var viatic = await _converterHelper.ToViaticAsync(model, path);
+                var viatic = await _converterHelper.ToViaticAsync(model, path, true);
                 _context.Viatics.Add(viatic);
                 await _context.SaveChangesAsync();
                 return RedirectToAction($"DetailsTrip/{model.TripId}");
             }
+            
             return View(model);
         }
 
@@ -360,8 +350,5 @@ namespace GoViatic.Web.Controllers
         {
             return _context.Travelers.Any(e => e.Id == id);
         }
-
-
-
     }
 }
