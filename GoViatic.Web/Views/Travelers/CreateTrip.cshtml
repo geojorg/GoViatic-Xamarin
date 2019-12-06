@@ -1,15 +1,14 @@
 ﻿@model GoViatic.Web.Models.TripViewModel
-
 @{
-    ViewData["Title"] = "AddTrip";
+    ViewData["Title"] = "Create Trip";
 }
 
-<h2>AddTrip</h2>
+<h2>Add New Trip</h2>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddTrip" enctype="multipart/form-data">
+        <form asp-action="CreateTrip" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TravelerId"/>
            
@@ -29,8 +28,8 @@
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
-                <a asp-action="Details" asp-route-id="@Model.TravelerId" class="btn btn-primary">Back To Trip</a>
+                <input type="submit" value="CreateTrip" class="btn btn-success" />
+                <a asp-action="DetailsTraveler" asp-route-id="@Model.TravelerId" class="btn btn-danger">Back To Trips</a>
             </div>
         </form>
     </div>

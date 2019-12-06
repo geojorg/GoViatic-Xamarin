@@ -1,16 +1,15 @@
-﻿using System;
+﻿using GoViatic.Web.Data;
+using GoViatic.Web.Data.Entities;
+using GoViatic.Web.Helpers;
+using GoViatic.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GoViatic.Web.Data;
-using GoViatic.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
-using GoViatic.Web.Models;
-using GoViatic.Web.Helpers;
-using System.IO;
 
 namespace GoViatic.Web.Controllers
 {
@@ -29,43 +28,14 @@ namespace GoViatic.Web.Controllers
             _comboHelper = comboHelper;
             _converterHelper = converterHelper;
         }
-
-        public IActionResult Index()
-        {
-            return View(_context.Travelers
-                .Include(t => t.User)
-                .Include(t => t.Trips));
-        }
-
-        //DETAILS OF THE USER
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var traveler = await _context.Travelers
-                .Include(t => t.User)
-                .Include(t => t.Trips)
-                .ThenInclude(v => v.Viatics)
-                .ThenInclude(o => o.ViaticType)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (traveler == null)
-            {
-                return NotFound();
-            }
-
-            return View(traveler);
-        }
-
-        //CREATION OF THE USER
-        public IActionResult Create()
+        
+        public IActionResult CreateTraveler()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AddUserViewModel model)
+        public async Task<IActionResult> CreateTraveler(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -94,23 +64,20 @@ namespace GoViatic.Web.Controllers
                     try
                     {
                         await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(IndexTraveler));
                     }
                     catch (Exception ex)
                     {
                         ModelState.AddModelError(string.Empty, ex.ToString());
                         return View(model);
-                    }                    
+                    }
                 }
                 ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
             }
             return View(model);
         }
 
-
-
-        //EDIT USER
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditTraveler(int? id)
         {
             if (id == null)
             {
@@ -127,7 +94,7 @@ namespace GoViatic.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Traveler traveler)
+        public async Task<IActionResult> EditTraveler(int id, [Bind("Id")] Traveler traveler)
         {
             if (id != traveler.Id)
             {
@@ -152,13 +119,38 @@ namespace GoViatic.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexTraveler));
+            }
+            return View(traveler);
+        }
+        
+        public IActionResult IndexTraveler()
+        {
+            return View(_context.Travelers
+                .Include(t => t.User)
+                .Include(t => t.Trips));
+        }
+
+        public async Task<IActionResult> DetailsTraveler(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var traveler = await _context.Travelers
+                .Include(t => t.User)
+                .Include(t => t.Trips)
+                .ThenInclude(v => v.Viatics)
+                .ThenInclude(v => v.ViaticType)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (traveler == null)
+            {
+                return NotFound();
             }
             return View(traveler);
         }
 
-        // GET: Travelers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteTraveler(int? id)
         {
             if (id == null)
             {
@@ -175,7 +167,6 @@ namespace GoViatic.Web.Controllers
             return View(traveler);
         }
 
-        // POST: Travelers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -183,16 +174,10 @@ namespace GoViatic.Web.Controllers
             var traveler = await _context.Travelers.FindAsync(id);
             _context.Travelers.Remove(traveler);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexTraveler));
         }
 
-        private bool TravelerExists(int id)
-        {
-            return _context.Travelers.Any(e => e.Id == id);
-        }
-
-        //ADD TRIP
-        public async Task<IActionResult> AddTrip(int? id)
+        public async Task<IActionResult> CreateTrip(int? id)
         {
             if (id == null)
             {
@@ -205,7 +190,6 @@ namespace GoViatic.Web.Controllers
             }
             var model = new TripViewModel
             {
-                City = "Bogota",
                 TravelerId = traveler.Id,
                 Date = DateTime.Today
             };
@@ -213,17 +197,141 @@ namespace GoViatic.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTrip(TripViewModel model)
+        public async Task<IActionResult> CreateTrip(TripViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var trip = await _converterHelper.ToTripAsync(model, true);
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"Details/{model.TravelerId}");
+                return RedirectToAction($"DetailsTraveler/{model.TravelerId}");
             };
             return View(model);
         }
+
+        public async Task<IActionResult> DetailsTrip(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips
+                .Include(t => t.Traveler)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (trip == null)
+            {
+                return NotFound();
+            }
+            
+            return View(trip);
+        }
+
+        public async Task<IActionResult> EditTrip(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips.FindAsync(id);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+            return View(trip);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTrip(int id, [Bind("Id")] Trip trip)
+        {
+            if (id != trip.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(trip);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TravelerExists(trip.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(IndexTraveler));
+            }
+            return View(trip);
+        }
+
+        public async Task<IActionResult> DeleteTrip(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            return View(trip);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteTripConfirmed(int id)
+        {
+            var trip = await _context.Travelers.FindAsync(id);
+            _context.Travelers.Remove(trip);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(IndexTraveler));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private bool TravelerExists(int id)
+        {
+            return _context.Travelers.Any(e => e.Id == id);
+        }
+
+
+        
 
 
         //ADD VIATIC
@@ -241,7 +349,7 @@ namespace GoViatic.Web.Controllers
             var model = new ViaticViewModel
             {
                 TripId = trip.Id,
-                ViaticType = _comboHelper.GetComboViaticType()
+                ViaticTypes = _comboHelper.GetComboViaticTypes()
             };
             return View(model);
         }

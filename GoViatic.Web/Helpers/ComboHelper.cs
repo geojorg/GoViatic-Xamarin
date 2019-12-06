@@ -14,7 +14,7 @@ namespace GoViatic.Web.Helpers
             _dataContext = dataContext;
         }
         
-        public IEnumerable<SelectListItem> GetComboViaticType()
+        public IEnumerable<SelectListItem> GetComboViaticTypes()
         {
             var list = _dataContext.ViaticTypes.Select(vt => new SelectListItem
             {
@@ -24,6 +24,11 @@ namespace GoViatic.Web.Helpers
                 .OrderBy(vt => vt.Text)
                 .ToList();
 
+            list.Insert(0, new SelectListItem
+            {
+                Text = "[Select a viatic type...]",
+                Value = "0"
+            });
             return list;
         }
     }

@@ -1,13 +1,13 @@
 ﻿@model GoViatic.Web.Data.Entities.Traveler
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Traveler Details";
 }
 
-<h2>Traveler</h2>
+    <h2>Traveler @Html.DisplayFor(model => model.User.FirstName)</h2>
 
 <div>
-    <h4>Details</h4>
+    <h4>Information</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,12 +15,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.User.Document)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User.Email)
@@ -43,10 +37,12 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-    <a asp-action="AddTrip" asp-route-id="@Model.Id" class="btn btn-primary">Add Trip</a>
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
+    <a asp-action="CreateTrip" asp-route-id="@Model.Id" class="btn btn-success">Create Trip</a>
+    <a asp-action="IndexTraveler" class="btn btn-danger">Back to Travelers</a>
 </div>
+<hr />
+<h4>List of Trips</h4>
+<hr />
 @if (Model.Trips.Count == 0)
 {
     <h4> No Trips added</h4>
@@ -87,8 +83,8 @@ else
                     @Html.DisplayFor(modelItem => item.Viatics.Count)
                 </td>
                 <td>
-                    <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                    <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+                    <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                    <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-info">Details</a>
                     <a asp-action="DeleteTrip" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>

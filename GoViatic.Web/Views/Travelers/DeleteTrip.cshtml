@@ -1,4 +1,4 @@
-﻿@model GoViatic.Web.Data.Entities.Traveler
+﻿@model GoViatic.Web.Data.Entities.Trip
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,10 +12,10 @@
     <hr />
     <dl class="dl-horizontal">
     </dl>
-    
-    <form asp-action="Delete">
+
+    <form asp-action="DeleteTrip">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="DetailsTraveler">Back to List</a>
     </form>
 </div>

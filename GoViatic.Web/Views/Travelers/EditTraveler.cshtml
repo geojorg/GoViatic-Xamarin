@@ -1,16 +1,15 @@
 ﻿@model GoViatic.Web.Data.Entities.Traveler
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Traveler";
 }
 
-<h2>Edit</h2>
+<h2>Edit Traveler</h2>
 
-<h4>Traveler</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="EditTraveler">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -21,6 +20,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="IndexTraveler">Back to List</a>
 </div>
 

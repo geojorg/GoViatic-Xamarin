@@ -5,6 +5,6 @@ namespace GoViatic.Web.Helpers
 {
     public interface IComboHelper
     {
-        IEnumerable<SelectListItem> GetComboViaticType();
+        IEnumerable<SelectListItem> GetComboViaticTypes();
     }
 }

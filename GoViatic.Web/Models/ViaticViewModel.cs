@@ -11,14 +11,14 @@ namespace GoViatic.Web.Models
         public int TripId { get; set; }
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
-        [Display(Name = "Pet Type")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must select a viatic concept.")]
+        [Display(Name = "Viatic Type")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a viatic type.")]
         public int ViaticTypeId { get; set; }
 
         [Display(Name = "Image")]
         public IFormFile ImageFile { get; set; }
 
-        public new IEnumerable<SelectListItem> ViaticType { get; set; }
+        public IEnumerable<SelectListItem> ViaticTypes { get; set; }
 
 
     }

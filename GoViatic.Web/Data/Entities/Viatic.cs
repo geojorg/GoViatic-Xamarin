@@ -7,6 +7,9 @@ namespace GoViatic.Web.Data.Entities
     {
         public int Id { get; set; }
 
+        [Display(Name = "Viatic")]
+        [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string ViaticName { get; set; }
 
         [Display(Name = "Description")]
@@ -14,13 +17,14 @@ namespace GoViatic.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Description { get; set; }
 
+        [Display(Name = "Invoice Date")]
         public DateTime InvoiceDate { get; set; }
 
         [Display(Name = "Invoice Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime InvoiceDateLocal => InvoiceDate.ToLocalTime();
 
-        [Display(Name = "Invoice")]
+        [Display(Name = "Invoice Image")]
         public string ImageUrl { get; set; }
 
         //TODO Put the right Url
