@@ -141,7 +141,6 @@ namespace GoViatic.Web.Controllers
                 .Include(t => t.User)
                 .Include(t => t.Trips)
                 .ThenInclude(v => v.Viatics)
-                .ThenInclude(v => v.ViaticType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (traveler == null)
             {
@@ -208,7 +207,7 @@ namespace GoViatic.Web.Controllers
             };
             return View(model);
         }
-
+        //TODO REVISAR
         public async Task<IActionResult> DetailsTrip(int? id)
         {
             if (id == null)
@@ -218,6 +217,8 @@ namespace GoViatic.Web.Controllers
 
             var trip = await _context.Trips
                 .Include(t => t.Traveler)
+                .Include(t => t.Viatics)
+                .ThenInclude(v => v.ViaticType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             
             if (trip == null)
@@ -302,40 +303,7 @@ namespace GoViatic.Web.Controllers
             return RedirectToAction(nameof(IndexTraveler));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private bool TravelerExists(int id)
-        {
-            return _context.Travelers.Any(e => e.Id == id);
-        }
-
-
-        
-
-
-        //ADD VIATIC
-        public async Task<IActionResult> AddViatic(int? id)
+        public async Task<IActionResult> CreateViatic(int? id)
         {
             if (id == null)
             {
@@ -355,33 +323,45 @@ namespace GoViatic.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddViatic(ViaticViewModel model)
+        public async Task<IActionResult> CreateViatic(ViaticViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var path = string.Empty;
 
                 if (model.ImageFile != null)
-                    {
-                        var guid = Guid.NewGuid().ToString();
-                        var file = $"{guid}.jpg";
-                        path = Path.Combine(
-                            Directory.GetCurrentDirectory(),
-                            "wwwroot\\image\\Invoices",
-                            file);
+                {
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
+                    path = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot\\image\\Invoices",
+                        file);
 
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await model.ImageFile.CopyToAsync(stream);
-                        }
-                        path = $"~/image/Invoices/{file}";
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await model.ImageFile.CopyToAsync(stream);
                     }
+                    path = $"~/image/Invoices/{file}";
+                }
                 var viatic = await _converterHelper.ToViaticAsync(model, path);
                 _context.Viatics.Add(viatic);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"Details/{model.TripId}");
+                return RedirectToAction($"DetailsTrip/{model.TripId}");
             }
             return View(model);
         }
+
+
+
+
+
+        private bool TravelerExists(int id)
+        {
+            return _context.Travelers.Any(e => e.Id == id);
+        }
+
+
+
     }
 }

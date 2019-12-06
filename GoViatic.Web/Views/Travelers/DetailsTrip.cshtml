@@ -28,12 +28,50 @@
         <dd>
             @Html.DisplayFor(model => model.EndDate)
         </dd>
+        <dt>
+            # Viatics
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Viatics.Count)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="CreateTrip" asp-route-id="@Model.Id" class="btn btn-success">Create Viatic</a>
+    <a asp-action="CreateViatic" asp-route-id="@Model.Id" class="btn btn-success">Create Viatic</a>
     <a asp-action="DetailsTraveler" asp-route-id="@Model.Traveler.Id" class="btn btn-danger">Back to Trips</a>
 </div>
 <hr />
 <h4>List of Viatics</h4>
 <hr />
+@if (Model.Viatics.Count == 0)
+{
+    <h4> No Viatics added</h4>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Viatics.FirstOrDefault().ViaticName)
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Viatics)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ViaticName)
+                    </td>
+                    <td>
+                        <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                        <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                        <a asp-action="DeleteTrip" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -19,7 +19,5 @@ namespace GoViatic.Web.Models
         public IFormFile ImageFile { get; set; }
 
         public IEnumerable<SelectListItem> ViaticTypes { get; set; }
-
-
     }
 }
