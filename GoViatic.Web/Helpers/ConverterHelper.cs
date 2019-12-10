@@ -13,7 +13,7 @@ namespace GoViatic.Web.Helpers
         {
             _context = context;
         }
-        public async Task<Trip> ToTripAsync (TripViewModel model, bool isNew)
+        public async Task<Trip> ToTripAsync(TripViewModel model, bool isNew)
         {
             return new Trip
             {
@@ -25,7 +25,20 @@ namespace GoViatic.Web.Helpers
                 Viatics = model.Viatics
             };
         }
-        
+
+        public TripViewModel ToTripViewModel(Trip trip)
+        {
+            return new TripViewModel
+            {
+                City = trip.City,
+                Date = trip.Date.ToUniversalTime(),
+                EndDate = trip.EndDate.ToUniversalTime(),
+                Traveler = trip.Traveler,
+                Viatics = trip.Viatics,
+                Id = trip.Id,
+            };
+        }
+
         public async Task<Viatic> ToViaticAsync(ViaticViewModel model, string path, bool isNew)
         {
             var viatic = new Viatic
@@ -34,13 +47,28 @@ namespace GoViatic.Web.Helpers
                 Description = model.Description,
                 ImageUrl = path,
                 InvoiceDate = model.InvoiceDate,
+                InvoiceAmmount = model.InvoiceAmmount,
                 ViaticName = model.ViaticName,
                 ViaticType = model.ViaticType,
                 Traveler = await _context.Travelers.FindAsync(model.Traveler),
                 Trip = await _context.Trips.FindAsync(model.TripId),
-
             };
             return viatic;
+        }
+        public ViaticViewModel ToViaticViewModel(Viatic viatic)
+        {
+            return new ViaticViewModel
+            {
+                Id = viatic.Id,
+                Description = viatic.Description,
+                ImageUrl = viatic.ImageUrl,
+                InvoiceDate = viatic.InvoiceDate,
+                InvoiceAmmount = viatic.InvoiceAmmount,
+                ViaticName = viatic.ViaticName,
+                ViaticType = viatic.ViaticType,
+                Traveler = viatic.Traveler,
+                TripId = viatic.Trip.Id
+            };
         }
     }
 }

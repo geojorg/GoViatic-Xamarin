@@ -1,0 +1,58 @@
+﻿@model GoViatic.Web.Models.ViaticViewModel
+@{
+    ViewData["Title"] = "Edit Viatic";
+}
+
+<h2>Edit Viatic</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditViatic" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TripId" />
+            <input type="hidden" asp-for="ImageUrl"/>
+
+            <div class="form-group">
+                <label asp-for="ViaticName" class="control-label"></label>
+                <input asp-for="ViaticName" class="form-control" />
+                <span asp-validation-for="ViaticName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InvoiceDate" class="control-label"></label>
+                <input asp-for="InvoiceDate" class="form-control" />
+                <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InvoiceAmmount" class="control-label"></label>
+                <input asp-for="InvoiceAmmount" class="form-control" />
+                <span asp-validation-for="InvoiceAmmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViaticType" class="control-label"></label>
+                <input asp-for="ViaticType" class="form-control" />
+                <span asp-validation-for="ViaticType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-action="DetailsTrip" asp-route-id="@Model.TripId" class="btn btn-danger">Back To Trips</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:400px;height:400px;max-width: 100%; height: auto;" />
+        }
+    </div>
+</div>
