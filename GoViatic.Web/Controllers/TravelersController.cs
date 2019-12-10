@@ -77,53 +77,6 @@ namespace GoViatic.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> EditTraveler(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var traveler = await _context.Travelers.FindAsync(id);
-            if (traveler == null)
-            {
-                return NotFound();
-            }
-            return View(traveler);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditTraveler(int id, [Bind("Id")] Traveler traveler)
-        {
-            if (id != traveler.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(traveler);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TravelerExists(traveler.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(IndexTraveler));
-            }
-            return View(traveler);
-        }
-        
         public IActionResult IndexTraveler()
         {
             return View(_context.Travelers
@@ -367,11 +320,6 @@ namespace GoViatic.Web.Controllers
             _context.Viatics.Remove(viatic);
             await _context.SaveChangesAsync();
             return RedirectToAction($"{nameof(DetailsTrip)}/{viatic.Trip.Id}");
-        }
-
-        private bool TravelerExists(int id)
-        {
-            return _context.Travelers.Any(e => e.Id == id);
         }
     }
 }
