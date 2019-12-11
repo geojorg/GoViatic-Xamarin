@@ -14,4 +14,8 @@
     <Folder Include="wwwroot\images\invoices\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GoViatic.Common\GoViatic.Common.csproj" />
+  </ItemGroup>
+
 </Project>
