@@ -4,6 +4,8 @@
     ViewData["Title"] = "Trip Details";
 }
 
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 <h2>Trip to @Html.DisplayFor(model => model.City)</h2>
 
 <div>
@@ -76,36 +78,56 @@ else
         <tbody>
             @foreach (var item in Model.Viatics)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ViaticName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InvoiceAmmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InvoiceDateLocal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ViaticType)
-                </td>
-                <td>
-                    <div class="col-md-4">
-                        @if (!string.IsNullOrEmpty(item.ImageUrl))
-                        {
-                            <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:120px;height:120px;max-height: 100%; width: auto;" />
-                        }
-                    </div>
-                </td>
-                <td>
-                    <a asp-action="EditViatic" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
-                    <a asp-action="DeleteViatic" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ViaticName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvoiceAmmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvoiceDateLocal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ViaticType)
+                    </td>
+                    <td>
+                        <div class="col-md-4">
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:120px;height:120px;max-height: 100%; width: auto;" />
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <a asp-action="EditViatic" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
+}
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+ 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+            // Delete item
+            var item_to_delete;
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Travelers/DeleteTrip/' + item_to_delete;
+            });
+        });
+    </script>
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Traveler Details";
 }
 
-    <h2>Traveler @Html.DisplayFor(model => model.User.FirstName)</h2>
+<h2>Traveler @Html.DisplayFor(model => model.User.FirstName)</h2>
 
 <div>
     <h4>Information</h4>
@@ -69,26 +69,46 @@ else
         <tbody>
             @foreach (var item in Model.Trips)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Viatics.Count)
-                </td>
-                <td>
-                    <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
-                    <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                    <a asp-action="DeleteTrip" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Viatics.Count)
+                    </td>
+                    <td>
+                        <a asp-action="EditTrip" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                        <a asp-action="DetailsTrip" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
+}
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+            // Delete item
+            var item_to_delete;
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Travelers/DeleteTrip/' + item_to_delete;
+            });
+        });
+    </script>
 }

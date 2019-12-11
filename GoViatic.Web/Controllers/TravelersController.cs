@@ -217,6 +217,7 @@ namespace GoViatic.Web.Controllers
             }
 
             var trip = await _context.Trips
+                .Include(r => r.Traveler)
                 .Include(r => r.Viatics)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (trip == null)
@@ -225,7 +226,7 @@ namespace GoViatic.Web.Controllers
             }
             _context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"{nameof(DetailsTraveler)}/{id}");
+            return RedirectToAction($"DetailsTraveler/{trip.Traveler.Id}");
         }
 
         public async Task<IActionResult> CreateViatic(int? id)
