@@ -2,7 +2,7 @@
 
 namespace GoViatic.Web.Models
 {
-    public class AddUserViewModel :EditUserViewModel
+    public class AddUserViewModel : EditUserViewModel
     {
         [Display(Name = "Email")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]

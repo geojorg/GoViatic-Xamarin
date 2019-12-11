@@ -101,6 +101,50 @@ namespace GoViatic.Web.Controllers
             }
             return View(traveler);
         }
+        public async Task<IActionResult> EditTraveler(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var traveler = await _context.Travelers
+                .Include(t => t.User)
+                .FirstOrDefaultAsync(t => t.Id == id.Value);
+            if (traveler == null)
+            {
+                return NotFound();
+            }
+
+            var model = new EditUserViewModel
+            {
+                Company = traveler.User.Company,
+                Document = traveler.User.Document,
+                FirstName = traveler.User.Document,
+                Id = traveler.Id
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditTraveler(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var traveler = await _context.Travelers
+                    .Include(t => t.User)
+                    .FirstOrDefaultAsync(t => t.Id == model.Id);
+
+                traveler.User.Document = model.Document;
+                traveler.User.Company = model.Company;
+                traveler.User.FirstName = model.FirstName;
+
+                await _userHelper.UpdateUserAsync(traveler.User);
+                return RedirectToAction(nameof(IndexTraveler));
+            }
+            return View(model);
+        }
 
         public async Task<IActionResult> DeleteTraveler(int? id)
         {
@@ -118,7 +162,11 @@ namespace GoViatic.Web.Controllers
             {
                 return NotFound();
             }
-            
+            if (traveler.Trips.Count > 0)
+            {
+                ModelState.AddModelError(string.Empty, "The Traveler can't be remove");
+                return RedirectToAction(nameof(IndexTraveler));
+            }
             await _userHelper.DeleteUserAsync(traveler.User.Email);
             _context.Travelers.Remove(traveler);
             await _context.SaveChangesAsync();
@@ -204,7 +252,7 @@ namespace GoViatic.Web.Controllers
                 var trip = await _converterHelper.ToTripAsync(model, false);
                 _context.Trips.Update(trip);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"DetailsTraveler/{model.Id}");
+                return RedirectToAction($"DetailsTraveler/{model.TravelerId}");
             }
             return View(model);
         }

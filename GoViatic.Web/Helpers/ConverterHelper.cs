@@ -36,6 +36,7 @@ namespace GoViatic.Web.Helpers
                 Traveler = trip.Traveler,
                 Viatics = trip.Viatics,
                 Id = trip.Id,
+                TravelerId = trip.Traveler.Id
             };
         }
 
