@@ -1,5 +1,7 @@
 ﻿using GoViatic.Common.Models;
 using GoViatic.Web.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace GoViatic.Web.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TravelersController : ControllerBase
     {
         private readonly DataContext _context;
