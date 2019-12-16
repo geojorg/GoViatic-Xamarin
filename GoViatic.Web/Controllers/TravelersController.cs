@@ -120,7 +120,7 @@ namespace GoViatic.Web.Controllers
             {
                 Company = traveler.User.Company,
                 Document = traveler.User.Document,
-                FirstName = traveler.User.Document,
+                FirstName = traveler.User.FirstName,
                 Id = traveler.Id
             };
             return View(model);
@@ -136,10 +136,9 @@ namespace GoViatic.Web.Controllers
                     .Include(t => t.User)
                     .FirstOrDefaultAsync(t => t.Id == model.Id);
 
+                traveler.User.FirstName = model.FirstName;
                 traveler.User.Document = model.Document;
                 traveler.User.Company = model.Company;
-                traveler.User.FirstName = model.FirstName;
-
                 await _userHelper.UpdateUserAsync(traveler.User);
                 return RedirectToAction(nameof(IndexTraveler));
             }
@@ -205,7 +204,7 @@ namespace GoViatic.Web.Controllers
             };
             return View(model);
         }
-        //TODO REVISAR
+
         public async Task<IActionResult> DetailsTrip(int? id)
         {
             if (id == null)

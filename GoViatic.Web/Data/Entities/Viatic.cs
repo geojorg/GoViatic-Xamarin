@@ -38,10 +38,9 @@ namespace GoViatic.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string ViaticType { get; set; }
 
-        //TODO Put the right Url
         public string ImageFullPath => string.IsNullOrEmpty(ImageUrl)
             ? null
-            : $"https://TBD";
+            : $"https://goviatic.azurewebsites.net{ImageUrl.Substring(1)}";
 
         public Traveler Traveler { get; set; }
         public Trip Trip { get; set; }
