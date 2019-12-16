@@ -200,7 +200,7 @@ namespace GoViatic.Web.Controllers
                 var trip = await _converterHelper.ToTripAsync(model, true);
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"DetailsTraveler/{model.TravelerId}");
+                return RedirectToAction("DetailsTraveler", "Travelers", new { id = model.TravelerId });
             };
             return View(model);
         }
@@ -251,7 +251,7 @@ namespace GoViatic.Web.Controllers
                 var trip = await _converterHelper.ToTripAsync(model, false);
                 _context.Trips.Update(trip);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"DetailsTraveler/{model.TravelerId}");
+                return RedirectToAction("DetailsTraveler", "Travelers", new {id = model.TravelerId});
             }
             return View(model);
         }
@@ -273,7 +273,7 @@ namespace GoViatic.Web.Controllers
             }
             _context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"DetailsTraveler/{trip.Traveler.Id}");
+            return RedirectToAction("DetailsTraveler", "Travelers", new { id = trip.Traveler.Id });
         }
 
         public async Task<IActionResult> CreateViatic(int? id)
@@ -309,7 +309,7 @@ namespace GoViatic.Web.Controllers
                 var viatic = await _converterHelper.ToViaticAsync(model, path, true);
                 _context.Viatics.Add(viatic);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"DetailsTrip/{model.TripId}");
+                return RedirectToAction("DetailsTrip", "Travelers", new { id = model.TripId });
             }
             return View(model);
         }
@@ -346,7 +346,7 @@ namespace GoViatic.Web.Controllers
                 var viatic = await _converterHelper.ToViaticAsync(model, path, false);
                 _context.Viatics.Update(viatic);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"DetailsTrip/{model.TripId}");
+                return RedirectToAction("DetailsTrip", "Travelers", new { id = model.TripId });
             }
             return View(model);
         }
@@ -367,7 +367,7 @@ namespace GoViatic.Web.Controllers
             }
             _context.Viatics.Remove(viatic);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"{nameof(DetailsTrip)}/{viatic.Trip.Id}");
+            return RedirectToAction("DetailsTrip", "Travelers", new { id = viatic.Trip.Id });
         }
     }
 }

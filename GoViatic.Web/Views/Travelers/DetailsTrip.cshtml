@@ -4,7 +4,7 @@
     ViewData["Title"] = "Trip Details";
 }
 
-    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
 
 <h2>Trip to @Html.DisplayFor(model => model.City)</h2>
 
@@ -115,7 +115,6 @@ else
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
  
     <script type="text/javascript">
         $(document).ready(function () {
@@ -126,7 +125,7 @@ else
                 item_to_delete = e.currentTarget.dataset.id;
             });
             $("#btnYesDelete").click(function () {
-                window.location.href = '/Travelers/DeleteTrip/' + item_to_delete;
+                window.location.href = '/Travelers/DeleteViatic/' + item_to_delete;
             });
         });
     </script>
