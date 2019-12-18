@@ -99,10 +99,15 @@
                 TextColor="{Binding EmptyString}"
                 FontSize="Body">
             </Label>
+            <ActivityIndicator
+                Color="#247D4D"
+                Grid.Row="6"
+                IsRunning="{Binding IsRunning}">
+            </ActivityIndicator>
             <Label
                 FontSize="Body"
                 HorizontalOptions="Center"
-                Grid.Row="6"
+                Grid.Row="7"
                 Margin="0,50,0,20"
                 Text="Forgot your Password ?">
                 <Label.GestureRecognizers>
@@ -113,7 +118,7 @@
                 BackgroundColor="#247D4D"
                 CornerRadius="7"
                 Command="{Binding LoginCommand}"
-                Grid.Row="7"
+                Grid.Row="8"
                 HeightRequest="36"
                 HorizontalOptions="Center"
                 Margin="0,0,0,50"
@@ -123,7 +128,7 @@
             </Button>
             <Label
                 LineBreakMode="WordWrap"
-                Grid.Row="8"
+                Grid.Row="9"
                 HorizontalOptions="Center"
                 FontSize="Body">
                 <Label.FormattedText>

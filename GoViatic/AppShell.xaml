@@ -48,4 +48,12 @@
             <views:RegisterPage/>
         </ShellContent>
     </TabBar>
+    <FlyoutItem
+        FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Principal"
+            Route="TripPage"
+            ContentTemplate="{DataTemplate views:TripPage}">
+        </ShellContent>
+    </FlyoutItem>
 </Shell>

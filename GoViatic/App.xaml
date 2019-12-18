@@ -10,5 +10,9 @@
         <OnPlatform x:TypeArguments="x:String" x:Key="UbuntuBold">
             <On Platform="Android">ubuntu-bold.ttf#Ubuntu Bold</On>
         </OnPlatform>
+        <ResourceDictionary>
+            <x:String x:Key="UrlAPI">https://goviatic.azurewebsites.net/</x:String>
+        </ResourceDictionary>
     </Application.Resources>
+   
 </Application>

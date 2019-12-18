@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoViatic", "GoViatic\GoViat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoViatic.Web", "GoViatic.Web\GoViatic.Web.csproj", "{01339DED-CF85-4277-8155-5174709908A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoViatic.Common", "GoViatic.Common\GoViatic.Common.csproj", "{54D8CBDF-CD0B-4908-8456-1814964BF249}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoViatic.Common", "GoViatic.Common\GoViatic.Common.csproj", "{54D8CBDF-CD0B-4908-8456-1814964BF249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
