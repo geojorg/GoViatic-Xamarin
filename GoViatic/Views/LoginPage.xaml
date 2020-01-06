@@ -23,7 +23,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-
             </Grid.RowDefinitions>
             <Image
                 Grid.Row="0"

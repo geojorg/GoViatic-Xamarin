@@ -1,5 +1,4 @@
-﻿using GoViatic.Common.Models;
-using GoViatic.ViewModels;
+﻿using GoViatic.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

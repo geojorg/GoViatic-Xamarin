@@ -1,5 +1,6 @@
 ﻿using GoViatic.Common.Models;
 using GoViatic.Common.Services;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -14,8 +15,9 @@ namespace GoViatic.ViewModels
         private string _email;
         private string token;
         private string _token;
-        public static string FirstName;
-        public static int TripCount;
+        private string _firstName;
+        private string _city;
+        private ICollection<TripResponse> _trips;
 
         public TripViewModel()
         {
@@ -42,6 +44,22 @@ namespace GoViatic.ViewModels
                 token = Token;
             }
         }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { SetProperty(ref _firstName, value); }
+        }
+        public string City
+        {
+            get { return _city; }
+            set { SetProperty(ref _city, value); }
+        }
+
+        public ICollection<TripResponse> Trips 
+        { 
+            get { return _trips; }  
+            set { SetProperty(ref _trips, value); } 
+        }
 
         private async void GetUserData()
         {
@@ -49,7 +67,7 @@ namespace GoViatic.ViewModels
             var response2 = await _apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
             var traveler = (TravelerResponse)response2.Result;
             FirstName = traveler.FirstName;
-            TripCount = traveler.Trips.Count();
+            Trips = traveler.Trips;
         }
     }
 }

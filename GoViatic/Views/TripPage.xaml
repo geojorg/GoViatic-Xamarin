@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:GoViatic.Common.Models;assembly=GoViatic.Common"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     Title="Trips"
     BackgroundColor="White"
@@ -13,6 +14,58 @@
     mc:Ignorable="d">
 
     <ContentPage.Content>
-        <Grid x:DataType="viewModels:TripViewModel" />
+        <Grid x:DataType="viewModels:TripViewModel" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="List Of Trips" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                BackgroundColor="#247D4D"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="New Trip"
+                TextColor="White"
+                WidthRequest="190" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="#247D4D"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="Edit Trip"
+                TextColor="White"
+                WidthRequest="190" />
+            <CollectionView
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                ItemsSource="{Binding Trips}"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TripResponse">
+                        <Grid>
+                            <Label
+                                Grid.Row="0"
+                                FontSize="Body"
+                                HorizontalOptions="Center"
+                                Text="{Binding City}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

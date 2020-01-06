@@ -9,7 +9,9 @@
     xmlns:views="clr-namespace:GoViatic.Views"
     mc:Ignorable="d">
 
-
+    <Shell.FlyoutHeader>
+        <controls:MenuHeader />
+    </Shell.FlyoutHeader>
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -55,8 +57,4 @@
             ContentTemplate="{DataTemplate views:TripPage}"
             Route="TripPage" />
     </FlyoutItem>
-
-    <Shell.FlyoutHeader>
-        <controls:MenuHeader />
-    </Shell.FlyoutHeader>
 </Shell>
