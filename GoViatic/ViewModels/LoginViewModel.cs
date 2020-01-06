@@ -1,6 +1,7 @@
 ﻿using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
@@ -97,7 +98,9 @@ namespace GoViatic.ViewModels
                     return;
                 }
                 var data = (TokenResponse)response.Result;
-                await Shell.Current.GoToAsync($"//TripPage?token={data.Token}");
+                await SecureStorage.SetAsync("PrivateToken", data.Token);
+                var token = data.Token;
+                await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
                 EmptyString = "Transparent";
                 Message = string.Empty;
             }

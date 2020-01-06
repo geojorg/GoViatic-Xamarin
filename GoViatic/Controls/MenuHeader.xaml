@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="GoViatic.Controls.MenuHeader"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    HeightRequest="188"
+    mc:Ignorable="d">
+
+    <Grid x:DataType="viewModels:MenuViewModel" BackgroundColor="#247D4D">
+        <Label
+            Grid.Row="0"
+            FontSize="20"
+            HorizontalTextAlignment="Center"
+            Text="Menu"
+            TextColor="White"
+            VerticalTextAlignment="Center" />
+        <Label />
+        <Label
+            Grid.Row="1"
+            FontSize="15"
+            HorizontalOptions="Center"
+            Text="{Binding FirstName, Mode=TwoWay}"
+            TextColor="White" />
+        <Label
+            Grid.Row="2"
+            FontSize="15"
+            HorizontalOptions="Center"
+            Text="{Binding TripCount, Mode=OneTime}"
+            TextColor="White" />
+    </Grid>
+</ContentView>

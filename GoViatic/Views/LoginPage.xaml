@@ -1,139 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-             mc:Ignorable="d"
-             x:Class="GoViatic.Views.LoginPage"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="White"
-             Visual="Material">
-    
+<ContentPage
+    x:Class="GoViatic.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    BackgroundColor="White"
+    Shell.NavBarIsVisible="False"
+    Visual="Material"
+    mc:Ignorable="d">
+
     <ContentPage.Content>
-        <Grid x:DataType="viewModels:LoginViewModel"
-            RowSpacing="0">
+        <Grid x:DataType="viewModels:LoginViewModel" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto "/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+
             </Grid.RowDefinitions>
             <Image
-                Aspect="AspectFit"
                 Grid.Row="0"
-                Source="loginheader"
-                Margin="0,0,0,20">
-            </Image>
+                Margin="0,0,0,20"
+                Aspect="AspectFit"
+                Source="loginheader" />
             <Label
                 Grid.Row="1"
-                HeightRequest="57"
-                FontSize="26"
+                Margin="30,0,150,0"
                 FontFamily="{StaticResource UbuntuBold}"
+                FontSize="26"
+                HeightRequest="57"
                 Text="HELLO THERE, TIME TO TRAVEL"
                 TextColor="#247D4D"
-                Margin="30,0,150,0"
-                WidthRequest="200">
-            </Label>
+                WidthRequest="200" />
             <Entry
-                BackgroundColor="Transparent"
-                FontFamily="{StaticResource UbuntuBold}"
                 Grid.Row="2"
-                Keyboard="Email"
-                Text="{Binding Email}"
                 Margin="25,0,25,0"
-                Placeholder="Email">
-            </Entry>
-            <Entry
                 BackgroundColor="Transparent"
-                Grid.Row="3"
-                Keyboard="Default"
                 FontFamily="{StaticResource UbuntuBold}"
+                Keyboard="Email"
+                Placeholder="Email"
+                Text="{Binding Email}" />
+            <Entry
+                Grid.Row="3"
                 Margin="25,0,25,0"
-                Text="{Binding Password}"
-                Placeholder="Password">
+                BackgroundColor="Transparent"
+                FontFamily="{StaticResource UbuntuBold}"
+                Keyboard="Default"
+                Placeholder="Password"
+                Text="{Binding Password}">
                 <Entry.Triggers>
                     <DataTrigger
+                        Binding="{Binding Source={x:Reference CheckBoxPassword}, Path=IsChecked}"
                         TargetType="Entry"
-                        Binding="{Binding Source={x:Reference CheckBoxPassword}, Path=IsChecked}" Value="False">
-                        <Setter Property="IsPassword" Value="True"/>
+                        Value="False">
+                        <Setter Property="IsPassword" Value="True" />
                     </DataTrigger>
                 </Entry.Triggers>
             </Entry>
             <StackLayout
                 Grid.Row="4"
+                Margin="25,0,25,0"
                 Orientation="Horizontal"
                 Spacing="0"
-                Margin="25,0,25,0"
                 VerticalOptions="StartAndExpand">
-                <CheckBox 
-                Grid.Row="4"
-                x:Name="CheckBoxPassword"
-                Color="#247D4D">
-                </CheckBox>
+                <CheckBox
+                    x:Name="CheckBoxPassword"
+                    Grid.Row="4"
+                    Color="#247D4D" />
                 <Label
                     FontSize="Body"
                     Text="Show Password"
-                    VerticalOptions="Center">
-                </Label>
+                    VerticalOptions="Center" />
                 <Switch
                     Margin="60,0,0,0"
                     IsToggled="{Binding IsRemembered, Mode=TwoWay}"
-                    OnColor="#ABABAB">
-                </Switch>
+                    OnColor="#ABABAB" />
                 <Label
                     FontSize="Body"
                     Text="Remember Me"
-                    VerticalOptions="Center">
-                </Label>
+                    VerticalOptions="Center" />
             </StackLayout>
             <Label
                 Grid.Row="5"
-                HorizontalOptions="Center"
-                Text="{Binding Message}"
-                TextColor="{Binding EmptyString}"
-                FontSize="Body">
-            </Label>
-            <ActivityIndicator
-                Color="#247D4D"
-                Grid.Row="6"
-                IsRunning="{Binding IsRunning}">
-            </ActivityIndicator>
-            <Label
                 FontSize="Body"
                 HorizontalOptions="Center"
+                Text="{Binding Message}"
+                TextColor="{Binding EmptyString}" />
+            <ActivityIndicator
+                Grid.Row="6"
+                IsRunning="{Binding IsRunning}"
+                Color="#247D4D" />
+            <Label
                 Grid.Row="7"
                 Margin="0,50,0,20"
+                FontSize="Body"
+                HorizontalOptions="Center"
                 Text="Forgot your Password ?">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding RecoverPswCommand}"/>
+                    <TapGestureRecognizer Command="{Binding RecoverPswCommand}" />
                 </Label.GestureRecognizers>
             </Label>
             <Button
-                BackgroundColor="#247D4D"
-                CornerRadius="7"
-                Command="{Binding LoginCommand}"
                 Grid.Row="8"
-                HeightRequest="36"
-                HorizontalOptions="Center"
                 Margin="0,0,0,50"
+                BackgroundColor="#247D4D"
+                Command="{Binding LoginCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
                 Text="SIGN IN"
                 TextColor="White"
-                WidthRequest="190">
-            </Button>
+                WidthRequest="190" />
             <Label
-                LineBreakMode="WordWrap"
                 Grid.Row="9"
+                FontSize="Body"
                 HorizontalOptions="Center"
-                FontSize="Body">
+                LineBreakMode="WordWrap">
                 <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="New Here ? "/>
+                    <FormattedString>
+                        <Span Text="New Here ? " />
                         <Span Text="Sign Up" TextDecorations="Underline">
                             <Span.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding RegisterCommand}" />

@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms"
-       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       xmlns:views="clr-namespace:GoViatic.Views"
-       mc:Ignorable="d"
-       x:Class="GoViatic.AppShell">
+<Shell
+    x:Class="GoViatic.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:GoViatic.Controls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:GoViatic.Views"
+    mc:Ignorable="d">
+
+
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -35,25 +39,24 @@
 
 
     <TabBar>
-        <ShellContent 
-            Route="Welcome">
-            <views:WelcomePage/>
+        <ShellContent Route="Welcome">
+            <views:WelcomePage />
         </ShellContent>
-        <ShellContent 
-            Route="Login">
-            <views:LoginPage/>
+        <ShellContent Route="Login">
+            <views:LoginPage />
         </ShellContent>
-        <ShellContent 
-            Route="Register">
-            <views:RegisterPage/>
+        <ShellContent Route="Register">
+            <views:RegisterPage />
         </ShellContent>
     </TabBar>
-    <FlyoutItem
-        FlyoutDisplayOptions="AsMultipleItems">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Principal"
-            Route="TripPage"
-            ContentTemplate="{DataTemplate views:TripPage}">
-        </ShellContent>
+            ContentTemplate="{DataTemplate views:TripPage}"
+            Route="TripPage" />
     </FlyoutItem>
+
+    <Shell.FlyoutHeader>
+        <controls:MenuHeader />
+    </Shell.FlyoutHeader>
 </Shell>

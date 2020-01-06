@@ -102,7 +102,5 @@ namespace GoViatic.Common.Services
                 };
             }
         }
-
-       
     }
 }

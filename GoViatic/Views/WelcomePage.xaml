@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-             xmlns:models="clr-namespace:GoViatic.Models"
-             mc:Ignorable="d"
-             x:Class="GoViatic.Views.WelcomePage"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="White"
-             Visual="Material">
+<ContentPage
+    x:Class="GoViatic.Views.WelcomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:GoViatic.Models"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    BackgroundColor="White"
+    Shell.NavBarIsVisible="False"
+    Visual="Material"
+    mc:Ignorable="d">
 
     <ContentPage.Content>
         <Grid x:DataType="viewModels:WelcomeViewModel">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <CarouselView
                 Grid.Row="0"
@@ -28,80 +29,73 @@
                     <DataTemplate x:DataType="models:Carousel">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Image
+                                Grid.Row="0"
                                 Margin="0,130,0,0"
                                 HeightRequest="250"
-                                Grid.Row="0"
                                 Source="{Binding Icon}"
-                                WidthRequest="220">
-                            </Image>
+                                WidthRequest="220" />
                             <Label
-                                FontSize="Title"
-                                FontFamily="{StaticResource UbuntuBold}"
                                 Grid.Row="1"
+                                Padding="0,30,0,0"
+                                FontFamily="{StaticResource UbuntuBold}"
+                                FontSize="Title"
                                 HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding Header}"
-                                Padding="0,30,0,0">
-                            </Label>
+                                Text="{Binding Header}" />
                             <Label
                                 Grid.Row="2"
+                                Padding="20,30,20,0"
                                 FontSize="Body"
                                 HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding Body}"
-                                Padding="20,30,20,0">
-                            </Label>
+                                Text="{Binding Body}" />
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <StackLayout
                 Grid.Row="1"
+                Margin="0,0,0,10"
                 HorizontalOptions="Center"
-                Orientation="Horizontal"
-                Margin="0,0,0,10">
+                Orientation="Horizontal">
                 <BoxView
-                        BackgroundColor="{Binding BoxView0}"
-                        CornerRadius="100"
-                        HeightRequest="10"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        WidthRequest="10">
-                </BoxView>
+                    BackgroundColor="{Binding BoxView0}"
+                    CornerRadius="100"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="10" />
                 <BoxView
-                        BackgroundColor="{Binding BoxView1}"
-                        CornerRadius="100"
-                        HeightRequest="10"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        WidthRequest="10">
-                </BoxView>
+                    BackgroundColor="{Binding BoxView1}"
+                    CornerRadius="100"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="10" />
                 <BoxView
-                        BackgroundColor="{Binding BoxView2}"
-                        CornerRadius="100"
-                        HeightRequest="10"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        WidthRequest="10">
-                </BoxView>
+                    BackgroundColor="{Binding BoxView2}"
+                    CornerRadius="100"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="10" />
             </StackLayout>
             <Button
                 Grid.Row="2"
+                Margin="0,0,0,50"
                 BackgroundColor="#247D4D"
                 Command="{Binding LoginCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
-                Margin="0,0,0,50"
                 Text="Empezar Ahora"
                 TextColor="White"
-                WidthRequest="190">
-            </Button>
+                WidthRequest="190" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
