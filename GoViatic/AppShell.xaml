@@ -57,4 +57,17 @@
             ContentTemplate="{DataTemplate views:TripPage}"
             Route="TripPage" />
     </FlyoutItem>
+    <MenuItem
+        Command="{Binding LogoutCommand}"
+        IconImageSource="ic_action_exit_to_app"
+        Text="Logout" />
+    <MenuItem
+        Command="{Binding RateCommand}"
+        CommandParameter="https://play.google.com/store/apps/details?id=com.geojorgco.sakuracards"
+        IconImageSource="ic_action_star_rate"
+        Text="Rate" />
+    <MenuItem
+        Command="{Binding ShareAppCommand}"
+        IconImageSource="ic_action_share"
+        Text="Share" />
 </Shell>

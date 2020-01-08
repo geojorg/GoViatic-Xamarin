@@ -21,12 +21,13 @@ namespace GoViatic.ViewModels
         private ICollection<TripResponse> _trips;
         private bool _hasTrips;
         private bool _firstTrip;
+        private bool _isRefreshing;
 
         public TripViewModel()
         {
             IApiService apiService = new ApiService();
             _apiService = apiService;
-            
+            IsRefreshing = false;
         }
 
         public string Email 
@@ -53,7 +54,6 @@ namespace GoViatic.ViewModels
             get { return _firstName; }
             set { SetProperty(ref _firstName, value); }
         }
-
         public ICollection<TripResponse> Trips 
         { 
             get { return _trips; }  
@@ -68,6 +68,11 @@ namespace GoViatic.ViewModels
         {
             get { return _firstTrip; }
             set { SetProperty(ref _firstTrip, value); }
+        }
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set { SetProperty(ref _isRefreshing, value); }
         }
 
         private async void GetUserData()
@@ -87,6 +92,15 @@ namespace GoViatic.ViewModels
                 FirstTrip = false;
                 HasTrips = true;
             }
+        }
+
+
+        public ICommand RefreshCommand => new Command(Refresh);
+        private void Refresh()
+        {
+            IsRefreshing = true;
+            GetUserData();
+            IsRefreshing = false;
         }
 
         public ICommand CreateCommand => new Command(Create);

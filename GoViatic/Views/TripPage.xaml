@@ -69,47 +69,61 @@
                     FontSize="20"
                     Text="{Binding FirstName}"
                     TextColor="Accent" />
-                <CollectionView
+                <RefreshView
                     Grid.Row="1"
-                    Margin="14,0,14,0"
-                    ItemsSource="{Binding Trips}"
-                    SelectionMode="Single">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:TripResponse">
-                            <Frame
-                                Padding="20"
-                                BackgroundColor="#649F7F"
-                                CornerRadius="9">
-                                <Grid>
-                                    <Label
-                                        Grid.Row="0"
-                                        FontFamily="{StaticResource UbuntuBold}"
-                                        FontSize="Body"
-                                        Text="{Binding City, Converter={StaticResource caseConverter}, ConverterParameter=u}"
-                                        TextColor="White"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        Grid.Row="1"
-                                        FontSize="Body"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding Date, StringFormat='{0:d}'}"
-                                        TextColor="White"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        Grid.Row="2"
-                                        FontSize="Body"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding EndDate, StringFormat='{0:d}'}"
-                                        TextColor="White"
-                                        VerticalOptions="Center" />
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    Margin="14,0,14,14"
+                    Command="{Binding RefreshCommand}"
+                    IsRefreshing="{Binding IsRefreshing}">
+                    <CollectionView ItemsSource="{Binding Trips}" SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:TripResponse">
+                                <Frame
+                                    Padding="20"
+                                    BackgroundColor="#649F7F"
+                                    CornerRadius="9">
+                                    <Grid>
+                                        <Label
+                                            Grid.Row="0"
+                                            FontFamily="{StaticResource UbuntuBold}"
+                                            FontSize="Body"
+                                            Text="{Binding City, Converter={StaticResource caseConverter}, ConverterParameter=u}"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Row="1"
+                                            FontSize="Body"
+                                            TextColor="White"
+                                            VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Date, StringFormat='{0:d/MM/yyyy}'}" />
+                                                    <Span Text=" - " />
+                                                    <Span Text="{Binding EndDate, StringFormat='{0:d/MM/yyyy}'}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label
+                                            Grid.Row="2"
+                                            FontFamily="{StaticResource UbuntuBold}"
+                                            FontSize="Body"
+                                            TextColor="White"
+                                            VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="BUDGET:" />
+                                                    <Span Text=" $ 120" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
                 <Button
                     Grid.Row="2"
                     Margin="0,0,0,50"

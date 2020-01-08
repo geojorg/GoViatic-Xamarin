@@ -8,7 +8,6 @@ namespace GoViatic.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        //TODO EL INDICADOR DE LOGIN SIGUE FUNCIONANDO CUANDO SALE EL ERROR DE CONTRASEÑA
         private string _password;
         private string _email;
         private string _emptyString;
@@ -50,7 +49,6 @@ namespace GoViatic.ViewModels
             get { return _isRemembered; }
             set { SetProperty(ref _isRemembered, value); }
         }
-
         public string Email
         {
             get { return _email; }
@@ -96,6 +94,7 @@ namespace GoViatic.ViewModels
                     Message = "Please Check your Password";
                     EmptyString = "Red";
                     Password = string.Empty;
+                    IsRunning = false;
                     return;
                 }
                 var data = (TokenResponse)response.Result;
@@ -104,6 +103,7 @@ namespace GoViatic.ViewModels
                 await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
                 EmptyString = "Transparent";
                 Message = string.Empty;
+                IsRunning = false;
             }
         }
         

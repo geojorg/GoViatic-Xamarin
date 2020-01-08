@@ -62,6 +62,9 @@ else
                     @Html.DisplayNameFor(model => model.Trips.FirstOrDefault().EndDateLocal)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Trips.FirstOrDefault().Bugdet)
+                </th>
+                <th>
                     # Viatics
                 </th>
             </tr>
@@ -78,6 +81,9 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bugdet)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Viatics.Count)

@@ -28,6 +28,7 @@ namespace GoViatic.Web.Data.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDateLocal => EndDate.ToLocalTime();
 
+        public decimal Bugdet { get; set; }
         public Traveler Traveler { get; set; }
         public ICollection<Viatic> Viatics { get; set; }
     }
