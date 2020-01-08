@@ -8,6 +8,7 @@ namespace GoViatic.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        //TODO EL INDICADOR DE LOGIN SIGUE FUNCIONANDO CUANDO SALE EL ERROR DE CONTRASEÑA
         private string _password;
         private string _email;
         private string _emptyString;

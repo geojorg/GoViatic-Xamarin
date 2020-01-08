@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GoViatic.Views.CreateTripPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Create New Trip"
+    Shell.BackgroundColor="#247D4D"
+    Visual="Material"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Text="PAGINA PARA CREAR UN VIAJE //TODO"
+                VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
