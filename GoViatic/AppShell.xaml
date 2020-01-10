@@ -7,6 +7,9 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:GoViatic.Views"
+    Shell.BackgroundColor="Accent"
+    Shell.TabBarTitleColor="#bdd8c9"
+    Shell.TabBarUnselectedColor="#3A5E48"
     mc:Ignorable="d">
 
     <Shell.FlyoutHeader>
@@ -51,12 +54,20 @@
             <views:RegisterPage />
         </ShellContent>
     </TabBar>
+
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="Principal"
+            Title="Trips"
             ContentTemplate="{DataTemplate views:TripPage}"
+            Icon="ic_action_trip"
             Route="TripPage" />
+        <ShellContent
+            Title="Trips"
+            ContentTemplate="{DataTemplate views:TripPage}"
+            Icon="ic_action_trip"
+            Route="newtrip" />
     </FlyoutItem>
+
     <MenuItem
         Command="{Binding LogoutCommand}"
         IconImageSource="ic_action_exit_to_app"

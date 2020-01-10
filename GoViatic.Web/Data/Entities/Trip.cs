@@ -29,6 +29,7 @@ namespace GoViatic.Web.Data.Entities
         public DateTime EndDateLocal => EndDate.ToLocalTime();
 
         public decimal Bugdet { get; set; }
+
         public Traveler Traveler { get; set; }
         public ICollection<Viatic> Viatics { get; set; }
     }

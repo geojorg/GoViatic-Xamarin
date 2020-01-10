@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GoViatic.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using GoViatic.Web.Models;
+using System.Diagnostics;
 
 namespace GoViatic.Web.Controllers
 {

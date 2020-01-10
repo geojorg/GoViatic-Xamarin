@@ -10,7 +10,7 @@
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     Title="List of Trips"
     BackgroundColor="White"
-    Shell.BackgroundColor="#247D4D"
+    Shell.BackgroundColor="Accent"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -53,7 +53,6 @@
                     TextColor="White"
                     WidthRequest="190" />
             </Grid>
-            <!--  //TODO: ESTA PARTE LA TENGO QUE CUADRAR  -->
             <Grid
                 Grid.Row="0"
                 IsVisible="{Binding HasTrips}"
@@ -74,7 +73,11 @@
                     Margin="14,0,14,14"
                     Command="{Binding RefreshCommand}"
                     IsRefreshing="{Binding IsRefreshing}">
-                    <CollectionView ItemsSource="{Binding Trips}" SelectionMode="Single">
+                    <CollectionView
+                        ItemsSource="{Binding Trips}"
+                        SelectedItem="{Binding Selection}"
+                        SelectionChangedCommand="{Binding SelectedCommand}"
+                        SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
@@ -113,8 +116,8 @@
                                             VerticalOptions="Center">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="BUDGET:" />
-                                                    <Span Text=" $ 120" />
+                                                    <Span Text="BUDGET: " />
+                                                    <Span Text="{Binding Budget, StringFormat='{}{0:C}'}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
@@ -126,7 +129,7 @@
                 </RefreshView>
                 <Button
                     Grid.Row="2"
-                    Margin="0,0,0,50"
+                    Margin="0,0,0,30"
                     BackgroundColor="Accent"
                     Command="{Binding CreateCommand}"
                     CornerRadius="7"

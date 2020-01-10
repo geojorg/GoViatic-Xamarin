@@ -22,6 +22,7 @@ namespace GoViatic.ViewModels
         private bool _hasTrips;
         private bool _firstTrip;
         private bool _isRefreshing;
+        private TripResponse _selection;
 
         public TripViewModel()
         {
@@ -74,6 +75,11 @@ namespace GoViatic.ViewModels
             get { return _isRefreshing; }
             set { SetProperty(ref _isRefreshing, value); }
         }
+        public TripResponse Selection
+        {
+            get { return _selection; }
+            set { SetProperty(ref _selection, value); }
+        }
 
         private async void GetUserData()
         {
@@ -94,13 +100,24 @@ namespace GoViatic.ViewModels
             }
         }
 
-
         public ICommand RefreshCommand => new Command(Refresh);
         private void Refresh()
         {
             IsRefreshing = true;
             GetUserData();
             IsRefreshing = false;
+        }
+
+        public ICommand SelectedCommand => new Command(Selected);
+        private async void Selected()
+        {
+            if (Selection != null)
+            {
+                var selected = Selection;
+                Routing.RegisterRoute("TripPage/ViaticsPage", typeof(ViaticsPage));
+                await Shell.Current.GoToAsync($"//TripPage/ViaticsPage?cardname={selected}");
+                Selection = null;
+            }
         }
 
         public ICommand CreateCommand => new Command(Create);
