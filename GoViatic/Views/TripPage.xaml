@@ -53,6 +53,7 @@
                     TextColor="White"
                     WidthRequest="190" />
             </Grid>
+
             <Grid
                 Grid.Row="0"
                 IsVisible="{Binding HasTrips}"
@@ -82,12 +83,22 @@
                             <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:TripResponse">
+                            <DataTemplate>
                                 <Frame
                                     Padding="20"
+                                    x:DataType="models:TripResponse"
                                     BackgroundColor="#649F7F"
                                     CornerRadius="9">
-                                    <Grid>
+                                    <Grid RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
                                         <Label
                                             Grid.Row="0"
                                             FontFamily="{StaticResource UbuntuBold}"
@@ -121,6 +132,15 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
+                                        <Button
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            x:DataType="viewModels:TripViewModel"
+                                            BackgroundColor="Accent"
+                                            Command="{Binding EditCommand}"
+                                            CornerRadius="7"
+                                            Text="Edit"
+                                            TextColor="White" />
                                     </Grid>
                                 </Frame>
                             </DataTemplate>

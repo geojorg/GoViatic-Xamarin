@@ -1,6 +1,7 @@
 ﻿using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using GoViatic.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -118,6 +119,19 @@ namespace GoViatic.ViewModels
                 await Shell.Current.GoToAsync($"//TripPage/ViaticsPage?cardname={selected}");
                 Selection = null;
             }
+        }
+
+        public ICommand DeleteCommand => new Command(Delete);
+        private void Delete()
+        {
+            //TODO DELETE BUTTON FOR THE TRIP
+            Application.Current.MainPage.DisplayAlert("Delete", "This Will Delete the Trip", "Ok");
+        }
+
+        public ICommand EditCommand => new Command(Edit);
+        private void Edit()
+        {
+            Shell.Current.Navigation.PushAsync(new EditTripPage());
         }
 
         public ICommand CreateCommand => new Command(Create);

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
 {
@@ -17,7 +19,7 @@ namespace GoViatic.ViewModels
         public decimal Budget
         {
             get { return _budget; }
-            set { SetProperty(ref _budget,value); }
+            set { SetProperty(ref _budget, value); }
         }
 
         public DateTime Date
@@ -38,5 +40,10 @@ namespace GoViatic.ViewModels
             set { SetProperty(ref _minDate, value); }
         }
 
+        public ICommand SaveCommand => new Command(Save);
+        private void Save(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

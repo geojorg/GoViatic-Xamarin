@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace GoViatic.Converters
@@ -9,23 +8,22 @@ namespace GoViatic.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Decimal.Parse(value.ToString()).ToString("C"); 
+            var dec = Decimal.Parse(value.ToString());
+            return dec.ToString("C");
         }
-        
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string valueFromString = Regex.Replace(value.ToString(), @"\D", "");
-            if (valueFromString.Length <= 0) 
+            string valString = value.ToString();
+            if (valString.Length <= 1)
+            {
                 return 0m;
-
-            long valueLong; 
-            if (!long.TryParse(valueFromString, out valueLong)) 
-                return 0m;
-
-            if (valueLong <= 0) 
-                return 0m;
-
-            return valueLong / 100m;
+            }
+            else
+            {
+                var stringconverted = Decimal.Parse(valString, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol);
+                return stringconverted;
+            }
         }
     }
 }
