@@ -3,15 +3,106 @@
     x:Class="GoViatic.Views.EditTripPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:GoViatic.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    Title="Edit Trip"
     mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CurrencyConverter x:Key="currencyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
+        <Grid
+            Margin="14"
+            x:DataType="viewModels:EditTripViewModel"
+            ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
             <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="PAGE TO EDIT TRIP"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="20"
+                Text="Let's Create your new Trip"
+                TextColor="Accent"
                 VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+            <Entry
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                BindingContext="{Binding City}"
+                Placeholder="City" />
+            <Entry
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                BindingContext="{Binding Budget}"
+                Keyboard="Numeric"
+                Placeholder="Budget" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="Body"
+                Text="Starting Date:"
+                VerticalOptions="CenterAndExpand" />
+            <DatePicker
+                Grid.Row="3"
+                Grid.Column="1"
+                BackgroundColor="#F6F6F6"
+                BindingContext="{Binding Date}"
+                Format="  dd/MM/yyyy"
+                Visual="Default" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="Body"
+                Text="Ending Date:"
+                VerticalOptions="Center" />
+            <DatePicker
+                Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor="#F6F6F6"
+                BindingContext="{Binding EndDate}"
+                Format="  dd/MM/yyyy"
+                Visual="Default" />
+            <Button
+                Grid.Row="8"
+                Grid.Column="0"
+                Margin="0,0,0,30"
+                BackgroundColor="Accent"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="SAVE"
+                TextColor="White"
+                WidthRequest="190" />
+            <Button
+                Grid.Row="8"
+                Grid.Column="1"
+                Margin="0,0,0,30"
+                BackgroundColor="Red"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="DELETE"
+                TextColor="White"
+                WidthRequest="190" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

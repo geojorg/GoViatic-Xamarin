@@ -62,8 +62,8 @@
             Icon="ic_action_trip"
             Route="TripPage" />
         <ShellContent
-            Title="Trips"
-            ContentTemplate="{DataTemplate views:TripPage}"
+            Title="Viatics"
+            ContentTemplate="{DataTemplate views:ViaticsPage}"
             Icon="ic_action_trip"
             Route="newtrip" />
     </FlyoutItem>
