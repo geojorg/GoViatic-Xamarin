@@ -18,7 +18,7 @@ namespace GoViatic.ViewModels
         private string token;
         private string _token;
         private string _firstName;
-        private ICollection<TripResponse> _trips;
+        public static ICollection<TripResponse> trips;
         private bool _hasTrips;
         private bool _firstTrip;
         private bool _isRefreshing;
@@ -30,11 +30,12 @@ namespace GoViatic.ViewModels
             _apiService = apiService;
             IsRefreshing = false;
 
+            //TODO:PASS THE COMPLETE MODEL WHEN IT IS AVAILABLE
             EditCommand = new Command<TripResponse>((t) =>
             {
-                var selected = t.Id;
+                var id = t.Id;
                 Routing.RegisterRoute("TripPage/EditTripPage", typeof(EditTripPage));
-                Shell.Current.GoToAsync($"//TripPage/EditTripPage?data={selected}",true);
+                Shell.Current.GoToAsync($"//TripPage/EditTripPage?id={id}",true);
             });
         }
         public Command<TripResponse> EditCommand { get; set; }
@@ -65,8 +66,8 @@ namespace GoViatic.ViewModels
         }
         public ICollection<TripResponse> Trips 
         { 
-            get { return _trips; }  
-            set { SetProperty(ref _trips, value); } 
+            get { return trips; }  
+            set { SetProperty(ref trips, value); } 
         }
         public bool HasTrips
         {

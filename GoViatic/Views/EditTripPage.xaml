@@ -39,20 +39,20 @@
                 Grid.ColumnSpan="2"
                 FontFamily="{StaticResource UbuntuBold}"
                 FontSize="20"
-                Text="Let's Create your new Trip"
+                Text="poner un mensaje"
                 TextColor="Accent"
                 VerticalOptions="CenterAndExpand" />
             <Entry
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
-                BindingContext="{Binding City}"
-                Placeholder="City" />
+                Placeholder="City"
+                Text="{Binding City}" />
             <Entry
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                BindingContext="{Binding Budget}"
                 Keyboard="Numeric"
-                Placeholder="Budget" />
+                Placeholder="Budget"
+                Text="{Binding Budget, StringFormat='{}{0:C}'}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -64,7 +64,7 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 BackgroundColor="#F6F6F6"
-                BindingContext="{Binding Date}"
+                Date="{Binding Date}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
             <Label
@@ -78,7 +78,7 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 BackgroundColor="#F6F6F6"
-                BindingContext="{Binding EndDate}"
+                Date="{Binding EndDate}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
             <Button
