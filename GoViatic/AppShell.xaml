@@ -64,8 +64,13 @@
         <ShellContent
             Title="Viatics"
             ContentTemplate="{DataTemplate views:ViaticsPage}"
-            Icon="ic_action_trip"
-            Route="newtrip" />
+            Icon="ic_action_money"
+            Route="ViaticPage" />
+        <ShellContent
+            Title="Analysis"
+            ContentTemplate="{DataTemplate views:AnalysisPage}"
+            Icon="ic_action_delete"
+            Route="AnalysisPage" />
     </FlyoutItem>
 
     <MenuItem

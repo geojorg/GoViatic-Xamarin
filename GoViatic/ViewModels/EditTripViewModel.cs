@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
@@ -55,6 +56,18 @@ namespace GoViatic.ViewModels
         {
             get { return _budget; }
             set { SetProperty(ref _budget, value); }  
+        }
+
+        public ICommand SaveCommand => new Command(Save);
+        private void Save()
+        {
+            //TODO: GET THE THE SAVE COMMAND DONE
+        }
+
+        public ICommand DeleteCommand => new Command(Delete);
+        private void Delete()
+        {
+            //Todo: GET THE DELETE COMMAND DONE
         }
     }
 }

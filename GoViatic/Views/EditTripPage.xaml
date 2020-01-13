@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     Title="Edit Trip"
+    Visual="Material"
     mc:Ignorable="d">
 
     <ContentPage.Resources>
@@ -32,26 +33,38 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="0"
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="1"
                 FontFamily="{StaticResource UbuntuBold}"
                 FontSize="20"
-                Text="poner un mensaje"
+                Text="Edit your Trip"
                 TextColor="Accent"
                 VerticalOptions="CenterAndExpand" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="Body"
+                Text="City:"
+                VerticalOptions="Center" />
             <Entry
                 Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Placeholder="City"
+                Grid.Column="1"
                 Text="{Binding City}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="Body"
+                Text="Budget:"
+                VerticalOptions="Center" />
             <Entry
                 Grid.Row="2"
-                Grid.ColumnSpan="2"
+                Grid.Column="1"
                 Keyboard="Numeric"
-                Placeholder="Budget"
                 Text="{Binding Budget, StringFormat='{}{0:C}'}" />
             <Label
                 Grid.Row="3"
@@ -86,6 +99,7 @@
                 Grid.Column="0"
                 Margin="0,0,0,30"
                 BackgroundColor="Accent"
+                Command="{Binding SaveCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
