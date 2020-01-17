@@ -90,8 +90,10 @@
                     Grid.Row="1"
                     Margin="14,0,14,14"
                     Command="{Binding RefreshCommand}"
-                    IsRefreshing="{Binding IsRefreshing}">
+                    IsRefreshing="{Binding IsRefreshing}"
+                    RefreshColor="Accent">
                     <CollectionView
+                        x:Name="MyCollectionView"
                         ItemsSource="{Binding Trips}"
                         SelectedItem="{Binding Selection}"
                         SelectionChangedCommand="{Binding SelectedCommand}"
@@ -102,6 +104,9 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <SwipeView>
+                                    <SwipeView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemCollection" />
+                                    </SwipeView.GestureRecognizers>
                                     <SwipeView.RightItems>
                                         <SwipeItemView Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference Name=TripsPage}}" CommandParameter="{Binding .}">
                                             <Grid>

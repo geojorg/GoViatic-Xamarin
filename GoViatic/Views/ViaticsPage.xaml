@@ -11,18 +11,53 @@
     Visual="Material"
     mc:Ignorable="d">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SwipeItemBorderStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="#edcd66" />
+                <Setter Property="CornerRadius" Value="0, 9, 0, 9" />
+            </Style>
+            <Style x:Key="SwipeItemIconStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="30" />
+            </Style>
+            <Style x:Key="SwipeItemTextStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0, 36, 0, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
     <ContentPage.Content>
-        <Grid x:DataType="viewModels:ViaticViewModel" RowSpacing="0">
+        <Grid
+            Margin="14,0,14,0"
+            x:DataType="viewModels:ViaticViewModel"
+            RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
-            <BoxView
-                Grid.Row="0"
-                BackgroundColor="Black"
-                CornerRadius="10" />
+            <!--  REPLACE WITH THE CORRECT CODE  -->
+            <CollectionView ItemSizingStrategy="MeasureAllItems" SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <!--  CODE FOR THE DATA TEMPLATE  -->
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <CollectionView
                 Grid.Row="1"
+                ItemSizingStrategy="MeasureAllItems"
                 ItemsSource="{Binding ViaticsType}"
                 SelectionMode="Single">
                 <CollectionView.Header>
@@ -34,18 +69,24 @@
                         TextColor="Accent" />
                 </CollectionView.Header>
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="4" />
+                    <GridItemsLayout
+                        HorizontalItemSpacing="10"
+                        Orientation="Vertical"
+                        Span="4"
+                        VerticalItemSpacing="8.56" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ViaticT">
-                        <Grid RowSpacing="0">
-                            <Image Grid.Row="0" Source="{Binding Icon}" />
-                            <Label
-                                Grid.Row="1"
-                                FontSize="Body"
-                                HorizontalOptions="Center"
-                                Text="{Binding ViaticName}" />
-                        </Grid>
+                        <Frame BackgroundColor="Accent" CornerRadius="10">
+                            <Grid ColumnSpacing="12" RowSpacing="12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Row="0" Source="{Binding Icon}" />
+
+                            </Grid>
+                        </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

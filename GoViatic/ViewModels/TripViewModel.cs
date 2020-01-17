@@ -30,12 +30,12 @@ namespace GoViatic.ViewModels
             _apiService = apiService;
             IsRefreshing = false;
 
-            //TODO:PASS THE COMPLETE MODEL WHEN IT IS AVAILABLE
+            //TODO: PASS THE COMPLETE MODEL WHEN IT IS AVAILABLE IN XAMARIN FORM NEXT
             EditCommand = new Command<TripResponse>((t) =>
             {
                 var id = t.Id;
                 Routing.RegisterRoute("TripPage/EditTripPage", typeof(EditTripPage));
-                Shell.Current.GoToAsync($"//TripPage/EditTripPage?id={id}",true);
+                Shell.Current.GoToAsync($"//TripPage/EditTripPage?id={id}");
             });
         }
         public Command<TripResponse> EditCommand { get; set; }
@@ -123,9 +123,9 @@ namespace GoViatic.ViewModels
         {
             if (Selection != null)
             {
-                var selected = Selection;
+                var id = Selection.Id;
                 Routing.RegisterRoute("TripPage/ViaticsPage", typeof(ViaticsPage));
-                await Shell.Current.GoToAsync($"//TripPage/ViaticsPage?viatic={selected}",true);
+                await Shell.Current.GoToAsync($"//TripPage/ViaticsPage?id={id}");
                 Selection = null;
             }
         }
@@ -133,7 +133,7 @@ namespace GoViatic.ViewModels
         public ICommand CreateCommand => new Command(Create);
         private void Create()
         {
-            Shell.Current.Navigation.PushAsync(new CreateTripPage());
+            Shell.Current.Navigation.PushAsync(new CreateTripPage(),false);
         }
     }
 }

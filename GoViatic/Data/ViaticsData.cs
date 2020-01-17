@@ -14,7 +14,7 @@ namespace GoViatic.Data
             Viatics.Add(new ViaticT
             {
                 Id= 0,
-                Icon="IconTest",
+                Icon="Fuel",
                 ViaticName="Fuel",
                 Category="Transport"
             });
@@ -22,7 +22,7 @@ namespace GoViatic.Data
             Viatics.Add(new ViaticT
             {
                 Id = 1,
-                Icon = "IconTest",
+                Icon = "Taxi",
                 ViaticName = "Taxi/Uber",
                 Category = "Transport"
             });
@@ -30,7 +30,7 @@ namespace GoViatic.Data
             Viatics.Add(new ViaticT
             {
                 Id = 2,
-                Icon = "IconTest",
+                Icon = "Flight",
                 ViaticName = "Flight",
                 Category = "Transport"
             });
@@ -38,7 +38,7 @@ namespace GoViatic.Data
             Viatics.Add(new ViaticT
             {
                 Id = 3,
-                Icon = "IconTest",
+                Icon = "Tollbooth",
                 ViaticName = "Tollbooth",
                 Category = "Transport"
             });
@@ -46,7 +46,7 @@ namespace GoViatic.Data
             Viatics.Add(new ViaticT
             {
                 Id = 4,
-                Icon = "IconTest",
+                Icon = "Bus",
                 ViaticName = "Bus",
                 Category = "Transport"
             });
@@ -54,21 +54,50 @@ namespace GoViatic.Data
             Viatics.Add(new ViaticT
             {
                 Id = 5,
-                Icon = "IconTest",
+                Icon = "Train",
+                ViaticName = "Train",
+                Category = "Transport"
+            });
+
+            Viatics.Add(new ViaticT
+            {
+                Id = 6,
+                Icon = "Food",
                 ViaticName = "Food",
                 Category = "Food&Drinks"
             });
 
             Viatics.Add(new ViaticT
             {
-                Id = 6,
-                Icon = "IconTest",
+                Id = 7,
+                Icon = "Hotel",
                 ViaticName = "Lodging",
                 Category = "Hotels"
             });
 
+            Viatics.Add(new ViaticT
+            {
+                Id = 8,
+                Icon = "Shops",
+                ViaticName = "Shopping",
+                Category = "Other"
+            });
 
+            Viatics.Add(new ViaticT
+            {
+                Id = 9,
+                Icon = "Boat",
+                ViaticName = "Boat",
+                Category = "Transport"
+            });
 
+            Viatics.Add(new ViaticT
+            {
+                Id = 10,
+                Icon = "Other",
+                ViaticName = "Other",
+                Category = "Other"
+            });
         }
 
     }
