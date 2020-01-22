@@ -16,8 +16,7 @@ namespace GoViatic.ViewModels
         private DateTime _endDate;
         private decimal _budget;
         public ICollection<ViaticResponse> Viatics { get; private set; }
-        public string Id { get; set; }
-
+        
         public string Trips
         {
             set
@@ -62,12 +61,14 @@ namespace GoViatic.ViewModels
         private void Save()
         {
             //TODO: GET THE THE SAVE COMMAND DONE
+            Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
         }
 
         public ICommand DeleteCommand => new Command(Delete);
         private void Delete()
         {
             //Todo: GET THE DELETE COMMAND DONE
+            Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
         }
     }
 }

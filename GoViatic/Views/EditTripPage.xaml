@@ -65,7 +65,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Keyboard="Numeric"
-                Text="{Binding Budget, StringFormat='{}{0:C}'}" />
+                Text="{Binding Budget, Converter={StaticResource currencyConverter}}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -111,6 +111,7 @@
                 Grid.Column="1"
                 Margin="0,0,0,30"
                 BackgroundColor="Red"
+                Command="{Binding DeleteCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"

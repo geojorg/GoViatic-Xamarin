@@ -43,7 +43,8 @@ namespace GoViatic.ViewModels
         public ICommand SaveCommand => new Command(Save);
         private void Save(object obj)
         {
-            throw new NotImplementedException();
+            //TODO: Implement the saving of the City
+            Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
         }
     }
 }

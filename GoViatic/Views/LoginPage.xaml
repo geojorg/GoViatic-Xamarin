@@ -78,7 +78,7 @@
                     Text="Show Password"
                     VerticalOptions="Center" />
                 <Switch
-                    Margin="60,0,0,0"
+                    Margin="50,0,0,0"
                     IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                     OnColor="#ABABAB" />
                 <Label
