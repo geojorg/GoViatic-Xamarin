@@ -8,9 +8,7 @@
     mc:Ignorable="d">
 
     <Application.Resources>
-        <OnPlatform x:Key="UbuntuBold" x:TypeArguments="x:String">
-            <On Platform="Android">ubuntu-bold.ttf#Ubuntu Bold</On>
-        </OnPlatform>
+        <OnPlatform x:Key="UbuntuBold" x:TypeArguments="x:String" />
         <ResourceDictionary>
             <x:String x:Key="UrlAPI">https://goviatic.azurewebsites.net/</x:String>
         </ResourceDictionary>

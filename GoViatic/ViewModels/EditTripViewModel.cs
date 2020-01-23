@@ -1,6 +1,5 @@
 ﻿using GoViatic.Common.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -8,15 +7,14 @@ using Xamarin.Forms;
 namespace GoViatic.ViewModels
 {
     //TODO:replace with the model one the new system is in place.
-    [QueryProperty("Trips", "id")]
+    [QueryProperty("City", "id")]
     public class EditTripViewModel : BaseViewModel
     {
         private string _city;
+        private decimal _budget;
         private DateTime _date;
         private DateTime _endDate;
-        private decimal _budget;
-        public ICollection<ViaticResponse> Viatics { get; private set; }
-        
+
         public string Trips
         {
             set
@@ -29,7 +27,7 @@ namespace GoViatic.ViewModels
                     Budget = trip.Budget;
                     Date = trip.Date;
                     EndDate = trip.EndDate;
-                    Viatics = trip.Viatics;
+                    //Viatics = trip.Viatics;
                 }
             }
         }

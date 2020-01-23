@@ -19,25 +19,13 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
-                <Setter Property="FontFamily">
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="Android">ubuntu.ttf#Ubuntu</On>
-                    </OnPlatform>
-                </Setter>
+                <Setter Property="FontFamily" Value="Ubuntu" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="FontFamily">
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="Android">ubuntu.ttf#Ubuntu</On>
-                    </OnPlatform>
-                </Setter>
+                <Setter Property="FontFamily" Value="Ubuntu" />
             </Style>
             <Style TargetType="Entry">
-                <Setter Property="FontFamily">
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="Android">ubuntu.ttf#Ubuntu</On>
-                    </OnPlatform>
-                </Setter>
+                <Setter Property="FontFamily" Value="Ubuntu" />
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
