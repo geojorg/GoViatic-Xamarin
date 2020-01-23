@@ -42,7 +42,7 @@
                             <Label
                                 Grid.Row="1"
                                 Padding="0,30,0,0"
-                                FontFamily="{StaticResource UbuntuBold}"
+                                FontFamily="UbuntuBold"
                                 FontSize="Title"
                                 HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"

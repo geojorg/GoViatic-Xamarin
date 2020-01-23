@@ -39,7 +39,7 @@
             <Label
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                FontFamily="{StaticResource UbuntuBold}"
+                FontFamily="UbuntuBold"
                 FontSize="20"
                 Text="Let's Create your new Trip"
                 TextColor="Accent"
@@ -57,7 +57,7 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                FontFamily="{StaticResource UbuntuBold}"
+                FontFamily="UbuntuBold"
                 FontSize="Body"
                 Text="Starting Date:"
                 VerticalOptions="CenterAndExpand" />
@@ -72,7 +72,7 @@
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                FontFamily="{StaticResource UbuntuBold}"
+                FontFamily="UbuntuBold"
                 FontSize="Body"
                 Text="Ending Date:"
                 VerticalOptions="Center" />

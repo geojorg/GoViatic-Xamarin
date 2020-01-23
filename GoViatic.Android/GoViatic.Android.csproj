@@ -70,8 +70,6 @@
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ubuntu-bold.ttf" />
-    <None Include="Assets\ubuntu.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -52,7 +52,7 @@
                 <Label
                     Grid.Row="1"
                     Margin="30,0,150,0"
-                    FontFamily="{StaticResource UbuntuBold}"
+                    FontFamily="UbuntuBold"
                     FontSize="26"
                     HeightRequest="57"
                     Text="Hello, let's créate a new Trip"
@@ -70,7 +70,6 @@
                     TextColor="White"
                     WidthRequest="190" />
             </Grid>
-
             <Grid
                 Grid.Row="0"
                 IsVisible="{Binding HasTrips}"
@@ -82,7 +81,7 @@
                 </Grid.RowDefinitions>
                 <Label
                     Margin="30,20,120,0"
-                    FontFamily="{StaticResource Key=UbuntuBold}"
+                    FontFamily="UbuntuBold"
                     FontSize="20"
                     Text="{Binding FirstName}"
                     TextColor="Accent" />
@@ -125,7 +124,7 @@
                                             <Grid>
                                                 <Label
                                                     Grid.Row="0"
-                                                    FontFamily="{StaticResource UbuntuBold}"
+                                                    FontFamily="UbuntuBold"
                                                     FontSize="Body"
                                                     Text="{Binding City, Converter={StaticResource caseConverter}, ConverterParameter=u}"
                                                     TextColor="White"
@@ -145,7 +144,7 @@
                                                 </Label>
                                                 <Label
                                                     Grid.Row="2"
-                                                    FontFamily="{StaticResource UbuntuBold}"
+                                                    FontFamily="UbuntuBold"
                                                     FontSize="Body"
                                                     TextColor="White"
                                                     VerticalOptions="Center">
