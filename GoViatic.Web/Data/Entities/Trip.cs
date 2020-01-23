@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoViatic.Web.Data.Entities
 {
@@ -28,8 +29,9 @@ namespace GoViatic.Web.Data.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDateLocal => EndDate.ToLocalTime();
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Bugdet { get; set; }
-
+        
         public Traveler Traveler { get; set; }
         public ICollection<Viatic> Viatics { get; set; }
     }

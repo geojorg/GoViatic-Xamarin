@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoViatic.Web.Data.Entities
 {
@@ -31,6 +32,7 @@ namespace GoViatic.Web.Data.Entities
 
         [Display(Name = "Invoice Ammount")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal InvoiceAmmount { get; set; }
 
         [Display(Name = "Viatic Type")]

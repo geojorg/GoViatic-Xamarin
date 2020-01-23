@@ -21,49 +21,54 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <CollectionView
+            <RefreshView
                 Grid.Row="0"
-                Margin="0,14,0,0"
-                ItemSizingStrategy="MeasureAllItems"
-                ItemsSource="{Binding Viatics}"
-                SelectionMode="Single">
-                <CollectionView.Header>
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="17"
-                        HorizontalTextAlignment="Center"
-                        Text="Current Viatics"
-                        TextColor="Accent" />
-                </CollectionView.Header>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame
-                            x:DataType="commonmodels:ViaticResponse"
-                            BackgroundColor="#649F7F"
-                            CornerRadius="10">
-                            <Grid>
-                                <Label
-                                    FontSize="Body"
-                                    Text="{Binding Name}"
-                                    TextColor="White" />
-                                <Label
-                                    Grid.Row="1"
-                                    FontSize="Body"
-                                    Text="{Binding Description}"
-                                    TextColor="White" />
-                                <Label
-                                    Grid.Row="2"
-                                    FontSize="Body"
-                                    Text="{Binding InvoiceAmmount, StringFormat='{}{0:C}'}"
-                                    TextColor="White" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}"
+                RefreshColor="Accent">
+                <CollectionView
+                    Margin="0,14,0,0"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding Viatics}"
+                    SelectionMode="Single">
+                    <CollectionView.Header>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            HorizontalTextAlignment="Center"
+                            Text="Current Viatics"
+                            TextColor="Accent" />
+                    </CollectionView.Header>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                x:DataType="commonmodels:ViaticResponse"
+                                BackgroundColor="#649F7F"
+                                CornerRadius="10">
+                                <Grid>
+                                    <Label
+                                        FontSize="Body"
+                                        Text="{Binding Name}"
+                                        TextColor="White" />
+                                    <Label
+                                        Grid.Row="1"
+                                        FontSize="Body"
+                                        Text="{Binding Description}"
+                                        TextColor="White" />
+                                    <Label
+                                        Grid.Row="2"
+                                        FontSize="Body"
+                                        Text="{Binding InvoiceAmmount, StringFormat='{}{0:C}'}"
+                                        TextColor="White" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
             <CollectionView
                 Grid.Row="1"
                 Margin="0,0,0,10"

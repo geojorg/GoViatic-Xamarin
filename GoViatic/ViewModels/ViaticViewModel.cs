@@ -4,6 +4,7 @@ using GoViatic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
@@ -16,9 +17,11 @@ namespace GoViatic.ViewModels
         private string _city;
         private string _viaticName;
         private ICollection<ViaticResponse> _viatics;
+        private bool _isRefreshing;
 
         public ViaticViewModel()
         {
+            IsRefreshing = false;
             ViaticsType = ViaticsData.Viatics;
         }
 
@@ -35,6 +38,12 @@ namespace GoViatic.ViewModels
                     Viatics = trip.Viatics;
                 }
             }
+        }
+
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set { SetProperty(ref _isRefreshing, value); }
         }
 
         public ICollection<ViaticResponse> Viatics 
@@ -65,6 +74,15 @@ namespace GoViatic.ViewModels
         {
             get { return _viaticName; }
             set { SetProperty(ref _viaticName, value); }
+        }
+
+        public ICommand RefreshCommand => new Command(Refresh);
+        private void Refresh()
+        {
+            IsRefreshing = true;
+            var a = new TripViewModel();
+            var b = a.RefreshCommand;
+            IsRefreshing = false;
         }
     }
 }
