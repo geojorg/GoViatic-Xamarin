@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:GoViatic.Models"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    x:Name="ViaticPage"
     Title="{Binding Tittle}"
     Visual="Material"
     mc:Ignorable="d">
@@ -30,14 +31,28 @@
                     Margin="0,14,0,0"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Viatics}"
+                    SelectedItem="{Binding Selection, Mode=TwoWay}"
+                    SelectionChangedCommand="{Binding SelectionCommand}"
                     SelectionMode="Single">
                     <CollectionView.Header>
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="17"
-                            HorizontalTextAlignment="Center"
-                            Text="Current Viatics"
-                            TextColor="Accent" />
+                        <Grid>
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontFamily="Ubuntu"
+                                FontSize="17"
+                                HorizontalTextAlignment="Center"
+                                Text="Viatics"
+                                TextColor="Accent" />
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontFamily="Ubuntu"
+                                FontSize="17"
+                                HorizontalTextAlignment="Center"
+                                Text="Invoice"
+                                TextColor="Accent" />
+                        </Grid>
                     </CollectionView.Header>
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
@@ -48,19 +63,17 @@
                                 x:DataType="commonmodels:ViaticResponse"
                                 BackgroundColor="#649F7F"
                                 CornerRadius="10">
-                                <Grid>
+                                <Grid RowSpacing="0">
                                     <Label
+                                        Grid.Column="0"
                                         FontSize="Body"
+                                        HorizontalTextAlignment="Center"
                                         Text="{Binding Name}"
                                         TextColor="White" />
                                     <Label
-                                        Grid.Row="1"
+                                        Grid.Column="1"
                                         FontSize="Body"
-                                        Text="{Binding Description}"
-                                        TextColor="White" />
-                                    <Label
-                                        Grid.Row="2"
-                                        FontSize="Body"
+                                        HorizontalTextAlignment="Center"
                                         Text="{Binding InvoiceAmmount, StringFormat='{}{0:C}'}"
                                         TextColor="White" />
                                 </Grid>
@@ -103,7 +116,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -86,11 +86,11 @@ namespace GoViatic.Common.Services
                     };
                 }
 
-                var owner = JsonConvert.DeserializeObject<TravelerResponse>(result);
+                var traveler = JsonConvert.DeserializeObject<TravelerResponse>(result);
                 return new Response
                 {
                     IsSuccess = true,
-                    Result = owner
+                    Result = traveler
                 };
             }
             catch (Exception ex)

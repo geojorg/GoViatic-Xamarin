@@ -57,10 +57,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.187-pre2" />
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.4.10-beta</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.142-pre1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.4.0-pre2" />
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.5.0.187-pre2</Version>
+      <Version>4.5.0.142-pre1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -246,7 +249,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_action_edit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_action_user.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_action_money.png" />
   </ItemGroup>
@@ -297,6 +302,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Shops.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_action_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\HV.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_camera_alt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

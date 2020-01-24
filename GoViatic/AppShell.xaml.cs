@@ -11,7 +11,7 @@ namespace GoViatic
         public ICommand LogoutCommand => new Command(Logout);
         private void Logout()
         {
-            Shell.Current.GoToAsync("//Login");
+            Shell.Current.GoToAsync("//LoginPage");
         }
         
         public ICommand RateCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
@@ -19,6 +19,7 @@ namespace GoViatic
         public ICommand ShareAppCommand => new Command(ShareApp);
         private async void ShareApp()
         {
+            //TODO: CHANGE LINK TO NEW NAME IN APP STORE FROM GOOGLE
             await Share.RequestAsync(new ShareTextRequest
             {
                 Title = "Compartir App",

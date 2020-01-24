@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GoViatic.Views.UserPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    Title="Profile"
+    Visual="Material"
+    mc:Ignorable="d">
+
+
+    <ContentPage.Content>
+        <Grid x:DataType="viewModels:UserViewModel" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <BoxView
+                Grid.Row="0"
+                BackgroundColor="Accent"
+                HeightRequest="200" />
+            <Frame
+                Grid.Row="0"
+                Padding="-8"
+                BorderColor="White"
+                CornerRadius="85"
+                HeightRequest="170"
+                HorizontalOptions="Center"
+                IsClippedToBounds="True"
+                VerticalOptions="Center"
+                WidthRequest="170">
+                <ImageButton
+                    Command="{Binding LoadImageCommand, Mode=TwoWay}"
+                    HorizontalOptions="FillAndExpand"
+                    Source="{Binding ProfileImage}"
+                    VerticalOptions="FillAndExpand" />
+            </Frame>
+            <Button
+                Grid.Row="2"
+                Command="{Binding LoadImageCommand}"
+                Text="testing buttton" />
+            <Label Text="{Binding Name}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

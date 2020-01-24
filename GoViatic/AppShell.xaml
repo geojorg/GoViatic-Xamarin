@@ -35,11 +35,8 @@
         <ShellContent Route="Welcome">
             <views:WelcomePage />
         </ShellContent>
-        <ShellContent Route="Login">
+        <ShellContent Route="LoginPage">
             <views:LoginPage />
-        </ShellContent>
-        <ShellContent Route="Register">
-            <views:RegisterPage />
         </ShellContent>
     </TabBar>
 
@@ -50,10 +47,10 @@
             Icon="ic_action_trip"
             Route="TripPage" />
         <ShellContent
-            Title="Viatics"
-            ContentTemplate="{DataTemplate views:ViaticsPage}"
-            Icon="ic_action_money"
-            Route="ViaticPage" />
+            Title="User Data"
+            ContentTemplate="{DataTemplate views:UserPage}"
+            Icon="ic_action_user"
+            Route="UserPage" />
         <ShellContent
             Title="Analysis"
             ContentTemplate="{DataTemplate views:AnalysisPage}"

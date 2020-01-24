@@ -1,6 +1,8 @@
 ﻿using GoViatic.Common.Models;
+using GoViatic.Common.Services;
 using GoViatic.Data;
 using GoViatic.Models;
+using GoViatic.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +20,20 @@ namespace GoViatic.ViewModels
         private string _viaticName;
         private ICollection<ViaticResponse> _viatics;
         private bool _isRefreshing;
+        private ViaticResponse _selection;
 
         public ViaticViewModel()
         {
             IsRefreshing = false;
             ViaticsType = ViaticsData.Viatics;
         }
+        public Command<ViaticResponse> EditCommand { get; set; }
 
         public string Trips
         {
             set
             {
+
                 var allTrips = TripViewModel.trips;
                 TripResponse trip = allTrips.FirstOrDefault(t => t.Id.ToString() == Uri.UnescapeDataString(value));
                 if (trip != null)
@@ -36,6 +41,7 @@ namespace GoViatic.ViewModels
                     City = trip.City;
                     Tittle = $"Viatics for {City}";
                     Viatics = trip.Viatics;
+                    Id = value;
                 }
             }
         }
@@ -51,6 +57,8 @@ namespace GoViatic.ViewModels
             get { return _viatics;}
             set { SetProperty(ref _viatics, value); }
         }
+
+        public string Id { get; private set; }
 
         public IList<ViaticT> ViaticsType
         {
@@ -76,13 +84,44 @@ namespace GoViatic.ViewModels
             set { SetProperty(ref _viaticName, value); }
         }
 
+        public ViaticResponse Selection
+        {
+            get { return _selection; }
+            set { SetProperty(ref _selection, value); }
+        }
+
         public ICommand RefreshCommand => new Command(Refresh);
         private void Refresh()
         {
             IsRefreshing = true;
-            var a = new TripViewModel();
-            var b = a.RefreshCommand;
+            GetData();
             IsRefreshing = false;
+        }
+
+        public ICommand SelectionCommand => new Command(SelectionC);
+        private async void SelectionC()
+        {
+            if (Selection != null)
+            {
+                var name = Selection.Name;
+                
+                Routing.RegisterRoute("EditViaticPage", typeof(EditViaticPage));
+                await Shell.Current.GoToAsync("//ViaticsPage/EditViaticPage");
+                Selection = null;
+            }
+        }
+
+        public async void GetData()
+        {
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var token = LoginViewModel.token;
+            var email = LoginViewModel._email;
+            IApiService apiService = new ApiService();
+            var response2 = await apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
+            var traveler = (TravelerResponse)response2.Result;
+            var trips = traveler.Trips;
+            var currenttrip = trips.FirstOrDefault(m => m.Id == Int32.Parse(Id));
+            Viatics = currenttrip.Viatics;
         }
     }
 }

@@ -3,6 +3,7 @@ using GoViatic.Common.Services;
 using GoViatic.Views;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -59,6 +60,7 @@ namespace GoViatic.ViewModels
                 token = Token;
             }
         }
+
         public string FirstName
         {
             get { return _firstName; }
@@ -90,7 +92,6 @@ namespace GoViatic.ViewModels
             set { SetProperty(ref _selection, value); }
         }
         
-
         private async void GetUserData()
         {
             var url = App.Current.Resources["UrlAPI"].ToString();
@@ -110,8 +111,17 @@ namespace GoViatic.ViewModels
             }
         }
 
+        public async Task<TripResponse> GetData()
+        {
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            IApiService apiService = new ApiService();
+            var response2 = await apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
+            var tripResponse = (TripResponse)response2.Result;
+            return tripResponse;
+        }
+
         public ICommand RefreshCommand => new Command(Refresh);
-        private void Refresh()
+        public void Refresh()
         {
             IsRefreshing = true;
             GetUserData();

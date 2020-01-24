@@ -1,8 +1,6 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Essentials;
-using System.Globalization;
-using System;
+using Xamarin.Forms.Xaml;
 
 namespace GoViatic
 {
@@ -17,7 +15,7 @@ namespace GoViatic
             if (firstime == "Yes")
             {
                 MainPage = new AppShell();
-                Shell.Current.GoToAsync("//Login");
+                Shell.Current.GoToAsync("//LoginPage");
             }
             else
             {

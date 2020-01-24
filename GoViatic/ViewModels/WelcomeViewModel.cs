@@ -95,7 +95,7 @@ namespace GoViatic.ViewModels
             get
             {
                 return new Command(() =>
-                { Shell.Current.GoToAsync("//Login"); });
+                { Shell.Current.GoToAsync("///LoginPage"); });
             }
         }
     }

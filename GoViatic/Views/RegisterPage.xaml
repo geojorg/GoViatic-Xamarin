@@ -1,125 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-             mc:Ignorable="d"
-             x:Class="GoViatic.Views.RegisterPage"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="White"
-             Visual="Material">
+<ContentPage
+    x:Class="GoViatic.Views.RegisterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    BackgroundColor="White"
+    Shell.NavBarIsVisible="False"
+    Visual="Material"
+    mc:Ignorable="d">
 
     <ContentPage.Content>
-        <Grid x:DataType="viewModels:RegisterViewModel"
-            RowSpacing="0">
+        <Grid x:DataType="viewModels:RegisterViewModel" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image
-                Aspect="AspectFit"
                 Grid.Row="0"
-                Source="loginheader"
-                Margin="0,0,0,20">
-            </Image>
+                Margin="0,0,0,20"
+                Aspect="AspectFit"
+                Source="loginheader" />
             <Label
                 Grid.Row="1"
-                HeightRequest="57"
-                FontSize="26"
+                Margin="20,0,140,0"
                 FontFamily="UbuntuBold"
+                FontSize="26"
+                HeightRequest="57"
                 Text="GET ON BOARD"
                 TextColor="#247D4D"
-                Margin="20,0,140,0"
-                WidthRequest="200">
-            </Label>
+                WidthRequest="200" />
             <Entry
-                BackgroundColor="Transparent"
                 Grid.Row="2"
                 Margin="25,0,25,0"
-                Text="{Binding Name}"
-                Placeholder="Name">
-            </Entry>
-            <Entry
                 BackgroundColor="Transparent"
+                Placeholder="First Name"
+                Text="{Binding Name}" />
+            <Entry
                 Grid.Row="3"
                 Margin="25,0,25,0"
-                Text="{Binding Company}"
-                Placeholder="Company">
-            </Entry>
-            <Entry
                 BackgroundColor="Transparent"
+                Placeholder="Last Name"
+                Text="{Binding LastName}" />
+            <Entry
                 Grid.Row="4"
-                Keyboard="Email"
                 Margin="25,0,25,0"
-                Text="{Binding Email}"
-                Placeholder="Email">
-            </Entry>
-            <Entry
                 BackgroundColor="Transparent"
+                Placeholder="Company"
+                Text="{Binding Company}" />
+            <Entry
                 Grid.Row="5"
                 Margin="25,0,25,0"
-                Text="{Binding Password}"
-                Placeholder="Password">
-            </Entry>
-            <Entry
                 BackgroundColor="Transparent"
+                Keyboard="Email"
+                Placeholder="Email"
+                Text="{Binding Email}" />
+            <Entry
                 Grid.Row="6"
                 Margin="25,0,25,0"
-                Text="{Binding ConfirmPassword}"
-                Placeholder="Confirm Password">
-            </Entry>
-            <Label
+                BackgroundColor="Transparent"
+                Placeholder="Password"
+                Text="{Binding Password}" />
+            <Entry
                 Grid.Row="7"
+                Margin="25,0,25,0"
+                BackgroundColor="Transparent"
+                Placeholder="Confirm Password"
+                Text="{Binding ConfirmPassword}" />
+            <Label
+                Grid.Row="8"
                 FontSize="Body"
                 HorizontalOptions="Center"
                 Text="Check all Entries"
-                TextColor="{Binding EntryEmpty}">
-            </Label>
+                TextColor="{Binding EntryEmpty}" />
             <Label
+                Grid.Row="9"
+                Margin="60,10,60,10"
                 FontSize="Body"
                 HorizontalOptions="Center"
-                Grid.Row="8"
-                Margin="60,10,60,10"
                 HorizontalTextAlignment="Center">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="By creating an account, you agree to the "/>
-                        <Span Text="Terms and Use" TextDecorations="Underline"/>
-                        <Span Text=" and "/>
-                        <Span Text="Privacy Policy" TextDecorations="Underline"/>
+                        <Span Text="By creating an account, you agree to the " />
+                        <Span Text="Terms and Use" TextDecorations="Underline" />
+                        <Span Text=" and " />
+                        <Span Text="Privacy Policy" TextDecorations="Underline" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
             <Button
-                BackgroundColor="#247D4D"
-                CornerRadius="7"
-                Command="{Binding RegisterCommand}"
-                Grid.Row="9"
-                HorizontalOptions="Center"
-                HeightRequest="36"
-                Text="SIGN UP"
-                Margin="0,0,0,30"
-                TextColor="White"
-                WidthRequest="190">
-            </Button>
-            <Label
                 Grid.Row="10"
+                Margin="0,0,0,30"
+                BackgroundColor="#247D4D"
+                Command="{Binding RegisterCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="SIGN UP"
+                TextColor="White"
+                WidthRequest="190" />
+            <Label
+                Grid.Row="11"
+                FontSize="Body"
                 HorizontalOptions="Center"
                 Text="I am already a member"
-                FontSize="Body"
                 TextDecorations="Underline">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                    <TapGestureRecognizer Command="{Binding LoginCommand}" />
                 </Label.GestureRecognizers>
             </Label>
         </Grid>

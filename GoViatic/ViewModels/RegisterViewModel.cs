@@ -11,7 +11,8 @@ namespace GoViatic.ViewModels
         private string _email;
         private string _password;
         private string _confirmpassoword;
-        
+        private string _lastName;
+
         public string EntryEmpty
         {
             get { return _entryEmpty; }
@@ -21,6 +22,11 @@ namespace GoViatic.ViewModels
         {
             get { return _name; }
             set { SetProperty(ref _name, value); }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { SetProperty(ref _lastName, value); }
         }
         public string Company
         {
@@ -47,44 +53,39 @@ namespace GoViatic.ViewModels
         {
             EntryEmpty = "Transparent";
         }
-        public ICommand RegisterCommand
+
+        //TODO: CREATE THE REGISTRATION IN THE SYSTEM
+        public ICommand RegisterCommand => new Command(RegisterAsync);
+        private async void RegisterAsync()
         {
-            get
+            if (string.IsNullOrEmpty(_name) || string.IsNullOrEmpty(_lastName) || string.IsNullOrEmpty(_email) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_confirmpassoword) || Password != ConfirmPassword)
             {
-                return new Command(async() =>
-                {
-                    if (string.IsNullOrEmpty(_name)||string.IsNullOrEmpty(_email)||string.IsNullOrEmpty(_password)||string.IsNullOrEmpty(_confirmpassoword)||Password != ConfirmPassword)
-                    {
-                        EntryEmpty = "Red";
-                    }
-                    else
-                    {
-                        EntryEmpty = "Transparent";
-                        await Application.Current.MainPage.DisplayAlert("Registration", "Thanks for Registering", "OK");
-                        await Shell.Current.GoToAsync("//Login");
-                        Name = string.Empty;
-                        Company = string.Empty;
-                        Email = string.Empty;
-                        Password = string.Empty;
-                        ConfirmPassword = string.Empty;
-                    }
-                });
+                EntryEmpty = "Red";
+            }
+            else
+            {
+                EntryEmpty = "Transparent";
+                await Application.Current.MainPage.DisplayAlert("Registration", "Thanks for Registering", "OK");
+                await Shell.Current.Navigation.PopAsync();
+                Name = string.Empty;
+                LastName = string.Empty;
+                Company = string.Empty;
+                Email = string.Empty;
+                Password = string.Empty;
+                ConfirmPassword = string.Empty;
             }
         }
-        public ICommand LoginCommand
+
+        public ICommand LoginCommand => new Command(Login);
+        private void Login()
         {
-            get
-            {
-                return new Command(() =>
-                { 
-                    Shell.Current.GoToAsync("//Login");
-                    Name = string.Empty;
-                    Company = string.Empty;
-                    Email = string.Empty;
-                    Password = string.Empty;
-                    ConfirmPassword = string.Empty;
-                });
-            }
+            Shell.Current.Navigation.PopAsync();
+            Name = string.Empty;
+            LastName = string.Empty;
+            Company = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
+            ConfirmPassword = string.Empty;
         }
     }
 }

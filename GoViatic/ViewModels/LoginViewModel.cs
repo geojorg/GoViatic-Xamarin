@@ -1,5 +1,6 @@
 ﻿using GoViatic.Common.Models;
 using GoViatic.Common.Services;
+using GoViatic.Views;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -9,15 +10,17 @@ namespace GoViatic.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         private string _password;
-        private string _email;
+        public static string _email;
         private string _emptyString;
         private bool _isRemembered;
         private string _message;
         private bool _isRunning;
+        public static string token;
         private readonly IApiService _apiService;
 
         public LoginViewModel()
         {
+            //TODO: REMOVE THE EMAIL AND PASSWORD FROM THE NAME
             EmptyString = "Transparent";
             IsRemembered = true;
             IApiService apiService = new ApiService();
@@ -99,23 +102,24 @@ namespace GoViatic.ViewModels
                 }
                 var data = (TokenResponse)response.Result;
                 await SecureStorage.SetAsync("PrivateToken", data.Token);
-                var token = data.Token;
+                token = data.Token;
                 await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
                 EmptyString = "Transparent";
                 Message = string.Empty;
                 IsRunning = false;
             }
         }
-        
+
         public ICommand RegisterCommand => new Command(Register);
         private void Register()
         {
-            Shell.Current.GoToAsync("//Register");
+            Shell.Current.Navigation.PushAsync(new RegisterPage());
         }
 
         public ICommand RecoverPswCommand => new Command(Recovery);
         private void Recovery()
         {
+            //TODO: PENDIENTE HACER EL SISTEMA PARA ENVIO DE CORREO ELECTRONICO
             Application.Current.MainPage.DisplayAlert(
                 "Password Recovery", 
                 "An Email has been sent to recover your password", 
