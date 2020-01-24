@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Plugin.CurrentActivity;
 using Xamarin.Forms;
 
 namespace GoViatic.Droid
@@ -16,6 +17,7 @@ namespace GoViatic.Droid
 
             base.OnCreate(savedInstanceState);
             Forms.SetFlags("SwipeView_Experimental");
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
