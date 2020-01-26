@@ -122,8 +122,27 @@
                                             BackgroundColor="#649F7F"
                                             CornerRadius="9">
                                             <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
                                                 <Label
                                                     Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    FontFamily="UbuntuBold"
+                                                    FontSize="Body"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="VIATICS: " />
+                                                            <Span Text="{Binding ViaticCount}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="0"
                                                     FontFamily="UbuntuBold"
                                                     FontSize="Body"
                                                     Text="{Binding City, Converter={StaticResource caseConverter}, ConverterParameter=u}"
@@ -131,6 +150,7 @@
                                                     VerticalOptions="Center" />
                                                 <Label
                                                     Grid.Row="1"
+                                                    Grid.Column="0"
                                                     FontSize="Body"
                                                     TextColor="White"
                                                     VerticalOptions="Center">
@@ -144,6 +164,7 @@
                                                 </Label>
                                                 <Label
                                                     Grid.Row="2"
+                                                    Grid.Column="0"
                                                     FontFamily="UbuntuBold"
                                                     FontSize="Body"
                                                     TextColor="White"

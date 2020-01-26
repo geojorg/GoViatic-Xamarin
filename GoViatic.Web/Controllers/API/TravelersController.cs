@@ -49,6 +49,7 @@ namespace GoViatic.Web.Controllers.API
                     Date = tr.Date,
                     EndDate = tr.EndDate,
                     Budget = tr.Bugdet,
+                    ViaticCount = tr.Viatics.Count(),
                     Viatics = tr.Viatics.Select(v => new ViaticResponse
                     {
                         Id = v.Id,

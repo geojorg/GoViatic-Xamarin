@@ -3,7 +3,6 @@ using GoViatic.Common.Services;
 using GoViatic.Views;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -24,6 +23,7 @@ namespace GoViatic.ViewModels
         private bool _firstTrip;
         private bool _isRefreshing;
         private TripResponse _selection;
+        private string _viaticCount;
 
         public TripViewModel()
         {
@@ -40,7 +40,6 @@ namespace GoViatic.ViewModels
             });
         }
         public Command<TripResponse> EditCommand { get; set; }
-
         public string Email 
         { 
             get { return _email; } 
@@ -60,7 +59,6 @@ namespace GoViatic.ViewModels
                 token = Token;
             }
         }
-
         public string FirstName
         {
             get { return _firstName; }
@@ -91,12 +89,18 @@ namespace GoViatic.ViewModels
             get { return _selection; }
             set { SetProperty(ref _selection, value); }
         }
+        public string ViaticCount
+        {
+            get { return _viaticCount; }
+            set { SetProperty(ref _viaticCount, value); }
+        }
         
         private async void GetUserData()
         {
             var url = App.Current.Resources["UrlAPI"].ToString();
             var response2 = await _apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
             var traveler = (TravelerResponse)response2.Result;
+            
             FirstName = $"{traveler.FirstName} Choose your Trip";
             Trips = traveler.Trips;
             if (Trips.Count() == 0)
@@ -111,14 +115,14 @@ namespace GoViatic.ViewModels
             }
         }
 
-        public async Task<TripResponse> GetData()
-        {
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            IApiService apiService = new ApiService();
-            var response2 = await apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
-            var tripResponse = (TripResponse)response2.Result;
-            return tripResponse;
-        }
+        //public async Task<TripResponse> GetData()
+        //{
+        //    var url = App.Current.Resources["UrlAPI"].ToString();
+        //    IApiService apiService = new ApiService();
+        //    var response2 = await apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
+        //    var tripResponse = (TripResponse)response2.Result;
+        //    return tripResponse;
+        //}
 
         public ICommand RefreshCommand => new Command(Refresh);
         public void Refresh()

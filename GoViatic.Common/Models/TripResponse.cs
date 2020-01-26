@@ -10,6 +10,7 @@ namespace GoViatic.Common.Models
         public decimal Budget { get; set; }
         public DateTime Date { get; set; }
         public DateTime EndDate { get; set; }
+        public int ViaticCount { get; set; }
         public ICollection<ViaticResponse> Viatics { get; set; }
     }
 }

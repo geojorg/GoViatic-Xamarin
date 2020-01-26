@@ -53,10 +53,12 @@
             <Entry
                 Grid.Row="1"
                 Grid.Column="1"
+                BackgroundColor="Transparent"
                 Text="{Binding City}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
+                BackgroundColor="Transparent"
                 FontFamily="UbuntuBold"
                 FontSize="Body"
                 Text="Budget:"
@@ -64,6 +66,7 @@
             <Entry
                 Grid.Row="2"
                 Grid.Column="1"
+                BackgroundColor="Transparent"
                 Keyboard="Numeric"
                 Text="{Binding Budget, Converter={StaticResource currencyConverter}}" />
             <Label
@@ -76,7 +79,7 @@
             <DatePicker
                 Grid.Row="3"
                 Grid.Column="1"
-                BackgroundColor="#F6F6F6"
+                BackgroundColor="Transparent"
                 Date="{Binding Date}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
@@ -90,7 +93,7 @@
             <DatePicker
                 Grid.Row="4"
                 Grid.Column="1"
-                BackgroundColor="#F6F6F6"
+                BackgroundColor="Transparent"
                 Date="{Binding EndDate}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />

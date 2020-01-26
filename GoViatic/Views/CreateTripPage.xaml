@@ -47,10 +47,12 @@
             <Entry
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
+                BackgroundColor="Transparent"
                 Placeholder="City" />
             <Entry
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
+                BackgroundColor="Transparent"
                 Keyboard="Numeric"
                 Placeholder="Budget"
                 Text="{Binding Budget, Converter={StaticResource currencyConverter}}" />
@@ -64,7 +66,7 @@
             <DatePicker
                 Grid.Row="3"
                 Grid.Column="1"
-                BackgroundColor="#F6F6F6"
+                BackgroundColor="Transparent"
                 Date="{Binding Date}"
                 Format="  dd/MM/yyyy"
                 MinimumDate="{Binding MinDate}"
@@ -79,7 +81,7 @@
             <DatePicker
                 Grid.Row="4"
                 Grid.Column="1"
-                BackgroundColor="#F6F6F6"
+                BackgroundColor="Transparent"
                 Date="{Binding EndDate}"
                 Format="  dd/MM/yyyy"
                 MinimumDate="{Binding MinDate}"
