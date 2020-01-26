@@ -10,6 +10,7 @@ namespace GoViatic.Web.Helpers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<User> _signInManager;
+        
 
         public UserHelper(
             UserManager<User> userManager,
@@ -86,6 +87,26 @@ namespace GoViatic.Web.Helpers
         public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
         {
             return await _signInManager.CheckPasswordSignInAsync(user, password, false);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(user, token);
+        }
+
+        public async Task<User> GetUserByIdAsync(string userId)
+        {
+            return await _userManager.FindByIdAsync(userId);
         }
     }
 }

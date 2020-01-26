@@ -17,16 +17,22 @@ namespace GoViatic.Web.Controllers
     {
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
-        
         private readonly IConverterHelper _converterHelper;
         private readonly IImageHelper _imageHelper;
+        private readonly IMailHelper _mailHelper;
 
-        public TravelersController(DataContext context, IUserHelper userHelper, IConverterHelper converterHelper, IImageHelper imageHelper)
+        public TravelersController(
+            DataContext context, 
+            IUserHelper userHelper, 
+            IConverterHelper converterHelper, 
+            IImageHelper imageHelper,
+            IMailHelper mailHelper)
         {
             _context = context;
             _userHelper = userHelper;
             _converterHelper = converterHelper;
             _imageHelper = imageHelper;
+            _mailHelper = mailHelper;
         }
         
         public IActionResult CreateTraveler()
@@ -64,6 +70,36 @@ namespace GoViatic.Web.Controllers
                     try
                     {
                         await _context.SaveChangesAsync();
+                        var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                        var tokenLink = Url.Action("ConfirmEmail", "Account", new
+                        {
+                            userid = user.Id,
+                            token = myToken
+                        }, protocol: HttpContext.Request.Scheme);
+
+                        _mailHelper.SendMail(model.Username, "Email confirmation",
+                            $"<p>&nbsp;</p>" +
+                            $"<table style='max-width: 600px; padding: 10px; margin: 0 auto; border-collapse: collapse;'>" +
+                            $"<tbody>" +
+                            $"<tr>" +
+                            $"<td style='background-color: #247d4d; text-align: center; padding: 0;'>&nbsp;</td>" +
+                            $"</tr>" +
+                            $"<tr>" +
+                            $"<td style='background-color: #ecf0f1;'><br />" +
+                            $"<div style='color: #34495e; margin: 4% 10% 2%; text-align: justify; font-family: sans-serif;'><br />" +
+                            $"<h1 style='color: #e67e22; margin: 0 0 7px;'><span style='color: #247d4d;'>Hola</span></h1>" +
+                            $"Bienvenido a GoViatic, es hora de comenzar a viajar y registrar sin problemas tus gastos de viaje:<br />" +
+                            $"<h2 style='color: #247d4d; margin: 0 0 7px;'>Email Confirmation</h2>" +
+                            $"To allow the user, please click in this link:</div>" +
+                            $"    <a style ='text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #247d4d' href = \"{tokenLink}\">Confirm Email</a>" +
+                            $"<p style='color: #b3b3b3; font-size: 12px; text-align: center; margin: 30px 0 0;'>GoViatic by GEOJOR.CO</p>" +
+                            $"</div>" +
+                            $"</td>" +
+                            $"</tr>" +
+                            $"</tbody>" +
+                            $"</table>" +
+                            $"<p>&nbsp;</p>");
+                        ViewBag.Message = "The instructions to allow your user has been sent to email.";
                         return RedirectToAction(nameof(IndexTraveler));
                     }
                     catch (Exception ex)

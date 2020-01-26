@@ -25,7 +25,7 @@ namespace GoViatic.Web.Data
             await CheckViaticAsync();
 
             var manager = await CheckUserAync("Jorge Guerrero", "geojorg@gmail.com", "78305713", "GeojorgCO", "Manager");
-            var traveler = await CheckUserAync("Andres Guerrero", "jorge.guerrero.montes@gmail.com", "78305713", "GeojorgCO", "Traveler");
+            var traveler = await CheckUserAync("Andres Guerrero", "jgm@gmail.com", "78305713", "GeojorgCO", "Traveler");
             await CheckTravelerAsync(traveler);
             await CheckManagerAsync(manager);
         }
@@ -46,6 +46,8 @@ namespace GoViatic.Web.Data
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, role);
             }
+            var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+            await _userHelper.ConfirmEmailAsync(user, token);
             return user;
         }
 
