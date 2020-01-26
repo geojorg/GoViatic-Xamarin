@@ -5,7 +5,7 @@ namespace GoViatic.Common.Services
 {
     public interface IApiService
     {
-        Task<Response> GetTravelerByEmail(
+        Task<Response<TravelerResponse>> GetTravelerByEmail(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -13,11 +13,13 @@ namespace GoViatic.Common.Services
             string accessToken,
             string email);
 
-        Task<Response> GetTokenAsync(
+        Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
             TokenRequest request);
+
+        Task<bool> CheckConnection();
     }
 }
 

@@ -15,12 +15,12 @@
 
     <ContentPage.Content>
         <Grid
-            Margin="14,0,14,0"
+            Margin="14,14,14,0"
             x:DataType="viewModels:ViaticViewModel"
             RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <RefreshView
                 Grid.Row="0"
@@ -28,32 +28,11 @@
                 IsRefreshing="{Binding IsRefreshing}"
                 RefreshColor="Accent">
                 <CollectionView
-                    Margin="0,14,0,0"
                     ItemSizingStrategy="MeasureAllItems"
                     ItemsSource="{Binding Viatics}"
                     SelectedItem="{Binding Selection, Mode=TwoWay}"
                     SelectionChangedCommand="{Binding SelectionCommand}"
                     SelectionMode="Single">
-                    <CollectionView.Header>
-                        <Grid>
-                            <Label
-                                Grid.Column="0"
-                                FontAttributes="Bold"
-                                FontFamily="Ubuntu"
-                                FontSize="17"
-                                HorizontalTextAlignment="Center"
-                                Text="Viatics"
-                                TextColor="Accent" />
-                            <Label
-                                Grid.Column="1"
-                                FontAttributes="Bold"
-                                FontFamily="Ubuntu"
-                                FontSize="17"
-                                HorizontalTextAlignment="Center"
-                                Text="Invoice"
-                                TextColor="Accent" />
-                        </Grid>
-                    </CollectionView.Header>
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
@@ -63,59 +42,59 @@
                                 x:DataType="commonmodels:ViaticResponse"
                                 BackgroundColor="#649F7F"
                                 CornerRadius="10">
-                                <Grid RowSpacing="0">
-                                    <Label
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
                                         Grid.Column="0"
+                                        Aspect="AspectFill"
+                                        HeightRequest="100"
+                                        Source="{Binding ImageUrl}"
+                                        WidthRequest="100" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
                                         FontSize="Body"
                                         HorizontalTextAlignment="Center"
                                         Text="{Binding Name}"
                                         TextColor="White" />
                                     <Label
+                                        Grid.Row="1"
                                         Grid.Column="1"
                                         FontSize="Body"
                                         HorizontalTextAlignment="Center"
-                                        Text="{Binding InvoiceAmmount, StringFormat='{}{0:C}'}"
+                                        Text="{Binding ViaticType}"
                                         TextColor="White" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        FontSize="Body"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding InvoiceAmmount}"
+                                        TextColor="White" />
+
                                 </Grid>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-            <CollectionView
+            <Button
                 Grid.Row="1"
-                Margin="0,0,0,10"
-                ItemSizingStrategy="MeasureAllItems"
-                ItemsSource="{Binding ViaticsType}"
-                SelectionMode="Single">
-                <CollectionView.Header>
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="17"
-                        HorizontalTextAlignment="Center"
-                        Text="Add a New Viatic"
-                        TextColor="Accent" />
-                </CollectionView.Header>
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        HorizontalItemSpacing="10"
-                        Orientation="Vertical"
-                        Span="4"
-                        VerticalItemSpacing="8.56" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ViaticT">
-                        <Frame BackgroundColor="Accent" CornerRadius="10">
-                            <Grid ColumnSpacing="12" RowSpacing="12">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50" />
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="{Binding Icon}" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                Margin="0,30,0,30"
+                BackgroundColor="Accent"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="NEW VIATIC"
+                TextColor="White"
+                WidthRequest="190" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

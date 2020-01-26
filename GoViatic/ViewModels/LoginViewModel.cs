@@ -91,22 +91,32 @@ namespace GoViatic.ViewModels
                 };
 
                 var url = App.Current.Resources["UrlAPI"].ToString();
-                var response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
-                if (!response.IsSuccess)
+                var connection = await _apiService.CheckConnection();
+                if (!connection)
                 {
-                    Message = "Please Check your Password";
-                    EmptyString = "Red";
-                    Password = string.Empty;
+                    IsRunning = true;
+                    await Application.Current.MainPage.DisplayAlert("Error", "Check Internet Connection", "OK");
                     IsRunning = false;
-                    return;
                 }
-                var data = (TokenResponse)response.Result;
-                await SecureStorage.SetAsync("PrivateToken", data.Token);
-                token = data.Token;
-                await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
-                EmptyString = "Transparent";
-                Message = string.Empty;
-                IsRunning = false;
+                else
+                {
+                    var response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
+                    if (!response.IsSuccess)
+                    {
+                        Message = "Please Check your Password";
+                        EmptyString = "Red";
+                        Password = string.Empty;
+                        IsRunning = false;
+                        return;
+                    }
+                    var data = response.Result;
+                    await SecureStorage.SetAsync("PrivateToken", data.Token);
+                    token = data.Token;
+                    await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
+                    EmptyString = "Transparent";
+                    Message = string.Empty;
+                    IsRunning = false;
+                }
             }
         }
 

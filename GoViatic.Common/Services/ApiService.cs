@@ -5,13 +5,22 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace GoViatic.Common.Services
 {
     public class ApiService : IApiService
     {
-       
-        public async Task<Response> GetTokenAsync(
+        public async Task<bool> CheckConnection()
+        {
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase, 
             string servicePrefix, 
             string controller, 
@@ -31,14 +40,14 @@ namespace GoViatic.Common.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<TokenResponse>
                     {
                         IsSuccess = false,
                         Message = result,
                     };
                 }
                 var token = JsonConvert.DeserializeObject<TokenResponse>(result);
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = true,
                     Result = token
@@ -46,7 +55,7 @@ namespace GoViatic.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -54,7 +63,7 @@ namespace GoViatic.Common.Services
             }
         }
 
-        public async Task<Response> GetTravelerByEmail(
+        public async Task<Response<TravelerResponse>> GetTravelerByEmail(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -79,7 +88,7 @@ namespace GoViatic.Common.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<TravelerResponse>
                     {
                         IsSuccess = false,
                         Message = result,
@@ -87,7 +96,7 @@ namespace GoViatic.Common.Services
                 }
 
                 var traveler = JsonConvert.DeserializeObject<TravelerResponse>(result);
-                return new Response
+                return new Response<TravelerResponse>
                 {
                     IsSuccess = true,
                     Result = traveler
@@ -95,7 +104,7 @@ namespace GoViatic.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<TravelerResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
