@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GoViatic.Web.Data;
+﻿using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
+using GoViatic.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace GoViatic.Web.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class TripsController : Controller
     {
         private readonly DataContext _context;
@@ -19,13 +18,14 @@ namespace GoViatic.Web.Controllers
             _context = context;
         }
 
-        // GET: Trips
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Trips.ToListAsync());
+            return View(_context.Trips
+                .Include(p => p.Traveler)
+                .ThenInclude(o => o.User)
+                .Include(p => p.Viatics));
         }
 
-        // GET: Trips/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,7 +34,10 @@ namespace GoViatic.Web.Controllers
             }
 
             var trip = await _context.Trips
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.Traveler)
+                .ThenInclude(o => o.User)
+                .Include(p => p.Viatics)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (trip == null)
             {
                 return NotFound();
@@ -43,29 +46,6 @@ namespace GoViatic.Web.Controllers
             return View(trip);
         }
 
-        // GET: Trips/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Trips/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,City,Date,EndDate")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(trip);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(trip);
-        }
-
-        // GET: Trips/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,50 +53,51 @@ namespace GoViatic.Web.Controllers
                 return NotFound();
             }
 
-            var trip = await _context.Trips.FindAsync(id);
+            var trip = await _context.Trips
+                .Include(p => p.Traveler)
+                .Include(p => p.Viatics)
+                .FirstOrDefaultAsync(p => p.Id == id.Value);
             if (trip == null)
             {
                 return NotFound();
             }
-            return View(trip);
+
+            var view = new TripViewModel
+            {
+                Id = trip.Id,
+                City = trip.City,
+                Bugdet = trip.Bugdet,
+                Date = trip.Date,
+                EndDate = trip.EndDate,
+                TravelerId = trip.Traveler.Id,
+            };
+
+            return View(view);
         }
 
-        // POST: Trips/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,City,Date,EndDate")] Trip trip)
+        public async Task<IActionResult> Edit(TripViewModel model)
         {
-            if (id != trip.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var trip = new Trip
                 {
-                    _context.Update(trip);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TripExists(trip.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                    Id = model.Id,
+                    City = model.City,
+                    Bugdet = model.Bugdet,
+                    Date = model.Date,
+                    EndDate = model.EndDate,
+                };
+
+                _context.Trips.Update(trip);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(trip);
+
+            return View(model);
         }
 
-        // GET: Trips/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,24 +111,9 @@ namespace GoViatic.Web.Controllers
             {
                 return NotFound();
             }
-
-            return View(trip);
-        }
-
-        // POST: Trips/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var trip = await _context.Trips.FindAsync(id);
             _context.Trips.Remove(trip);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TripExists(int id)
-        {
-            return _context.Trips.Any(e => e.Id == id);
         }
     }
 }
