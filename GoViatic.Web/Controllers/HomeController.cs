@@ -1,11 +1,26 @@
-﻿using GoViatic.Web.Models;
+﻿using GoViatic.Web.Data;
+using GoViatic.Web.Data.Entities;
+using GoViatic.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GoViatic.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly DataContext _context;
+
+        public HomeController(DataContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -40,5 +55,149 @@ namespace GoViatic.Web.Controllers
         {
             return View();
         }
+
+        //CONTROLLER INFORMATION
+
+        [Authorize(Roles = "Traveler")]
+        public IActionResult Trips()
+        {
+            return View(_context.Trips
+                .Include(p => p.Viatics)
+                .Where(p => p.Traveler.User.Email.ToLower().Equals(User.Identity.Name.ToLower())));
+        }
+
+        [Authorize(Roles = "Traveler")]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips
+                .Include(p => p.Traveler)
+                .ThenInclude(o => o.User)
+                .Include(p => p.Viatics)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            return View(trip);
+        }
+
+        [Authorize(Roles = "Traveler")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips
+                .Include(p => p.Traveler)
+                .Include(p => p.Viatics)
+                .FirstOrDefaultAsync(p => p.Id == id.Value);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            var model = new TripViewModel
+            {
+                Id = trip.Id,
+                City = trip.City,
+                Budget = trip.Budget,
+                Date = trip.Date,
+                EndDate = trip.EndDate,
+                Viatics = trip.Viatics,
+                TravelerId = trip.Traveler.Id,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(TripViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var trip = new Trip
+                {
+                    Id = model.Id,
+                    City = model.City,
+                    Budget = model.Budget,
+                    Date = model.Date,
+                    EndDate = model.EndDate,
+                    Traveler = await _context.Travelers.FindAsync(model.TravelerId)
+                };
+                _context.Trips.Update(trip);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Trips));
+            }
+            return View(model);
+        }
+
+        [Authorize(Roles = "Traveler")]
+        public async Task<IActionResult> Create()
+        {
+            var traveler = await _context.Travelers
+                .FirstOrDefaultAsync(o => o.User.Email.ToLower().Equals(User.Identity.Name.ToLower()));
+            if (traveler == null)
+            {
+                return NotFound();
+            }
+            var model = new TripViewModel
+            {
+                TravelerId = traveler.Id,
+                Date = DateTime.Today,
+                EndDate = DateTime.Today.AddDays(2)
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(TripViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var trip = new Trip
+                {
+                    City = model.City,
+                    Budget = model.Budget,
+                    Date = model.Date,
+                    EndDate = model.EndDate,
+                    Traveler = await _context.Travelers.FindAsync(model.TravelerId),
+                };
+                _context.Trips.Add(trip);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(Trips)}");
+            }
+            return View(model);
+        }
+
+
+        [Authorize(Roles = "Traveler")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.Trips
+                .Include(p => p.Viatics)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            _context.Trips.Remove(trip);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Trips));
+        }
+
     }
 }

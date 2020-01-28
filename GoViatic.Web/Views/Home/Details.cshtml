@@ -45,7 +45,7 @@
 </div>
 <div>
     <a asp-action="CreateViatic" asp-route-id="@Model.Id" class="btn btn-success">Create Viatic</a>
-    <a asp-action="DetailsTraveler" asp-route-id="@Model.Traveler.Id" class="btn btn-danger">Back to Trips</a>
+    <a asp-action="Trips" asp-route-id="@Model.Traveler.Id" class="btn btn-danger">Back to Trips</a>
 </div>
 <hr />
 <h4>List of Viatics</h4>
@@ -121,7 +121,7 @@ else
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
- 
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#MyTable').DataTable();

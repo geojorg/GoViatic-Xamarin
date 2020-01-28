@@ -30,7 +30,7 @@ namespace GoViatic.Web.Data.Entities
         public DateTime EndDateLocal => EndDate.ToLocalTime();
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Bugdet { get; set; }
+        public decimal Budget { get; set; }
         
         public Traveler Traveler { get; set; }
         public ICollection<Viatic> Viatics { get; set; }

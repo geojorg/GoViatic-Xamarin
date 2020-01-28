@@ -21,7 +21,7 @@ namespace GoViatic.Web.Helpers
                 City = model.City,
                 Date = model.Date.ToUniversalTime(),
                 EndDate = model.EndDate.ToUniversalTime(),
-                Bugdet = model.Bugdet,
+                Budget = model.Budget,
                 Traveler = await _context.Travelers.FindAsync(model.TravelerId),
                 Viatics = model.Viatics
             };
@@ -34,7 +34,7 @@ namespace GoViatic.Web.Helpers
                 City = trip.City,
                 Date = trip.Date.ToUniversalTime(),
                 EndDate = trip.EndDate.ToUniversalTime(),
-                Bugdet = trip.Bugdet,
+                Budget = trip.Budget,
                 Traveler = trip.Traveler,
                 Viatics = trip.Viatics,
                 Id = trip.Id,

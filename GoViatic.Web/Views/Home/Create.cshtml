@@ -1,0 +1,23 @@
+﻿@model GoViatic.Web.Models.TripViewModel
+@{
+    ViewData["Title"] = "Create Trip";
+}
+
+<h2>Add New Trip</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TravelerId" />
+
+            <partial name="_Trip" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-action="Trips" asp-route-id="@Model.TravelerId" class="btn btn-danger">Back To Trips</a>
+            </div>
+        </form>
+    </div>
+</div>

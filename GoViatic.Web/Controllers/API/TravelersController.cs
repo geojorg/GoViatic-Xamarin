@@ -48,7 +48,7 @@ namespace GoViatic.Web.Controllers.API
                     City = tr.City,
                     Date = tr.Date,
                     EndDate = tr.EndDate,
-                    Budget = tr.Bugdet,
+                    Budget = tr.Budget,
                     ViaticCount = tr.Viatics.Count(),
                     Viatics = tr.Viatics.Select(v => new ViaticResponse
                     {

@@ -66,7 +66,7 @@ namespace GoViatic.Web.Controllers
             {
                 Id = trip.Id,
                 City = trip.City,
-                Bugdet = trip.Bugdet,
+                Budget = trip.Budget,
                 Date = trip.Date,
                 EndDate = trip.EndDate,
                 TravelerId = trip.Traveler.Id,
@@ -85,7 +85,7 @@ namespace GoViatic.Web.Controllers
                 {
                     Id = model.Id,
                     City = model.City,
-                    Bugdet = model.Bugdet,
+                    Budget = model.Budget,
                     Date = model.Date,
                     EndDate = model.EndDate,
                 };
