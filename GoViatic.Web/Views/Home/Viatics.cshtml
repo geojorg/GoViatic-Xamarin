@@ -1,0 +1,23 @@
+﻿@model GoViatic.Web.Models.ViaticViewModel
+@{
+    ViewData["Title"] = "Create Viatic";
+}
+
+<h2>Add Viatics</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Viatics" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TripId" />
+
+            <partial name="_Viatic" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-action="Details" asp-route-id="@Model.TripId" class="btn btn-danger">Back To Trips</a>
+            </div>
+        </form>
+    </div>
+</div>

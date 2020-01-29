@@ -1,5 +1,6 @@
 ﻿using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
+using GoViatic.Web.Helpers;
 using GoViatic.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,14 @@ namespace GoViatic.Web.Controllers
     {
 
         private readonly DataContext _context;
+        private readonly IImageHelper _imageHelper;
+        private readonly IConverterHelper _converterHelper;
 
-        public HomeController(DataContext context)
+        public HomeController(DataContext context, IImageHelper imageHelper, IConverterHelper converterHelper)
         {
             _context = context;
+            _imageHelper = imageHelper;
+            _converterHelper = converterHelper;
         }
 
         public IActionResult Index()
@@ -177,6 +182,80 @@ namespace GoViatic.Web.Controllers
             return View(model);
         }
 
+        // TODO: CREATE VIATIC
+        public async Task<IActionResult> Viatics(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var trip = await _context.Trips.FindAsync(id.Value);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+            var model = new ViaticViewModel
+            {
+                TripId = trip.Id,
+                InvoiceDate = DateTime.Today
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Viatics(ViaticViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var path = string.Empty;
+                if (model.ImageFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
+                }
+                var viatic = await _converterHelper.ToViaticAsync(model, path, true);
+                _context.Viatics.Add(viatic);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "Home", new { id = model.TripId });
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> ViaticEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viatic = await _context.Viatics
+                .Include(v => v.Trip)
+                .FirstOrDefaultAsync(v => v.Id == id);
+            if (viatic == null)
+            {
+                return NotFound();
+            }
+            return View(_converterHelper.ToViaticViewModel(viatic));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ViaticEdit(ViaticViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var path = model.ImageUrl;
+
+                if (model.ImageFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
+                }
+
+                var viatic = await _converterHelper.ToViaticAsync(model, path, false);
+                _context.Viatics.Update(viatic);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "Home", new { id = model.TripId });
+            }
+            return View(model);
+        }
 
         [Authorize(Roles = "Traveler")]
         public async Task<IActionResult> Delete(int? id)
@@ -199,5 +278,23 @@ namespace GoViatic.Web.Controllers
             return RedirectToAction(nameof(Trips));
         }
 
+        public async Task<IActionResult> DeleteViatic(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viatic = await _context.Viatics
+                .Include(t => t.Trip)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (viatic == null)
+            {
+                return NotFound();
+            }
+            _context.Viatics.Remove(viatic);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Home", new { id = viatic.Trip.Id });
+        }
     }
 }
