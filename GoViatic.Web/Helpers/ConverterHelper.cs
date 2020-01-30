@@ -1,4 +1,5 @@
-﻿using GoViatic.Web.Data;
+﻿using GoViatic.Common.Models;
+using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
 using GoViatic.Web.Models;
 using System.Threading.Tasks;
@@ -71,6 +72,36 @@ namespace GoViatic.Web.Helpers
                 ViaticType = viatic.ViaticType,
                 Traveler = viatic.Traveler,
                 TripId = viatic.Trip.Id
+            };
+        }
+        public TripResponse ToTripResponse(Trip trip)
+        {
+            if (trip == null)
+            {
+                return null;
+            }
+            return new TripResponse
+            {
+                City = trip.City,
+                Budget = trip.Budget,
+                Date = trip.Date,
+                EndDate = trip.EndDate,
+            };
+        }
+
+        public TravelerResponse ToTravelerResponse(Traveler traveler)
+        {
+            if (traveler == null)
+            {
+                return null;
+            }
+
+            return new TravelerResponse
+            {
+                FirstName = traveler.User.FirstName,
+                LastName = traveler.User.LastName,
+                Company = traveler.User.Company,
+                Email = traveler.User.Email,
             };
         }
     }

@@ -194,9 +194,9 @@ namespace GoViatic.Web.Controllers
             var user = new User
             {
                 FirstName = model.FirstName,
+                LastName = model.LastName,
                 Email = model.Username,
                 Company = model.Company,
-                Document = model.Document,
                 UserName = model.Username
             };
 
@@ -222,9 +222,9 @@ namespace GoViatic.Web.Controllers
 
             var view = new EditUserViewModel
             {
-                Company = traveler.User.Company,
-                Document = traveler.User.Document,
                 FirstName = traveler.User.FirstName,
+                LastName = traveler.User.LastName,
+                Company = traveler.User.Company,
                 Id = traveler.Id,
             };
             return View(view);
@@ -245,8 +245,8 @@ namespace GoViatic.Web.Controllers
                     .Include(o => o.User)
                     .FirstOrDefaultAsync(o => o.Id == model.Id);
 
-                traveler.User.Document = model.Document;
                 traveler.User.FirstName = model.FirstName;
+                traveler.User.LastName = model.LastName;
                 traveler.User.Company = model.Company;
                 await _userHelper.UpdateUserAsync(traveler.User);
                 return RedirectToAction("Index", "Home");
@@ -255,13 +255,13 @@ namespace GoViatic.Web.Controllers
         }
 
         //CHANGE PASSWORD
-        public IActionResult ChangePassword()
+        public IActionResult ChangePasswordWeb()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<IActionResult> ChangePasswordWeb(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
             {

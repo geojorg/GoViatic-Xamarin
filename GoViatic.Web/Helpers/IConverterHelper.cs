@@ -1,4 +1,5 @@
-﻿using GoViatic.Web.Data.Entities;
+﻿using GoViatic.Common.Models;
+using GoViatic.Web.Data.Entities;
 using GoViatic.Web.Models;
 using System.Threading.Tasks;
 
@@ -10,5 +11,7 @@ namespace GoViatic.Web.Helpers
         ViaticViewModel ToViaticViewModel(Viatic viatic);
         Task<Trip> ToTripAsync(TripViewModel model, bool isNew);
         TripViewModel ToTripViewModel(Trip trip);
+        TripResponse ToTripResponse(Trip trip);
+        TravelerResponse ToTravelerResponse(Traveler traveler);
     }
 }

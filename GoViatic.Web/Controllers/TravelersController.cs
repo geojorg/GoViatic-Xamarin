@@ -48,9 +48,9 @@ namespace GoViatic.Web.Controllers
                 var user = new User
                 {
                     FirstName = model.FirstName,
-                    Email = model.Username,
-                    Document = model.Document,
+                    LastName = model.LastName,
                     Company = model.Company,
+                    Email = model.Username,
                     UserName = model.Username
                 };
 
@@ -154,9 +154,9 @@ namespace GoViatic.Web.Controllers
 
             var model = new EditUserViewModel
             {
-                Company = traveler.User.Company,
-                Document = traveler.User.Document,
                 FirstName = traveler.User.FirstName,
+                LastName = traveler.User.LastName,
+                Company = traveler.User.Company,
                 Id = traveler.Id
             };
             return View(model);
@@ -173,7 +173,7 @@ namespace GoViatic.Web.Controllers
                     .FirstOrDefaultAsync(t => t.Id == model.Id);
 
                 traveler.User.FirstName = model.FirstName;
-                traveler.User.Document = model.Document;
+                traveler.User.LastName = model.LastName;
                 traveler.User.Company = model.Company;
                 await _userHelper.UpdateUserAsync(traveler.User);
                 return RedirectToAction(nameof(IndexTraveler));

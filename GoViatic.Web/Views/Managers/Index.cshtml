@@ -22,10 +22,10 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.FirstOrDefault().User.Document)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().User.FirstName)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FirstOrDefault().User.FirstName)
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().User.LastName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstOrDefault().User.Email)
@@ -38,10 +38,10 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.User.Document)
+                                    @Html.DisplayFor(modelItem => item.User.FirstName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.User.FirstName)
+                                    @Html.DisplayFor(modelItem => item.User.LastName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.User.Email)

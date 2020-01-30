@@ -24,13 +24,13 @@ namespace GoViatic.Web.Data
             await CheckRoles();
             await CheckViaticAsync();
 
-            var manager = await CheckUserAync("Jorge Guerrero", "geojorg@gmail.com", "78305713", "GeojorgCO", "Manager");
-            var traveler = await CheckUserAync("Andres Guerrero", "jgm@gmail.com", "78305713", "GeojorgCO", "Traveler");
+            var manager = await CheckUserAync("Jorge", "Guerrero", "geojorg@gmail.com", "GeojorgCO", "Manager");
+            var traveler = await CheckUserAync("Andres", "Guerrero", "jgm@gmail.com", "GeojorgCO", "Traveler");
             await CheckTravelerAsync(traveler);
             await CheckManagerAsync(manager);
         }
 
-        private async Task<User> CheckUserAync(string firstname, string email, string document, string company, string role)
+        private async Task<User> CheckUserAync(string firstname, string lastname, string email, string company, string role)
         {
             var user = await _userHelper.GetUserByEmailAsync(email);
             if (user == null)
@@ -38,9 +38,9 @@ namespace GoViatic.Web.Data
                 user = new User
                 {
                     FirstName = firstname,
+                    LastName = lastname,
                     Email = email,
                     UserName = email,
-                    Document = document,
                     Company = company
                 };
                 await _userHelper.AddUserAsync(user, "123456");

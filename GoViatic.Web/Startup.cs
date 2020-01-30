@@ -77,6 +77,7 @@ namespace GoViatic.Web
             services.AddScoped<IImageHelper, ImageHelper>();
             services.AddScoped<IMailHelper, MailHelper>();
             services.AddRazorPages();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

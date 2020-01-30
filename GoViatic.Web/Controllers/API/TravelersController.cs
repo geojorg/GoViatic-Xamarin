@@ -38,10 +38,10 @@ namespace GoViatic.Web.Controllers.API
             var response = new TravelerResponse
             {
                 Id = traveler.Id,
-                Email = traveler.User.Email,
                 FirstName = traveler.User.FirstName,
+                LastName = traveler.User.LastName,
                 Company = traveler.User.Company,
-                Document = traveler.User.Document,
+                Email = traveler.User.Email,
                 Trips = traveler.Trips.Select(tr => new TripResponse
                 {
                     Id = tr.Id,
