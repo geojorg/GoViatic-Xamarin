@@ -13,5 +13,6 @@ namespace GoViatic.Web.Helpers
         TripViewModel ToTripViewModel(Trip trip);
         TripResponse ToTripResponse(Trip trip);
         TravelerResponse ToTravelerResponse(Traveler traveler);
+        ViaticResponse ToViaticResponse(Viatic viatic);
     }
 }

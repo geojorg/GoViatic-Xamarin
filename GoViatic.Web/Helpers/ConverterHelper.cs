@@ -104,5 +104,24 @@ namespace GoViatic.Web.Helpers
                 Email = traveler.User.Email,
             };
         }
+
+        public ViaticResponse ToViaticResponse(Viatic viatic)
+        {
+            if (viatic == null)
+            {
+                return null;
+            }
+
+            return new ViaticResponse
+            {
+                Name = viatic.ViaticName,
+                Description = viatic.Description,
+                InvoiceAmmount = viatic.InvoiceAmmount,
+                InvoiceDate = viatic.InvoiceDate,
+                Id = viatic.Id,
+                ImageUrl = viatic.ImageFullPath,
+                ViaticType = viatic.ViaticType
+            };
+        }
     }
 }

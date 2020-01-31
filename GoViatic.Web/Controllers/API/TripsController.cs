@@ -6,6 +6,7 @@ using GoViatic.Common.Models;
 using GoViatic.Web.Data;
 using GoViatic.Web.Data.Entities;
 using GoViatic.Web.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoViatic.Web.Controllers.API
 {
@@ -77,6 +78,27 @@ namespace GoViatic.Web.Controllers.API
             _context.Trips.Update(oldTrip);
             await _context.SaveChangesAsync();
             return Ok(_converterHelper.ToTripResponse(oldTrip));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTrip([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.BadRequest(ModelState);
+            }
+
+            var trip = await _context.Trips
+                .Include(p => p.Viatics)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (trip == null)
+            {
+                return this.NotFound();
+            }
+
+            _context.Trips.Remove(trip);
+            await _context.SaveChangesAsync();
+            return Ok("Trip deleted");
         }
     }
 }
