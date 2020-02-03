@@ -20,6 +20,12 @@ namespace GoViatic.Common.Services
             TokenRequest request);
 
         Task<bool> CheckConnection();
+
+        Task<Response<object>> RegisterUserAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            UserRequest userRequest);
     }
 }
 

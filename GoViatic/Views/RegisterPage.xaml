@@ -46,7 +46,7 @@
                 Margin="25,0,25,0"
                 BackgroundColor="Transparent"
                 Placeholder="First Name"
-                Text="{Binding Name}" />
+                Text="{Binding FirstName}" />
             <Entry
                 Grid.Row="3"
                 Margin="25,0,25,0"
@@ -70,19 +70,21 @@
                 Grid.Row="6"
                 Margin="25,0,25,0"
                 BackgroundColor="Transparent"
+                IsPassword="True"
                 Placeholder="Password"
                 Text="{Binding Password}" />
             <Entry
                 Grid.Row="7"
                 Margin="25,0,25,0"
                 BackgroundColor="Transparent"
+                IsPassword="True"
                 Placeholder="Confirm Password"
-                Text="{Binding ConfirmPassword}" />
+                Text="{Binding PasswordConfirm}" />
             <Label
                 Grid.Row="8"
                 FontSize="Body"
                 HorizontalOptions="Center"
-                Text="Check all Entries"
+                Text="{Binding AlertDialog}"
                 TextColor="{Binding EntryEmpty}" />
             <Label
                 Grid.Row="9"
