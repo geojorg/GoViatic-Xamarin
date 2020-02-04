@@ -43,7 +43,7 @@ namespace GoViatic.ViewModels
         public ICommand SaveCommand => new Command(Save);
         private void Save(object obj)
         {
-            //TODO: Implement the saving of the City
+            //TODO: SAVE CITY USING THE API SERVICE FOR TRIP SAVE
             Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
         }
     }

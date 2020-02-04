@@ -1,4 +1,5 @@
-﻿using GoViatic.Common.Models;
+﻿using GoViatic.Common.Helpers;
+using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using GoViatic.Views;
 using System.Windows.Input;
@@ -20,49 +21,43 @@ namespace GoViatic.ViewModels
 
         public LoginViewModel()
         {
-            //TODO: REMOVE THE EMAIL AND PASSWORD FROM THE NAME
             EmptyString = "Transparent";
             IsRemembered = true;
             IApiService apiService = new ApiService();
             _apiService = apiService;
-            Email = "jgm@gmail.com";
-            Password = "123456";
         }
 
-        public string Message
-        {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
-        }
-
-        public bool IsRunning 
-        { 
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
-        }
-
-        public string EmptyString 
-        { 
-            get { return _emptyString; }
-            set { SetProperty(ref _emptyString, value); }
-        }
-
-        public bool IsRemembered 
-        { 
-            get { return _isRemembered; }
-            set { SetProperty(ref _isRemembered, value); }
-        }
         public string Email
         {
             get { return _email; }
             set { SetProperty(ref _email, value); }
         }
-        public string Password 
-        { 
+        public string Password
+        {
             get { return _password; }
-            set { SetProperty(ref _password, value); } 
+            set { SetProperty(ref _password, value); }
         }
-
+        public string Message
+        {
+            get { return _message; }
+            set { SetProperty(ref _message, value); }
+        }
+        public bool IsRunning 
+        { 
+            get { return _isRunning; }
+            set { SetProperty(ref _isRunning, value); }
+        }
+        public string EmptyString 
+        { 
+            get { return _emptyString; }
+            set { SetProperty(ref _emptyString, value); }
+        }
+        public bool IsRemembered 
+        { 
+            get { return _isRemembered; }
+            set { SetProperty(ref _isRemembered, value); }
+        }
+        
         public ICommand LoginCommand => new Command(Login);
         public async void Login()
         {
@@ -110,8 +105,22 @@ namespace GoViatic.ViewModels
                         return;
                     }
                     var data = response.Result;
-                    await SecureStorage.SetAsync("PrivateToken", data.Token);
-                    token = data.Token;
+
+                    var response2 = await _apiService.GetTravelerByEmail(
+                        url, 
+                        "api",
+                        "/Travelers/GetTravelerByEmail", 
+                        "bearer", 
+                        data.Token, 
+                        Email);
+
+                    var traveler = response2.Result;
+                    //await SecureStorage.SetAsync("PrivateToken", data.Token);
+                    //token = data.Token;
+
+
+
+
                     await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
                     EmptyString = "Transparent";
                     Message = string.Empty;
@@ -129,11 +138,7 @@ namespace GoViatic.ViewModels
         public ICommand RecoverPswCommand => new Command(Recovery);
         private void Recovery()
         {
-            //TODO: PENDIENTE HACER EL SISTEMA PARA ENVIO DE CORREO ELECTRONICO
-            Application.Current.MainPage.DisplayAlert(
-                "Password Recovery", 
-                "An Email has been sent to recover your password", 
-                "Ok"); 
+            Shell.Current.Navigation.PushAsync(new RecoverPswPage());
         }
     }
 }

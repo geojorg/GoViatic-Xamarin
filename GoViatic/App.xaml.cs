@@ -1,4 +1,6 @@
-﻿using Xamarin.Essentials;
+﻿using GoViatic.Common.Helpers;
+using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +17,15 @@ namespace GoViatic
             if (firstime == "Yes")
             {
                 MainPage = new AppShell();
-                Shell.Current.GoToAsync("//LoginPage");
+                //TODO: MAKE THE SETTINGS WORK FROM THE START
+                //if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
+                //{
+                //    Shell.Current.GoToAsync("//TripPage");
+                //}
+                //else
+                //{
+                    Shell.Current.GoToAsync("//LoginPage");
+                //}
             }
             else
             {

@@ -9,6 +9,7 @@ namespace GoViatic.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
+        //TODO: CREATE A INDICATOR VIEW FOR THIS REGISTERVIEW MODEL WHEN CREATING THE USER
         private string _entryEmpty;
         private string _firstName;
         private string _company;
@@ -121,8 +122,6 @@ namespace GoViatic.ViewModels
             return true;
         }
 
-
-        //TODO: CREATE THE REGISTRATION IN THE SYSTEM
         public ICommand RegisterCommand => new Command(RegisterAsync);
         private async void RegisterAsync()
         {

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GoViatic.Views.RecoverPswPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    Title="Recover Password"
+    Visual="Material"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <Grid x:DataType="viewModels:RecoverPswViewModel" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <BoxView
+                Grid.Row="0"
+                BackgroundColor="Accent"
+                HeightRequest="220" />
+            <Image
+                Grid.Row="0"
+                HeightRequest="130"
+                HorizontalOptions="Center"
+                Source="{Binding ImageSource}"
+                VerticalOptions="Center" />
+            <Label
+                Grid.Row="1"
+                Margin="14,20,14,0"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Text="Forgot your Password?"
+                TextColor="Accent" />
+            <Label
+                Grid.Row="2"
+                Margin="14,0,14,0"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Message}" />
+            <Entry
+                Grid.Row="3"
+                Margin="14,0,14,0"
+                BackgroundColor="Transparent"
+                IsVisible="{Binding IsVisible}"
+                Keyboard="Email"
+                Placeholder="Email"
+                Text="{Binding Email}" />
+            <ActivityIndicator
+                Grid.Row="4"
+                Margin="0,0,0,40"
+                IsRunning="{Binding IsRunning}"
+                Color="Accent" />
+            <Button
+                Grid.Row="5"
+                Margin="0,0,0,50"
+                BackgroundColor="#247D4D"
+                Command="{Binding RecoverPswCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsVisible}"
+                Text="Submit"
+                TextColor="White"
+                WidthRequest="190" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

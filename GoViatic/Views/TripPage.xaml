@@ -16,7 +16,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:StringCaseConverter x:Key="caseConverter" />
-
             <Style x:Key="SwipeItemBorderStyle" TargetType="BoxView">
                 <Setter Property="BackgroundColor" Value="#edcd66" />
                 <Setter Property="CornerRadius" Value="0, 9, 0, 9" />
@@ -116,6 +115,7 @@
                                         </SwipeItemView>
                                     </SwipeView.RightItems>
                                     <SwipeView.Content>
+                                        <!--  //TODO: CHANGE THIS FROM TRIPRESPONSE TO TRIPITEMVIEWMODEL  -->
                                         <Frame
                                             Padding="20"
                                             x:DataType="models:TripResponse"
@@ -198,5 +198,4 @@
             </Grid>
         </Grid>
     </ContentPage.Content>
-
 </ContentPage>

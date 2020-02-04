@@ -48,26 +48,26 @@ namespace GoViatic.ViewModels
             source.Add(new Carousel
             {
                 Icon = "carousel0",
-                Header = "Bienvenido a GoViatic",
-                Body = "Realiza el control de tus gatos de viáticos fácil"
+                Header = "Welcome to GoViatic",
+                Body = "Make control of your viatics easy"
             });
             source.Add(new Carousel
             {
                 Icon = "carousel1",
-                Header = "Gestión de forma simple",
-                Body = "Gestiona tus gastos de transporte, alimentación y muchos otros"
+                Header = "Simple Management",
+                Body = "Manage your transportation, food and many other expenses"
             });
             source.Add(new Carousel
             {
                 Icon = "carousel2",
-                Header = "Exporta el resumen",
-                Body = "Exporta el resumen de tus facturas y viáticos en Excel o PDF"
+                Header = "Export the Summary",
+                Body = "Export the summary of your invoices viatics in Excel or PDF"
             });
             Carousels = new ObservableCollection<Carousel>(source);
         }
 
         public ICommand PositionChangedCommand => new Command<int>(PositionChanged);
-        void PositionChanged(int position)
+        private void PositionChanged(int position)
         {
             CurrentPosition = position;
             OnPropertyChanged("CurrentPosition");
@@ -90,13 +90,11 @@ namespace GoViatic.ViewModels
                     break;
             }
         }
-        public ICommand LoginCommand
+       
+        public ICommand LoginCommand => new Command(Login);
+        private void Login()
         {
-            get
-            {
-                return new Command(() =>
-                { Shell.Current.GoToAsync("///LoginPage"); });
-            }
+            Shell.Current.GoToAsync("///LoginPage");
         }
     }
 }
