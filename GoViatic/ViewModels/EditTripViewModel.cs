@@ -7,7 +7,6 @@ using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
 {
-    //TODO: CHANGE TO TRIPITEM VIEW MODEL PENDING
     [QueryProperty("Trips", "id")]
     public class EditTripViewModel : BaseViewModel
     {

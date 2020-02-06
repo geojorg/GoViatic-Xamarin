@@ -1,8 +1,10 @@
-﻿using GoViatic.Common.Models;
+﻿using GoViatic.Common.Helpers;
+using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using GoViatic.Data;
 using GoViatic.Models;
 using GoViatic.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,6 @@ namespace GoViatic.ViewModels
         {
             set
             {
-
                 var allTrips = TripViewModel.trips;
                 TripResponse trip = allTrips.FirstOrDefault(t => t.Id.ToString() == Uri.UnescapeDataString(value));
                 if (trip != null)
@@ -52,9 +53,9 @@ namespace GoViatic.ViewModels
             set { SetProperty(ref _isRefreshing, value); }
         }
 
-        public ICollection<ViaticResponse> Viatics 
-        { 
-            get { return _viatics;}
+        public ICollection<ViaticResponse> Viatics
+        {
+            get { return _viatics; }
             set { SetProperty(ref _viatics, value); }
         }
 
@@ -93,24 +94,26 @@ namespace GoViatic.ViewModels
         public ICommand RefreshCommand => new Command(Refresh);
         private void Refresh()
         {
+            //TODO CHANGE THE GET DATA BUT BE TAKE INTO ACCOUNT HOW TO DO  IT FOR THE NEW VIATICS
             IsRefreshing = true;
             GetData();
             IsRefreshing = false;
         }
 
+        //TODO: CHANGE THE NAME OR USE THE ID FOR CHANGING THE SELECCTION
         public ICommand SelectionCommand => new Command(SelectionC);
         private async void SelectionC()
         {
             if (Selection != null)
             {
                 var name = Selection.Name;
-                
                 Routing.RegisterRoute("EditViaticPage", typeof(EditViaticPage));
                 await Shell.Current.GoToAsync("//ViaticsPage/EditViaticPage");
                 Selection = null;
             }
         }
 
+        //TODO: CHECK IF THIS IS THE BEST WAY TO IMPLEMENT THIS FUNCTIONALITY
         public async void GetData()
         {
             var url = App.Current.Resources["UrlAPI"].ToString();
@@ -123,5 +126,11 @@ namespace GoViatic.ViewModels
             var currenttrip = trips.FirstOrDefault(m => m.Id == Int32.Parse(Id));
             Viatics = currenttrip.Viatics;
         }
+
+        //private void GetUserData()
+        //{
+        //    var user = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
+            
+        //}
     }
 }

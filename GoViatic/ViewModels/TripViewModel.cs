@@ -1,6 +1,7 @@
-﻿using GoViatic.Common.Models;
-using GoViatic.Common.Services;
+﻿using GoViatic.Common.Helpers;
+using GoViatic.Common.Models;
 using GoViatic.Views;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -8,30 +9,19 @@ using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
 {
-    [QueryProperty("Token", "token")]
-    [QueryProperty("Email", "email")]
     public class TripViewModel : BaseViewModel
     {
-        private readonly IApiService _apiService;
-        private string email;
-        private string _email;
-        private string token;
-        private string _token;
         private string _firstName;
         public static ICollection<TripResponse> trips;
-        private bool _hasTrips;
-        private bool _firstTrip;
         private bool _isRefreshing;
         private TripResponse _selection;
         private string _viaticCount;
 
         public TripViewModel()
         {
-            IApiService apiService = new ApiService();
-            _apiService = apiService;
             IsRefreshing = false;
-
-            //TODO: PASS THE COMPLETE MODEL WHEN IT IS AVAILABLE IN XAMARIN FORM NEXT
+            GetUserData();
+            
             EditCommand = new Command<TripResponse>((t) =>
             {
                 var id = t.Id;
@@ -39,26 +29,13 @@ namespace GoViatic.ViewModels
                 Shell.Current.GoToAsync($"//TripPage/EditTripPage?id={id}");
             });
         }
+
+        public bool HasTrips { get; set; }
+
+        public bool FirstTrip { get; set; }
+
         public Command<TripResponse> EditCommand { get; set; }
-        public string Email 
-        { 
-            get { return _email; } 
-            set
-            {
-                SetProperty(ref _email, value);
-                email = Email;
-                GetUserData();
-            }
-        }
-        public string Token
-        {
-            get { return _token; }
-            set 
-            { 
-                SetProperty(ref _token, value);
-                token = Token;
-            }
-        }
+
         public string FirstName
         {
             get { return _firstName; }
@@ -69,16 +46,7 @@ namespace GoViatic.ViewModels
             get { return trips; }  
             set { SetProperty(ref trips, value); } 
         }
-        public bool HasTrips
-        {
-            get { return _hasTrips; }
-            set { SetProperty(ref _hasTrips, value); }
-        }
-        public bool FirstTrip
-        {
-            get { return _firstTrip; }
-            set { SetProperty(ref _firstTrip, value); }
-        }
+       
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -95,14 +63,11 @@ namespace GoViatic.ViewModels
             set { SetProperty(ref _viaticCount, value); }
         }
         
-        private async void GetUserData()
+        private void GetUserData()
         {
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var response2 = await _apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
-            var traveler = (TravelerResponse)response2.Result;
-            
-            FirstName = $"{traveler.FirstName} Choose your Trip";
-            Trips = traveler.Trips;
+            var userData = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);            
+            FirstName = $"{userData.FirstName} {userData.LastName} Choose your Trip";
+            Trips = userData.Trips;
             if (Trips.Count() == 0)
             {
                 FirstTrip = true;
@@ -114,15 +79,6 @@ namespace GoViatic.ViewModels
                 HasTrips = true;
             }
         }
-
-        //public async Task<TripResponse> GetData()
-        //{
-        //    var url = App.Current.Resources["UrlAPI"].ToString();
-        //    IApiService apiService = new ApiService();
-        //    var response2 = await apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
-        //    var tripResponse = (TripResponse)response2.Result;
-        //    return tripResponse;
-        //}
 
         public ICommand RefreshCommand => new Command(Refresh);
         public void Refresh()

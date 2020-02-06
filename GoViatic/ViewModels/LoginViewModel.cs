@@ -2,8 +2,8 @@
 using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using GoViatic.Views;
+using Newtonsoft.Json;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
@@ -22,7 +22,7 @@ namespace GoViatic.ViewModels
         public LoginViewModel()
         {
             EmptyString = "Transparent";
-            IsRemembered = true;
+            IsRemember = true;
             IApiService apiService = new ApiService();
             _apiService = apiService;
         }
@@ -52,7 +52,7 @@ namespace GoViatic.ViewModels
             get { return _emptyString; }
             set { SetProperty(ref _emptyString, value); }
         }
-        public bool IsRemembered 
+        public bool IsRemember 
         { 
             get { return _isRemembered; }
             set { SetProperty(ref _isRemembered, value); }
@@ -95,7 +95,12 @@ namespace GoViatic.ViewModels
                 }
                 else
                 {
-                    var response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
+                    var response = await _apiService.GetTokenAsync(
+                        url, 
+                        "Account", 
+                        "/CreateToken", 
+                        request);
+
                     if (!response.IsSuccess)
                     {
                         Message = "Please Check your Password";
@@ -104,24 +109,22 @@ namespace GoViatic.ViewModels
                         IsRunning = false;
                         return;
                     }
-                    var data = response.Result;
+                    var tokenData = response.Result;
 
                     var response2 = await _apiService.GetTravelerByEmail(
                         url, 
                         "api",
                         "/Travelers/GetTravelerByEmail", 
-                        "bearer", 
-                        data.Token, 
+                        "bearer",
+                        tokenData.Token, 
                         Email);
-
                     var traveler = response2.Result;
-                    //await SecureStorage.SetAsync("PrivateToken", data.Token);
-                    //token = data.Token;
 
-
-
-
-                    await Shell.Current.GoToAsync($"//TripPage?token={token}&email={Email}");
+                    Settings.Traveler = JsonConvert.SerializeObject(traveler);
+                    Settings.Token = JsonConvert.SerializeObject(tokenData);
+                    Settings.IsRemembered = IsRemember;
+                   
+                    await Shell.Current.GoToAsync("//TripPage");
                     EmptyString = "Transparent";
                     Message = string.Empty;
                     IsRunning = false;

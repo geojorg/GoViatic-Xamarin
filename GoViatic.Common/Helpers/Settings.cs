@@ -1,16 +1,26 @@
-﻿namespace GoViatic.Common.Helpers
+﻿using Xamarin.Essentials;
+
+namespace GoViatic.Common.Helpers
 {
-    public class Settings
+    public static class Settings
     {
-        private const string _trip = "Trip";
-        private const string _token = "Token";
-        private const string _traveler = "Traveler";
+    
+        public static string Traveler 
+        {
+            get { return Preferences.Get("userData", string.Empty); }          
+            set {Preferences.Set("userData", value);}
+        }
 
-        private const string _isRemembered = "IsRemembered";
-        private static readonly bool _boolDefault = false;
+        public static bool IsRemembered
+        {
+            get { return Preferences.Get("loginData", false); }
+            set { Preferences.Set("loginData", value); }
+        }
 
-        
-
-
+        public static string Token
+        {
+            get { return Preferences.Get("oauth_token",string.Empty); }
+            set { Preferences.Set("oauth_token", value); }
+        }
     }
 }

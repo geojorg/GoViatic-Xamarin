@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using GoViatic.Common.Helpers;
+using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,6 +12,7 @@ namespace GoViatic
         public ICommand LogoutCommand => new Command(Logout);
         private void Logout()
         {
+            Settings.IsRemembered = false;
             Shell.Current.GoToAsync("//LoginPage");
         }
         
