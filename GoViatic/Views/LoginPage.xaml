@@ -23,6 +23,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image
                 Grid.Row="0"
@@ -94,6 +95,7 @@
                 TextColor="{Binding EmptyString}" />
             <ActivityIndicator
                 Grid.Row="6"
+                HeightRequest="50"
                 IsRunning="{Binding IsRunning}"
                 Color="#247D4D" />
             <Label

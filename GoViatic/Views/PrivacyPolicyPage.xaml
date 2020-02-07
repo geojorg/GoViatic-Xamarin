@@ -17,7 +17,7 @@
             <BoxView
                 Grid.Row="0"
                 BackgroundColor="Accent"
-                HeightRequest="220" />
+                HeightRequest="200" />
             <Image
                 Grid.Row="0"
                 HeightRequest="130"

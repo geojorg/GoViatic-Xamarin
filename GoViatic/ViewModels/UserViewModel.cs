@@ -1,6 +1,7 @@
 ﻿using GoViatic.Common.Helpers;
 using GoViatic.Common.Models;
 using GoViatic.Common.Services;
+using GoViatic.Views;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -14,14 +15,10 @@ namespace GoViatic.ViewModels
     {
         private MediaFile _file;
         private ImageSource _profileImage;
-        private string _firstName;
-        private string _lastName;
-        private string _company;
-        private string _email;
         private string _alertDialog;
         private TravelerResponse _traveler;
         private string _entryEmpty;
-        private string _isRunning;
+        private bool _isEnable;
         private readonly IApiService _apiService;
 
 
@@ -30,6 +27,7 @@ namespace GoViatic.ViewModels
             IApiService apiService = new ApiService();
             _apiService = apiService;
             Traveler = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
+            IsEnable = true;
         }
 
         public ImageSource ProfileImage
@@ -47,10 +45,10 @@ namespace GoViatic.ViewModels
             get { return _alertDialog; }
             set { SetProperty(ref _alertDialog, value); }
         }
-        public string IsRunning
+        public bool IsEnable
         {
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
+            get { return _isEnable; }
+            set { SetProperty(ref _isEnable, value); }
         }
         public TravelerResponse Traveler
         {
@@ -101,6 +99,7 @@ namespace GoViatic.ViewModels
         public ICommand UpdateCommand => new Command(UpdateAsync);
         private async void UpdateAsync()
         {
+            IsEnable = false;
             var isValid = await ValidateData();
             if (!isValid)
             {
@@ -136,13 +135,20 @@ namespace GoViatic.ViewModels
             }
 
             Settings.Traveler = JsonConvert.SerializeObject(Traveler);
+            IsEnable = true;
 
-            //TODO: GOTO THE TRIPS PAGE BETTER INSTEAD OF THE MESSAGE
-            //TODO: REMOVE THE EMAIL FIELD
             await App.Current.MainPage.DisplayAlert(
-                "Ok",
+                "Update",
                 "User updated succesfully.",
                 "Accept");
+
+            await Shell.Current.GoToAsync("//TripPage");
+        }
+
+        public ICommand PswChangeCommand => new Command(PswChange);
+        private void PswChange()
+        {
+            Shell.Current.Navigation.PushAsync(new ChangePswPage());
         }
 
         private async Task<bool> ValidateData()

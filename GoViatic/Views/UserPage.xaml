@@ -18,15 +18,13 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <BoxView
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
                 BackgroundColor="Accent"
-                HeightRequest="220" />
+                HeightRequest="200" />
             <Frame
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
@@ -52,7 +50,7 @@
                 Grid.ColumnSpan="2"
                 Margin="115,115,0,0"
                 Aspect="AspectFit"
-                BackgroundColor="Black"
+                BackgroundColor="DarkGray"
                 Command="{Binding LoadImageCommand}"
                 CornerRadius="20"
                 HeightRequest="40"
@@ -63,21 +61,21 @@
             <Entry
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
-                Margin="25,0,25,0"
+                Margin="14,0,14,0"
                 BackgroundColor="Transparent"
                 Placeholder="First Name"
                 Text="{Binding Traveler.FirstName}" />
             <Entry
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                Margin="25,0,25,0"
+                Margin="14,0,14,0"
                 BackgroundColor="Transparent"
                 Placeholder="Last Name"
                 Text="{Binding Traveler.LastName}" />
             <Entry
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
-                Margin="25,0,25,0"
+                Margin="14,0,14,0"
                 BackgroundColor="Transparent"
                 Placeholder="Company"
                 Text="{Binding Traveler.Company}" />
@@ -88,32 +86,29 @@
                 HorizontalOptions="Center"
                 Text="{Binding AlertDialog}"
                 TextColor="{Binding EntryEmpty}" />
-            <ActivityIndicator
-                Grid.Row="5"
-                Grid.ColumnSpan="2"
-                IsRunning="{Binding IsRunning}"
-                Color="#247D4D" />
             <Button
-                Grid.Row="6"
+                Grid.Row="5"
                 Grid.Column="0"
-                Margin="0,0,0,30"
+                Margin="0,0,0,50"
                 BackgroundColor="#247D4D"
                 Command="{Binding UpdateCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
                 Text="UPDATE"
                 TextColor="White"
                 WidthRequest="190" />
             <Button
-                Grid.Row="6"
+                Grid.Row="5"
                 Grid.Column="1"
-                Margin="0,0,0,30"
+                Margin="0,0,0,50"
                 BackgroundColor="#247D4D"
-                Command="{Binding UpdateCommand}"
+                Command="{Binding PswChangeCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
                 Text="CHANGE PASSWORD"
                 TextColor="White"
                 WidthRequest="190" />

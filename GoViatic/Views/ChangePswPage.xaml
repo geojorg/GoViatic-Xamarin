@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="GoViatic.Views.RecoverPswPage"
+    x:Class="GoViatic.Views.ChangePswPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-    Title="Recover Password"
+    Title="Change Password"
     Visual="Material"
     mc:Ignorable="d">
 
     <ContentPage.Content>
-        <Grid x:DataType="viewModels:RecoverPswViewModel" RowSpacing="0">
+        <Grid x:DataType="viewModels:ChangePswViewModel" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -28,46 +29,56 @@
                 Grid.Row="0"
                 HeightRequest="130"
                 HorizontalOptions="Center"
-                Source="{Binding ImageSource}"
+                Source="ic_newpsw"
                 VerticalOptions="Center" />
-            <Label
+            <Entry
                 Grid.Row="1"
-                Margin="14,20,14,0"
-                FontAttributes="Bold"
-                FontSize="Large"
-                HorizontalTextAlignment="Center"
-                Text="Forgot your Password?"
-                TextColor="Accent" />
-            <Label
+                Margin="14,0,14,0"
+                BackgroundColor="Transparent"
+                IsPassword="True"
+                IsVisible="True"
+                Keyboard="Plain"
+                Placeholder="Current Password"
+                Text="{Binding CurrentPassword}" />
+            <Entry
                 Grid.Row="2"
                 Margin="14,0,14,0"
-                FontAttributes="Bold"
-                FontSize="Medium"
-                HorizontalTextAlignment="Center"
-                Text="{Binding Message}" />
+                BackgroundColor="Transparent"
+                IsPassword="True"
+                IsVisible="True"
+                Keyboard="Plain"
+                Placeholder="New Password"
+                Text="{Binding NewPassword}" />
             <Entry
                 Grid.Row="3"
                 Margin="14,0,14,0"
                 BackgroundColor="Transparent"
-                IsVisible="{Binding IsVisible}"
-                Keyboard="Email"
-                Placeholder="Email"
-                Text="{Binding Email}" />
-            <ActivityIndicator
+                IsPassword="True"
+                IsVisible="True"
+                Keyboard="Plain"
+                Placeholder="Confirm Password"
+                Text="{Binding ConfirmPassword}" />
+            <Label
                 Grid.Row="4"
+                FontSize="Body"
+                HorizontalOptions="Center"
+                Text="{Binding AlertDialog}"
+                TextColor="{Binding EntryEmpty}" />
+            <ActivityIndicator
+                Grid.Row="5"
                 Margin="0,0,0,40"
                 HeightRequest="50"
                 IsRunning="{Binding IsRunning}"
                 Color="Accent" />
             <Button
-                Grid.Row="5"
+                Grid.Row="6"
                 Margin="0,0,0,50"
                 BackgroundColor="#247D4D"
-                Command="{Binding RecoverPswCommand}"
+                Command="{Binding ChangePswCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
-                IsVisible="{Binding IsVisible}"
+                IsVisible="True"
                 Text="Submit"
                 TextColor="White"
                 WidthRequest="190" />
