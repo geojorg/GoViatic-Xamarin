@@ -10,18 +10,26 @@
     Visual="Material"
     mc:Ignorable="d">
 
-
     <ContentPage.Content>
-        <Grid x:DataType="viewModels:UserViewModel" RowSpacing="0">
+        <Grid x:DataType="viewModels:UserViewModel" RowSpacing="40">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <BoxView
                 Grid.Row="0"
+                Grid.ColumnSpan="2"
                 BackgroundColor="Accent"
-                HeightRequest="200" />
+                HeightRequest="220" />
             <Frame
                 Grid.Row="0"
+                Grid.ColumnSpan="2"
                 Padding="-8"
                 BorderColor="White"
                 CornerRadius="85"
@@ -30,17 +38,85 @@
                 IsClippedToBounds="True"
                 VerticalOptions="Center"
                 WidthRequest="170">
-                <ImageButton
-                    Command="{Binding LoadImageCommand, Mode=TwoWay}"
-                    HorizontalOptions="FillAndExpand"
-                    Source="{Binding ProfileImage}"
-                    VerticalOptions="FillAndExpand" />
+                <Image
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="White"
+                    HeightRequest="130"
+                    HorizontalOptions="Center"
+                    Source="ic_user"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="130" />
             </Frame>
-            <Button
-                Grid.Row="2"
+            <ImageButton
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Margin="115,115,0,0"
+                Aspect="AspectFit"
+                BackgroundColor="Black"
                 Command="{Binding LoadImageCommand}"
-                Text="testing buttton" />
-            <Label Text="{Binding Name}" />
+                CornerRadius="20"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Source="ic_camera"
+                VerticalOptions="Center"
+                WidthRequest="40" />
+            <Entry
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="25,0,25,0"
+                BackgroundColor="Transparent"
+                Placeholder="First Name"
+                Text="{Binding Traveler.FirstName}" />
+            <Entry
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Margin="25,0,25,0"
+                BackgroundColor="Transparent"
+                Placeholder="Last Name"
+                Text="{Binding Traveler.LastName}" />
+            <Entry
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="25,0,25,0"
+                BackgroundColor="Transparent"
+                Placeholder="Company"
+                Text="{Binding Traveler.Company}" />
+            <Label
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                FontSize="Body"
+                HorizontalOptions="Center"
+                Text="{Binding AlertDialog}"
+                TextColor="{Binding EntryEmpty}" />
+            <ActivityIndicator
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                IsRunning="{Binding IsRunning}"
+                Color="#247D4D" />
+            <Button
+                Grid.Row="6"
+                Grid.Column="0"
+                Margin="0,0,0,30"
+                BackgroundColor="#247D4D"
+                Command="{Binding UpdateCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="UPDATE"
+                TextColor="White"
+                WidthRequest="190" />
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                Margin="0,0,0,30"
+                BackgroundColor="#247D4D"
+                Command="{Binding UpdateCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                Text="CHANGE PASSWORD"
+                TextColor="White"
+                WidthRequest="190" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

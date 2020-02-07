@@ -1,17 +1,15 @@
-﻿using GoViatic.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace GoViatic.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserPage : ContentPage
+    public partial class PrivacyPolicyPage : ContentPage
     {
-        public UserPage()
+        public PrivacyPolicyPage()
         {
             InitializeComponent();
             Shell.SetTabBarIsVisible(this, false);
-            BindingContext = new UserViewModel();
         }
     }
 }

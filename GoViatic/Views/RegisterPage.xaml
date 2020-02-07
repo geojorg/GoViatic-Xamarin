@@ -95,9 +95,17 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="By creating an account, you agree to the " />
-                        <Span Text="Terms and Use" TextDecorations="Underline" />
+                        <Span Text="Terms of Service" TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TermsCommand}" />
+                            </Span.GestureRecognizers>
+                        </Span>
                         <Span Text=" and " />
-                        <Span Text="Privacy Policy" TextDecorations="Underline" />
+                        <Span Text="Privacy Policy" TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PrivacyCommand}" />
+                            </Span.GestureRecognizers>
+                        </Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

@@ -32,7 +32,7 @@
             <Label
                 Grid.Row="1"
                 Margin="30,0,150,0"
-                FontFamily="ubuntubold"
+                FontFamily="UbuntuBold"
                 FontSize="26"
                 HeightRequest="57"
                 Text="HELLO THERE, TIME TO TRAVEL"

@@ -19,13 +19,13 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="Ubuntu" />
+                <Setter Property="FontFamily" Value="ubuntu" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="FontFamily" Value="Ubuntu" />
+                <Setter Property="FontFamily" Value="ubuntu" />
             </Style>
             <Style TargetType="Entry">
-                <Setter Property="FontFamily" Value="Ubuntu" />
+                <Setter Property="FontFamily" Value="ubuntu" />
             </Style>
         </ResourceDictionary>
     </Shell.Resources>

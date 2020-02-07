@@ -1,6 +1,7 @@
 ﻿using GoViatic.Common.Helpers;
 using GoViatic.Common.Models;
 using GoViatic.Common.Services;
+using GoViatic.Views;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -10,6 +11,7 @@ namespace GoViatic.ViewModels
     public class RegisterViewModel : BaseViewModel
     {
         //TODO: CREATE A INDICATOR VIEW FOR THIS REGISTERVIEW MODEL WHEN CREATING THE USER
+        //TODO: ADD TERMS OF USE AND AND PAGE FOR PRIVACY POLICY
         private string _entryEmpty;
         private string _firstName;
         private string _company;
@@ -175,5 +177,18 @@ namespace GoViatic.ViewModels
             Password = string.Empty;
             PasswordConfirm = string.Empty;
         }
+
+        public ICommand TermsCommand => new Command(Terms);
+        private void Terms()
+        {
+            Shell.Current.Navigation.PushAsync(new TermsPage());
+        }
+
+        public ICommand PrivacyCommand => new Command(Privacy);
+        private void Privacy()
+        {
+            Shell.Current.Navigation.PushAsync(new PrivacyPolicyPage());
+        }
+
     }
 }

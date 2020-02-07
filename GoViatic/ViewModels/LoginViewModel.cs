@@ -61,6 +61,7 @@ namespace GoViatic.ViewModels
         public ICommand LoginCommand => new Command(Login);
         public async void Login()
         {
+            EmptyString = "Transparent";
             if (string.IsNullOrEmpty(_email) && string.IsNullOrEmpty(_password))
             {
                 Message = "Please Check your Email and Password";

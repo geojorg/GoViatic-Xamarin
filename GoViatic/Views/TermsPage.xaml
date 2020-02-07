@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GoViatic.Views.TermsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Terms of Service"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <BoxView
+                Grid.Row="0"
+                BackgroundColor="Accent"
+                HeightRequest="220" />
+            <Image
+                Grid.Row="0"
+                HeightRequest="130"
+                HorizontalOptions="Center"
+                Source="ic_goviatic"
+                VerticalOptions="Center" />
+            <ScrollView Grid.Row="1" Margin="14">
+                <StackLayout>
+                    <Label
+                        Grid.Row="1"
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        Text="These Terms of Service govern your access to and use of our services, including our website, APIs, email notifications, applications, buttons, widgets, ads, commerce services, and our other covered services. By using the Services you agree to be bound by these Terms." />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="Who May Use the Services"
+                        TextColor="Accent" />
+                    <Label
+                        Grid.Row="1"
+                        FontSize="Body"
+                        Text="You may use the Services only if you agree to form a binding contract with GoViatic and are not a person barred from receiving services under the laws of the applicable jurisdiction. In any case, you must be at least 16 years old. If you are accepting these Terms and using the Services on behalf of a company, organization, government, or other legal entity, you represent and warrant that you are authorized to do so." />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="Content on the Services"
+                        TextColor="Accent" />
+                    <Label
+                        Grid.Row="1"
+                        FontSize="Body"
+                        Text="You are responsible for your use of the Services and for any Content you provide, including compliance with applicable laws, rules, and regulations. You should only provide Content that you are comfortable sharing with others." />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="Your Account"
+                        TextColor="Accent" />
+                    <Label
+                        Grid.Row="1"
+                        FontSize="Body"
+                        Text="You may need to create an account to use some of our Services. You are responsible for safeguarding your account, so use a strong password and limit its use to this account. We cannot and will not be liable for any loss or damage arising from your failure to comply with the above" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
