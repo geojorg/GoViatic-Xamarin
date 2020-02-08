@@ -31,21 +31,23 @@ namespace GoViatic.ViewModels
         }
         public Command<ViaticResponse> EditCommand { get; set; }
 
-        public string Trips
-        {
-            set
-            {
-                var allTrips = TripViewModel.trips;
-                TripResponse trip = allTrips.FirstOrDefault(t => t.Id.ToString() == Uri.UnescapeDataString(value));
-                if (trip != null)
-                {
-                    City = trip.City;
-                    Tittle = $"Viatics for {City}";
-                    Viatics = trip.Viatics;
-                    Id = value;
-                }
-            }
-        }
+
+        //TODO: ORGANIZE FOR THE NEW MODEL.
+        //public string Trips
+        //{
+        //    set
+        //    {
+        //        var allTrips = TripViewModel.trips;
+        //        TripResponse trip = allTrips.FirstOrDefault(t => t.Id.ToString() == Uri.UnescapeDataString(value));
+        //        if (trip != null)
+        //        {
+        //            City = trip.City;
+        //            Tittle = $"Viatics for {City}";
+        //            Viatics = trip.Viatics;
+        //            Id = value;
+        //        }
+        //    }
+        //}
 
         public bool IsRefreshing
         {

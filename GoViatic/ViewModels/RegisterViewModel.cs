@@ -2,7 +2,6 @@
 using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using GoViatic.Views;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,8 +9,6 @@ namespace GoViatic.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
-        //TODO: CREATE A INDICATOR VIEW FOR THIS REGISTERVIEW MODEL WHEN CREATING THE USER
-        //TODO: ADD TERMS OF USE AND AND PAGE FOR PRIVACY POLICY
         private string _entryEmpty;
         private string _firstName;
         private string _company;
@@ -20,7 +17,9 @@ namespace GoViatic.ViewModels
         private string _passwordConfirm;
         private string _lastName;
         private string _alertDialog;
+        private bool _isEnable;
         private readonly IApiService _apiService;
+        private bool _isRunning;
 
         public string EntryEmpty
         {
@@ -62,15 +61,26 @@ namespace GoViatic.ViewModels
             get { return _alertDialog; }
             set { SetProperty(ref _alertDialog, value); }
         }
+        public bool IsEnable
+        {
+            get { return _isEnable; }
+            set { SetProperty(ref _isEnable, value); }
+        }
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set { SetProperty(ref _isRunning, value); }
+        }
 
         public RegisterViewModel()
         {
             EntryEmpty = "Transparent";
+            IsEnable = true;
             IApiService apiService = new ApiService();
             _apiService = apiService;
         }
 
-        private async Task<bool> ValidateData()
+        private bool ValidateData()
         {
             if (string.IsNullOrEmpty(FirstName))
             {
@@ -120,16 +130,19 @@ namespace GoViatic.ViewModels
                 EntryEmpty = "Red";
                 return false;
             }
-
             return true;
         }
 
         public ICommand RegisterCommand => new Command(RegisterAsync);
         private async void RegisterAsync()
         {
-            var isValid = await ValidateData();
+            IsEnable = false;
+            IsRunning = true;
+            var isValid = ValidateData();
             if (!isValid)
             {
+                IsEnable = true;
+                IsRunning = false;
                 return;
             }
 
@@ -155,21 +168,10 @@ namespace GoViatic.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", response.Message,"Accept");
                 return;
             }
-
-            await App.Current.MainPage.DisplayAlert("Registration", "Confirm your Email to Log In", "Accept");
-            await Shell.Current.Navigation.PopAsync();
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Company = string.Empty;
-            Email = string.Empty;
-            Password = string.Empty;
-            PasswordConfirm = string.Empty;
-        }
-
-        public ICommand LoginCommand => new Command(Login);
-        private void Login()
-        {
-            Shell.Current.Navigation.PopAsync();
+            IsEnable = true;
+            IsRunning = false;
+            await App.Current.MainPage.DisplayAlert("Registration Successful", "Confirm your Email to Log In", "Accept");
+            await Shell.Current.Navigation.PopModalAsync();
             FirstName = string.Empty;
             LastName = string.Empty;
             Company = string.Empty;
@@ -181,13 +183,17 @@ namespace GoViatic.ViewModels
         public ICommand TermsCommand => new Command(Terms);
         private void Terms()
         {
-            Shell.Current.Navigation.PushAsync(new TermsPage());
+            var page = "terms";
+            Routing.RegisterRoute("TermsPage", typeof(TermsPage));
+            Shell.Current.GoToAsync($"TermsPage?type={page}");
         }
 
         public ICommand PrivacyCommand => new Command(Privacy);
         private void Privacy()
         {
-            Shell.Current.Navigation.PushAsync(new PrivacyPolicyPage());
+            var page = "privacy";
+            Routing.RegisterRoute("TermsPage", typeof(TermsPage));
+            Shell.Current.GoToAsync($"TermsPage?type={page}");
         }
 
     }

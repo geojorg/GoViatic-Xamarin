@@ -8,6 +8,7 @@
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     BackgroundColor="White"
     Shell.NavBarIsVisible="False"
+    Shell.PresentationMode="Modal"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -25,16 +26,15 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Image
                 Grid.Row="0"
-                Margin="0,0,0,20"
                 Aspect="AspectFit"
                 Source="loginheader" />
             <Label
                 Grid.Row="1"
-                Margin="20,0,140,0"
+                Margin="30,0,0,0"
                 FontFamily="UbuntuBold"
                 FontSize="26"
                 HeightRequest="57"
@@ -109,27 +109,24 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Button
+            <ActivityIndicator
                 Grid.Row="10"
+                Margin="0,10,0,10"
+                HeightRequest="50"
+                IsRunning="{Binding IsRunning}"
+                Color="#247D4D" />
+            <Button
+                Grid.Row="11"
                 Margin="0,0,0,30"
                 BackgroundColor="#247D4D"
                 Command="{Binding RegisterCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
                 Text="SIGN UP"
                 TextColor="White"
                 WidthRequest="190" />
-            <Label
-                Grid.Row="11"
-                FontSize="Body"
-                HorizontalOptions="Center"
-                Text="I am already a member"
-                TextDecorations="Underline">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding LoginCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

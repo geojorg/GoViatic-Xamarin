@@ -17,10 +17,12 @@ namespace GoViatic.ViewModels
         private string _message;
         private bool _isRunning;
         public static string token;
+        private bool _isEnable;
         private readonly IApiService _apiService;
 
         public LoginViewModel()
         {
+            IsEnable = true;
             EmptyString = "Transparent";
             IsRemember = true;
             IApiService apiService = new ApiService();
@@ -57,10 +59,16 @@ namespace GoViatic.ViewModels
             get { return _isRemembered; }
             set { SetProperty(ref _isRemembered, value); }
         }
-        
+        public bool IsEnable
+        {
+            get { return _isEnable; }
+            set { SetProperty(ref _isEnable, value); }
+        }
+
         public ICommand LoginCommand => new Command(Login);
         public async void Login()
         {
+            IsEnable = false;
             EmptyString = "Transparent";
             if (string.IsNullOrEmpty(_email) && string.IsNullOrEmpty(_password))
             {
@@ -120,7 +128,7 @@ namespace GoViatic.ViewModels
                         tokenData.Token, 
                         Email);
                     var traveler = response2.Result;
-
+                    IsEnable = false;
                     Settings.Traveler = JsonConvert.SerializeObject(traveler);
                     Settings.Token = JsonConvert.SerializeObject(tokenData);
                     Settings.IsRemembered = IsRemember;
@@ -136,7 +144,8 @@ namespace GoViatic.ViewModels
         public ICommand RegisterCommand => new Command(Register);
         private void Register()
         {
-            Shell.Current.Navigation.PushAsync(new RegisterPage());
+            Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
+            Shell.Current.GoToAsync("RegisterPage");
         }
 
         public ICommand RecoverPswCommand => new Command(Recovery);

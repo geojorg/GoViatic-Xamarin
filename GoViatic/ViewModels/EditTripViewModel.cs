@@ -15,22 +15,23 @@ namespace GoViatic.ViewModels
         private DateTime _date;
         private DateTime _endDate;
 
-        public string Trips
-        {
-            set
-            {
-                var allTrips = TripViewModel.trips;
-                TripResponse trip = allTrips.FirstOrDefault(m => m.Id.ToString() == Uri.UnescapeDataString(value));
-                if (trip != null)
-                {
-                    City = trip.City;
-                    Budget = trip.Budget;
-                    Date = trip.Date;
-                    EndDate = trip.EndDate;
-                    Viatics = trip.Viatics;
-                }
-            }
-        }
+        //TODO:PENDING TO SOLVE BECAUSE OF A MODEL CHANGE
+        //public string Trips
+        //{
+        //    set
+        //    {
+        //        var allTrips = TripViewModel.trips;
+        //        TripResponse trip = allTrips.FirstOrDefault(m => m.Id.ToString() == Uri.UnescapeDataString(value));
+        //        if (trip != null)
+        //        {
+        //            City = trip.City;
+        //            Budget = trip.Budget;
+        //            Date = trip.Date;
+        //            EndDate = trip.EndDate;
+        //            Viatics = trip.Viatics;
+        //        }
+        //    }
+        //}
         public string City
         {
             get { return _city; }

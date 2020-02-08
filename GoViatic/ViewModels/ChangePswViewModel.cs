@@ -13,6 +13,9 @@ namespace GoViatic.ViewModels
         private bool _isRunning;
         private string _alertDialog;
         private string _entryEmpty;
+        private string _currentPassword;
+        private string _newPassword;
+        private string _confirmPassword;
         private readonly IApiService _apiService;
 
         public ChangePswViewModel()
@@ -21,12 +24,24 @@ namespace GoViatic.ViewModels
             _apiService = apiService;
         }
 
-        public string CurrentPassword { get; set; }
-       
-        public string NewPassword { get; set; }
-        
-        public string ConfirmPassword { get; set; }
-       
+        public string CurrentPassword
+        {
+            get { return _currentPassword; }
+            set { SetProperty(ref _currentPassword, value); }
+        }
+
+        public string NewPassword
+        {
+            get { return _newPassword; }
+            set { SetProperty(ref _newPassword, value); }
+        }
+
+        public string ConfirmPassword
+        {
+            get { return _confirmPassword; }
+            set { SetProperty(ref _confirmPassword, value); }
+        }
+
         public string AlertDialog
         {
             get { return _alertDialog; }
@@ -71,6 +86,15 @@ namespace GoViatic.ViewModels
                 "bearer",
                 token.Token);
             IsRunning = false;
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                CurrentPassword = string.Empty;
+                NewPassword = string.Empty;
+                ConfirmPassword = string.Empty;
+                return;
+            }
 
             await App.Current.MainPage.DisplayAlert("Password Change", "The password has been change succefully","Accept");
             await Shell.Current.Navigation.PopAsync();

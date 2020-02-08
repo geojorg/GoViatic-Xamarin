@@ -6,7 +6,6 @@
     xmlns:converter="clr-namespace:GoViatic.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:GoViatic.Common.Models;assembly=GoViatic.Common"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     x:Name="TripsPage"
     Title="List of Trips"
@@ -118,7 +117,6 @@
                                         <!--  //TODO: CHANGE THIS FROM TRIPRESPONSE TO TRIPITEMVIEWMODEL  -->
                                         <Frame
                                             Padding="20"
-                                            x:DataType="models:TripResponse"
                                             BackgroundColor="#649F7F"
                                             CornerRadius="9">
                                             <Grid>

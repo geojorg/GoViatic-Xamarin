@@ -1,4 +1,5 @@
 ﻿using GoViatic.Common.Helpers;
+using GoViatic.Views;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;

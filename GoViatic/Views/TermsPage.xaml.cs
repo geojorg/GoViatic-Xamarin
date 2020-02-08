@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using GoViatic.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace GoViatic.Views
@@ -9,6 +10,7 @@ namespace GoViatic.Views
         public TermsPage()
         {
             InitializeComponent();
+            BindingContext = new TermsViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
     }

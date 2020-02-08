@@ -116,6 +116,7 @@
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
                 Text="SIGN IN"
                 TextColor="White"
                 WidthRequest="190" />
