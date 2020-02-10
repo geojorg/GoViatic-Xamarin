@@ -62,7 +62,7 @@ namespace GoViatic.ViewModels
         private async void ChangePsw()
         {
             IsRunning = true;
-            var isValid = await ValidateData();
+            var isValid = ValidateData();
             if (!isValid)
             {
                 return;
@@ -100,7 +100,7 @@ namespace GoViatic.ViewModels
             await Shell.Current.Navigation.PopAsync();
         }
 
-        private async Task<bool> ValidateData()
+        private bool ValidateData()
         {
             if (string.IsNullOrEmpty(CurrentPassword))
             {

@@ -34,7 +34,7 @@ namespace GoViatic.ViewModels
 
         public WelcomeViewModel()
         {
-            BoxView0 = "#247D4D";
+            BoxView0 = "Accent";
             BoxView1 = "#C1C0C0";
             BoxView2 = "#C1C0C0";
             source = new List<Carousel>();
@@ -47,7 +47,7 @@ namespace GoViatic.ViewModels
         {
             source.Add(new Carousel
             {
-                Icon = "carousel0",
+                Icon = "ic_goviatic",
                 Header = "Welcome to GoViatic",
                 Body = "Make control of your viatics easy"
             });
@@ -74,19 +74,19 @@ namespace GoViatic.ViewModels
             switch (position)
             {
                 case 0:
-                    BoxView0 = "#247D4D";
+                    BoxView0 = "Accent";
                     BoxView1 = "#C1C0C0";
                     BoxView2 = "#C1C0C0";
                     break;
                 case 1:
                     BoxView0 = "#C1C0C0";
-                    BoxView1 = "#247D4D";
+                    BoxView1 = "Accent";
                     BoxView2 = "#C1C0C0";
                     break;
                 case 2:
                     BoxView0 = "#C1C0C0";
                     BoxView1 = "#C1C0C0";
-                    BoxView2 = "#247D4D";
+                    BoxView2 = "Accent";
                     break;
             }
         }

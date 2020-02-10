@@ -3,6 +3,7 @@
     x:Class="GoViatic.Views.WelcomePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:GoViatic.Models"
@@ -12,90 +13,121 @@
     Visual="Material"
     mc:Ignorable="d">
 
-    <ContentPage.Content>
-        <Grid x:DataType="viewModels:WelcomeViewModel">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <CarouselView
-                Grid.Row="0"
-                ItemsSource="{Binding Carousels}"
-                PeekAreaInsets="0"
-                PositionChangedCommand="{Binding PositionChangedCommand}"
-                PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Carousel">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Image
-                                Grid.Row="0"
-                                Margin="0,130,0,0"
-                                HeightRequest="250"
-                                Source="{Binding Icon}"
-                                WidthRequest="220" />
-                            <Label
-                                Grid.Row="1"
-                                Padding="0,30,0,0"
-                                FontFamily="UbuntuBold"
-                                FontSize="Title"
-                                HorizontalOptions="Center"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding Header}" />
-                            <Label
-                                Grid.Row="2"
-                                Padding="20,30,20,0"
-                                FontSize="Body"
-                                HorizontalOptions="Center"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding Body}" />
-                        </Grid>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-            <StackLayout
-                Grid.Row="1"
-                Margin="0,0,0,10"
+    <Grid x:DataType="viewModels:WelcomeViewModel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CarouselView
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding Carousels}"
+            PositionChangedCommand="{Binding PositionChangedCommand}"
+            PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}"
+            VerticalOptions="FillAndExpand">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="32,64,32,64">
+                        <custom:PancakeView BackgroundColor="#649F7F" CornerRadius="28">
+                            <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+                                <custom:PancakeView
+                                    BackgroundGradientEndColor="#237A57"
+                                    BackgroundGradientStartColor="#649F7F"
+                                    CornerRadius="28"
+                                    HeightRequest="400"
+                                    VerticalOptions="FillAndExpand">
+                                    <Grid>
+                                        <StackLayout x:DataType="models:Carousel">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image
+                                                    Margin="24,24,24,0"
+                                                    HeightRequest="32"
+                                                    Opacity="0.5"
+                                                    Source="ic_goviatic" />
+                                                <Label
+                                                    Margin="24,24,24,0"
+                                                    FontSize="20"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Text="GoViatic"
+                                                    TextColor="White" />
+                                            </StackLayout>
+                                            <Label
+                                                Margin="24,24,24,0"
+                                                FontAttributes="Bold"
+                                                FontSize="Body"
+                                                Text="{Binding Header}"
+                                                TextColor="#FFFFFF" />
+                                            <Label
+                                                Margin="24,8,24,24"
+                                                FontSize="Body"
+                                                Text="{Binding Body}"
+                                                TextColor="#FFFFFF" />
+                                        </StackLayout>
+                                    </Grid>
+                                </custom:PancakeView>
+                                <StackLayout
+                                    Margin="0,-32,0,32"
+                                    BackgroundColor="#649F7F"
+                                    VerticalOptions="FillAndExpand">
+                                    <StackLayout Margin="0,32,0,0" VerticalOptions="CenterAndExpand">
+                                        <Label
+                                            Margin="0,8,0,0"
+                                            FontSize="10"
+                                            HorizontalOptions="Center"
+                                            TextColor="Gray" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </custom:PancakeView>
+                        <Image
+                            Margin="0,0,0,152"
+                            x:DataType="models:Carousel"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="{Binding Icon}"
+                            VerticalOptions="EndAndExpand"
+                            WidthRequest="220" />
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <StackLayout
+            Grid.Row="1"
+            Margin="0,0,0,10"
+            HorizontalOptions="Center"
+            Orientation="Horizontal">
+            <BoxView
+                BackgroundColor="{Binding BoxView0}"
+                CornerRadius="100"
+                HeightRequest="10"
                 HorizontalOptions="Center"
-                Orientation="Horizontal">
-                <BoxView
-                    BackgroundColor="{Binding BoxView0}"
-                    CornerRadius="100"
-                    HeightRequest="10"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="10" />
-                <BoxView
-                    BackgroundColor="{Binding BoxView1}"
-                    CornerRadius="100"
-                    HeightRequest="10"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="10" />
-                <BoxView
-                    BackgroundColor="{Binding BoxView2}"
-                    CornerRadius="100"
-                    HeightRequest="10"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="10" />
-            </StackLayout>
-            <Button
-                Grid.Row="2"
-                Margin="0,0,0,50"
-                BackgroundColor="#247D4D"
-                Command="{Binding LoginCommand}"
-                CornerRadius="7"
-                HeightRequest="46"
+                VerticalOptions="Center"
+                WidthRequest="10" />
+            <BoxView
+                BackgroundColor="{Binding BoxView1}"
+                CornerRadius="100"
+                HeightRequest="10"
                 HorizontalOptions="Center"
-                Text="Empezar Ahora"
-                TextColor="White"
-                WidthRequest="190" />
-        </Grid>
-    </ContentPage.Content>
+                VerticalOptions="Center"
+                WidthRequest="10" />
+            <BoxView
+                BackgroundColor="{Binding BoxView2}"
+                CornerRadius="100"
+                HeightRequest="10"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="10" />
+        </StackLayout>
+        <Button
+            Grid.Row="2"
+            Margin="0,0,0,50"
+            BackgroundColor="#649F7F"
+            Command="{Binding LoginCommand}"
+            CornerRadius="7"
+            FontAttributes="Bold"
+            HeightRequest="46"
+            HorizontalOptions="Center"
+            Text="Start Now"
+            TextColor="White"
+            WidthRequest="190" />
+    </Grid>
 </ContentPage>

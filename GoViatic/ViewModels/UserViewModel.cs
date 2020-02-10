@@ -5,7 +5,6 @@ using GoViatic.Views;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -100,7 +99,7 @@ namespace GoViatic.ViewModels
         private async void UpdateAsync()
         {
             IsEnable = false;
-            var isValid = await ValidateData();
+            var isValid = ValidateData();
             if (!isValid)
             {
                 return;
@@ -151,7 +150,7 @@ namespace GoViatic.ViewModels
             Shell.Current.Navigation.PushAsync(new ChangePswPage());
         }
 
-        private async Task<bool> ValidateData()
+        private bool ValidateData()
         {
             if (string.IsNullOrEmpty(Traveler.FirstName))
             {

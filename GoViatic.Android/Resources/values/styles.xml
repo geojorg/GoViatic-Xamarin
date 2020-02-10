@@ -7,7 +7,7 @@
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
     <item name="colorPrimary">#2196F3</item>
-    <item name="colorPrimaryDark">#000000</item>
+    <item name="colorPrimaryDark">#247D4D</item>
     <item name="colorAccent">#247D4D</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="android:colorActivatedHighlight">@android:color/transparent</item>
