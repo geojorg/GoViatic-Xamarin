@@ -8,6 +8,7 @@
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     BackgroundColor="White"
     Shell.NavBarIsVisible="False"
+    Shell.PresentationMode="ModalAnimated"
     Visual="Material"
     mc:Ignorable="d">
 

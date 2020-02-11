@@ -1,5 +1,4 @@
 ﻿using GoViatic.Common.Helpers;
-using GoViatic.Views;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -14,12 +13,13 @@ namespace GoViatic
         private void Logout()
         {
             Settings.IsRemembered = false;
-            Shell.Current.GoToAsync("//LoginPage");
+            Application.Current.MainPage = new AppShell();
         }
         
         public ICommand RateCommand => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 
         public ICommand ShareAppCommand => new Command(ShareApp);
+
         private async void ShareApp()
         {
             //TODO: CHANGE LINK TO NEW NAME IN APP STORE FROM GOOGLE

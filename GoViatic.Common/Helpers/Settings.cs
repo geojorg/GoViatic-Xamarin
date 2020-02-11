@@ -22,5 +22,11 @@ namespace GoViatic.Common.Helpers
             get { return Preferences.Get("oauth_token",string.Empty); }
             set { Preferences.Set("oauth_token", value); }
         }
+
+        public static bool FirstRun
+        {
+            get { return Preferences.Get("firtsRun", true); }
+            set { Preferences.Set("firtsRun", value); }
+        }
     }
 }

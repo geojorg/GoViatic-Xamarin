@@ -1,8 +1,8 @@
-﻿using GoViatic.Models;
+﻿using GoViatic.Common.Helpers;
+using GoViatic.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
@@ -34,13 +34,13 @@ namespace GoViatic.ViewModels
 
         public WelcomeViewModel()
         {
+            Settings.FirstRun = false;
             BoxView0 = "Accent";
             BoxView1 = "#C1C0C0";
             BoxView2 = "#C1C0C0";
             source = new List<Carousel>();
             CreateCarouselCollection();
             OnPropertyChanged("CurrentItem");
-            Preferences.Set("firstRun", "Yes");
         }
 
         private void CreateCarouselCollection()
@@ -94,7 +94,7 @@ namespace GoViatic.ViewModels
         public ICommand LoginCommand => new Command(Login);
         private void Login()
         {
-            Shell.Current.GoToAsync("///LoginPage");
+            Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }

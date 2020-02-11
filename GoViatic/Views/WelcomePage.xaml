@@ -10,6 +10,7 @@
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     BackgroundColor="White"
     Shell.NavBarIsVisible="False"
+    Shell.PresentationMode="ModalAnimated"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -85,7 +86,7 @@
                             HorizontalOptions="CenterAndExpand"
                             Source="{Binding Icon}"
                             VerticalOptions="EndAndExpand"
-                            WidthRequest="220" />
+                            WidthRequest="200" />
                     </Grid>
                 </DataTemplate>
             </CarouselView.ItemTemplate>

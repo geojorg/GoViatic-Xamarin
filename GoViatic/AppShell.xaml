@@ -30,13 +30,12 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-
     <TabBar>
-        <ShellContent Route="Welcome">
-            <views:WelcomePage />
-        </ShellContent>
         <ShellContent Route="LoginPage">
             <views:LoginPage />
+        </ShellContent>
+        <ShellContent Route="WelcomePage">
+            <views:WelcomePage />
         </ShellContent>
     </TabBar>
 

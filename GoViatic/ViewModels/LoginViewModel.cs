@@ -68,7 +68,6 @@ namespace GoViatic.ViewModels
         public ICommand LoginCommand => new Command(Login);
         public async void Login()
         {
-            IsEnable = false;
             EmptyString = "Transparent";
             if (string.IsNullOrEmpty(_email) && string.IsNullOrEmpty(_password))
             {
@@ -87,6 +86,7 @@ namespace GoViatic.ViewModels
             }
             else
             {
+                IsEnable = false;
                 IsRunning = true;
                 var request = new TokenRequest
                 {
@@ -116,6 +116,7 @@ namespace GoViatic.ViewModels
                         EmptyString = "Red";
                         Password = string.Empty;
                         IsRunning = false;
+                        IsEnable = true;
                         return;
                     }
                     var tokenData = response.Result;
@@ -128,14 +129,15 @@ namespace GoViatic.ViewModels
                         tokenData.Token, 
                         Email);
                     var traveler = response2.Result;
-                    IsEnable = false;
+
                     Settings.Traveler = JsonConvert.SerializeObject(traveler);
                     Settings.Token = JsonConvert.SerializeObject(tokenData);
                     Settings.IsRemembered = IsRemember;
-                   
+                    
                     await Shell.Current.GoToAsync("//TripPage");
                     EmptyString = "Transparent";
                     Message = string.Empty;
+                    IsEnable = true;
                     IsRunning = false;
                 }
             }
