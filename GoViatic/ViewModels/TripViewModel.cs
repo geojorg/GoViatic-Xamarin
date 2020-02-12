@@ -23,11 +23,12 @@ namespace GoViatic.ViewModels
             IsRefreshing = false;
             GetUserData();
             
-            EditCommand = new Command<TripResponse>((t) =>
+            EditCommand = new Command<TripResponse>(async (t) =>
             {
                 var id = t.Id;
+                var type = "Edit";
                 Routing.RegisterRoute("TripPage/EditTripPage", typeof(EditTripPage));
-                Shell.Current.GoToAsync($"//TripPage/EditTripPage?id={id}");
+                await Shell.Current.GoToAsync($"//TripPage/EditTripPage?type={type}&id={id}");
             });
         }
 
@@ -112,9 +113,11 @@ namespace GoViatic.ViewModels
         }
 
         public ICommand CreateCommand => new Command(Create);
-        private void Create()
+        private async void Create()
         {
-            Shell.Current.Navigation.PushAsync(new CreateTripPage(),false);
+            var type = "Create";
+            Routing.RegisterRoute("TripPage/EditTripPage", typeof(EditTripPage));
+            await Shell.Current.GoToAsync($"//TripPage/EditTripPage?type={type}");
         }
     }
 }

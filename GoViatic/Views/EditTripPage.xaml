@@ -7,7 +7,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-    Title="Edit Trip"
+    Title="{Binding NavTittle}"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -37,16 +37,16 @@
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Row="0"
-                Grid.ColumnSpan="1"
+                Grid.ColumnSpan="2"
                 FontFamily="UbuntuBold"
                 FontSize="20"
-                Text="Edit your Trip"
+                Text="{Binding Tittle}"
                 TextColor="Accent"
                 VerticalOptions="CenterAndExpand" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                FontFamily="UbuntuBold"
+                FontFamily="Ubuntu"
                 FontSize="Body"
                 Text="City:"
                 VerticalOptions="Center" />
@@ -100,6 +100,7 @@
             <Button
                 Grid.Row="8"
                 Grid.Column="0"
+                Grid.ColumnSpan="{Binding SaveColumnSpan}"
                 Margin="0,0,0,30"
                 BackgroundColor="Accent"
                 Command="{Binding SaveCommand}"
@@ -112,12 +113,14 @@
             <Button
                 Grid.Row="8"
                 Grid.Column="1"
+                Grid.ColumnSpan="1"
                 Margin="0,0,0,30"
                 BackgroundColor="Red"
                 Command="{Binding DeleteCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
+                IsVisible="{Binding DeleteVisible}"
                 Text="DELETE"
                 TextColor="White"
                 WidthRequest="190" />

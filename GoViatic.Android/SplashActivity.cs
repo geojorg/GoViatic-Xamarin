@@ -1,12 +1,12 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using AndroidX.AppCompat.App;
+using Android.Support.V7.App;
 using System;
 
 namespace GoViatic.Droid
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+    [Activity(MainLauncher = true, Theme = "@style/MyTheme.Splash", NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
