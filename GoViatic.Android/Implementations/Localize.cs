@@ -4,8 +4,8 @@ using Goviatic.Interfaces;
 using GoViatic.Helpers;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(BalotoRandom.Droid.Implementations.Localize))]
-namespace BalotoRandom.Droid.Implementations
+[assembly: Dependency(typeof(Goviatic.Droid.Implementations.Localize))]
+namespace Goviatic.Droid.Implementations
 {
     public class Localize : ILocalize
     {

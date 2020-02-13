@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Firebase.Messaging;
 
-namespace BalotoRandom.Droid
+namespace Goviatic.Droid
 {
     [Service(Name = "com.geojorgco.goviatic.FirebaseMessage")]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]

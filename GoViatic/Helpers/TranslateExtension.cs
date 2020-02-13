@@ -6,7 +6,7 @@ using System.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace BalotoRandom.Helpers
+namespace Goviatic.Helpers
 {
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension

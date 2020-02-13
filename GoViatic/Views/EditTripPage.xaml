@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:GoViatic.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:i18n="clr-namespace:Goviatic.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     Title="{Binding NavTittle}"
@@ -48,39 +49,39 @@
                 Grid.Column="0"
                 FontFamily="Ubuntu"
                 FontSize="Body"
-                Text="City:"
+                Text="{i18n:Translate City}"
                 VerticalOptions="Center" />
             <Entry
                 Grid.Row="1"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
-                Text="{Binding City}" />
+                Text="{Binding Trip.City}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
                 BackgroundColor="Transparent"
                 FontFamily="UbuntuBold"
                 FontSize="Body"
-                Text="Budget:"
+                Text="{i18n:Translate Budget}"
                 VerticalOptions="Center" />
             <Entry
                 Grid.Row="2"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
                 Keyboard="Numeric"
-                Text="{Binding Budget, Converter={StaticResource currencyConverter}}" />
+                Text="{Binding Trip.Budget, Converter={StaticResource currencyConverter}}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
                 FontFamily="UbuntuBold"
                 FontSize="Body"
-                Text="Starting Date:"
+                Text="{i18n:Translate StartDay}"
                 VerticalOptions="CenterAndExpand" />
             <DatePicker
                 Grid.Row="3"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
-                Date="{Binding Date}"
+                Date="{Binding Trip.Date}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
             <Label
@@ -88,13 +89,13 @@
                 Grid.Column="0"
                 FontFamily="UbuntuBold"
                 FontSize="Body"
-                Text="Ending Date:"
+                Text="{i18n:Translate EndDay}"
                 VerticalOptions="Center" />
             <DatePicker
                 Grid.Row="4"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
-                Date="{Binding EndDate}"
+                Date="{Binding Trip.EndDate}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
             <Button
@@ -107,7 +108,8 @@
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
-                Text="SAVE"
+                IsEnabled="{Binding IsEnable}"
+                Text="{i18n:Translate Save}"
                 TextColor="White"
                 WidthRequest="190" />
             <Button
@@ -121,7 +123,7 @@
                 HeightRequest="46"
                 HorizontalOptions="Center"
                 IsVisible="{Binding DeleteVisible}"
-                Text="DELETE"
+                Text="{i18n:Translate Delete}"
                 TextColor="White"
                 WidthRequest="190" />
         </Grid>

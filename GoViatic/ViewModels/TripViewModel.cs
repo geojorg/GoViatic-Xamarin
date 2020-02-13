@@ -1,5 +1,6 @@
 ﻿using GoViatic.Common.Helpers;
 using GoViatic.Common.Models;
+using GoViatic.Helpers;
 using GoViatic.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -9,7 +10,6 @@ using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
 {
-    //TODO: CHECK IF THE USER HAS TRIPS - UPDATE TO RETRIEVE INFORMATION FROM THE JSON AND NOT FROM THE MODEL.
     public class TripViewModel : BaseViewModel
     {
         private string _firstName;
@@ -48,7 +48,6 @@ namespace GoViatic.ViewModels
             get { return trips; }  
             set { SetProperty(ref trips, value); } 
         }
-       
         public bool IsRefreshing
         {
             get { return _isRefreshing; }
@@ -68,27 +67,35 @@ namespace GoViatic.ViewModels
         private void GetUserData()
         {
             var userData = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
-            Trips = new ObservableCollection<TripModel>(userData.Trips.Select(t => new TripModel()
-            {
-                Id = t.Id,
-                City = t.City,
-                Budget = t.Budget,
-                Date = t.Date,
-                EndDate = t.EndDate,
-                ViaticCount = t.ViaticCount,
-                Viatics = t.Viatics               
-            }).ToList());
-
-            FirstName = $"{userData.FirstName} {userData.LastName} Choose your Trip";
-            if (Trips.Count() == 0)
+            if (userData==null)
             {
                 FirstTrip = true;
-                HasTrips = false;
+                return;
             }
             else
             {
-                FirstTrip = false;
-                HasTrips = true;
+                Trips = new ObservableCollection<TripModel>(userData.Trips.Select(t => new TripModel()
+                {
+                    Id = t.Id,
+                    City = t.City,
+                    Budget = t.Budget,
+                    Date = t.Date,
+                    EndDate = t.EndDate,
+                    ViaticCount = t.ViaticCount,
+                    Viatics = t.Viatics
+                }).ToList());
+
+                FirstName = $"{userData.FirstName} {userData.LastName} {Languages.Choose}";
+                if (Trips.Count() == 0)
+                {
+                    FirstTrip = true;
+                    HasTrips = false;
+                }
+                else
+                {
+                    FirstTrip = false;
+                    HasTrips = true;
+                }
             }
         }
 

@@ -5,10 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:GoViatic.Converters"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:i18n="clr-namespace:Goviatic.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     x:Name="TripsPage"
-    Title="List of Trips"
+    Title="{i18n:Translate NavTittleTripsPage}"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -53,7 +54,7 @@
                     FontFamily="UbuntuBold"
                     FontSize="26"
                     HeightRequest="57"
-                    Text="Hello, let's créate a new Trip"
+                    Text="{i18n:Translate NewTripHeader}"
                     TextColor="#247D4D"
                     WidthRequest="200" />
                 <Button
@@ -64,7 +65,7 @@
                     CornerRadius="7"
                     HeightRequest="46"
                     HorizontalOptions="Center"
-                    Text="NEW TRIP"
+                    Text="{i18n:Translate NewTrip}"
                     TextColor="White"
                     WidthRequest="190" />
             </Grid>
@@ -114,7 +115,6 @@
                                         </SwipeItemView>
                                     </SwipeView.RightItems>
                                     <SwipeView.Content>
-                                        <!--  //TODO: CHANGE THIS FROM TRIPRESPONSE TO TRIPITEMVIEWMODEL  -->
                                         <Frame
                                             Padding="20"
                                             BackgroundColor="#649F7F"
@@ -133,7 +133,7 @@
                                                     VerticalOptions="Center">
                                                     <Label.FormattedText>
                                                         <FormattedString>
-                                                            <Span Text="VIATICS: " />
+                                                            <Span Text="{i18n:Translate ViaticsD}" />
                                                             <Span Text="{Binding ViaticCount}" />
                                                         </FormattedString>
                                                     </Label.FormattedText>
@@ -169,7 +169,7 @@
                                                     VerticalOptions="Center">
                                                     <Label.FormattedText>
                                                         <FormattedString>
-                                                            <Span Text="BUDGET: " />
+                                                            <Span Text="{i18n:Translate Budget}" />
                                                             <Span Text="{Binding Budget, StringFormat='{}{0:C}'}" />
                                                         </FormattedString>
                                                     </Label.FormattedText>
@@ -190,7 +190,7 @@
                     CornerRadius="7"
                     HeightRequest="46"
                     HorizontalOptions="Center"
-                    Text="NEW TRIP"
+                    Text="{i18n:Translate NewTrip}"
                     TextColor="White"
                     WidthRequest="190" />
             </Grid>
