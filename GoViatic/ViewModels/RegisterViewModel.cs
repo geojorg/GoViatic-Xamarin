@@ -9,22 +9,37 @@ namespace GoViatic.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
+        private bool _isEnable;
+        private bool _isRunning;
         private string _entryEmpty;
+        private string _alertDialog;
         private string _firstName;
+        private string _lastName;
         private string _company;
         private string _email;
         private string _password;
         private string _passwordConfirm;
-        private string _lastName;
-        private string _alertDialog;
-        private bool _isEnable;
         private readonly IApiService _apiService;
-        private bool _isRunning;
 
+        public bool IsEnable
+        {
+            get { return _isEnable; }
+            set { SetProperty(ref _isEnable, value); }
+        }
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set { SetProperty(ref _isRunning, value); }
+        }
         public string EntryEmpty
         {
             get { return _entryEmpty; }
             set { SetProperty(ref _entryEmpty, value); }
+        }
+        public string AlertDialog
+        {
+            get { return _alertDialog; }
+            set { SetProperty(ref _alertDialog, value); }
         }
         public string FirstName  
         {
@@ -56,26 +71,11 @@ namespace GoViatic.ViewModels
             get { return _passwordConfirm; }
             set { SetProperty(ref _passwordConfirm, value); }
         }
-        public string AlertDialog
-        {
-            get { return _alertDialog; }
-            set { SetProperty(ref _alertDialog, value); }
-        }
-        public bool IsEnable
-        {
-            get { return _isEnable; }
-            set { SetProperty(ref _isEnable, value); }
-        }
-        public bool IsRunning
-        {
-            get { return _isRunning; }
-            set { SetProperty(ref _isRunning, value); }
-        }
 
         public RegisterViewModel()
         {
-            EntryEmpty = "Transparent";
             IsEnable = true;
+            EntryEmpty = "Transparent";
             IApiService apiService = new ApiService();
             _apiService = apiService;
         }

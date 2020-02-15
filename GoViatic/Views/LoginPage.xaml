@@ -92,8 +92,8 @@
                 Grid.Row="5"
                 FontSize="Body"
                 HorizontalOptions="Center"
-                Text="{Binding Message}"
-                TextColor="{Binding EmptyString}" />
+                Text="{Binding AlertDialog}"
+                TextColor="{Binding EntryEmpty}" />
             <ActivityIndicator
                 Grid.Row="6"
                 HeightRequest="50"

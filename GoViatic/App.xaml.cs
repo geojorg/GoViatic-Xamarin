@@ -15,7 +15,7 @@ namespace GoViatic
         {
             InitializeComponent();
             MainPage = new AppShell();
-                var firstime = Settings.FirstRun;
+            var firstime = Settings.FirstRun;
             if (firstime == true)
             {
                 Routing.RegisterRoute("WelcomePage", typeof(WelcomePage));

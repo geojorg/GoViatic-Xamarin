@@ -16,22 +16,28 @@ namespace GoViatic.ViewModels
     [QueryProperty("Type", "type")]
     public class EditTripViewModel : BaseViewModel
     {
+        private bool _isEnable;
         private string _tittle;
         private string _columnSpan;
         private string _navTittle;
         private string _deleteVisible;
         private string _saveColumnSpan;
         private TripResponse _trip;
-        private bool _isEnable;
         private readonly IApiService _apiService;
 
         public EditTripViewModel()
         {
+            IsEnable = true;
             IApiService apiService = new ApiService();
             _apiService = apiService;
-            IsEnable = true;
         }
 
+        public bool IsEdit { get; set; }
+        public bool IsEnable
+        {
+            get { return _isEnable; }
+            set { SetProperty(ref _isEnable, value); }
+        }
         public string NavTittle
         {
             get { return _navTittle; }
@@ -62,13 +68,6 @@ namespace GoViatic.ViewModels
             get { return _trip; }
             set { SetProperty(ref _trip, value); }
         }
-        public bool IsEnable
-        {
-            get { return _isEnable; }
-            set { SetProperty(ref _isEnable, value); }
-        }
-        
-        public bool IsEdit { get; set; }
 
         public ICollection<ViaticResponse> Viatics { get; private set; }
 
@@ -165,7 +164,7 @@ namespace GoViatic.ViewModels
                string.Format(Languages.CreateEditTripConfirm, IsEdit ? Languages.Edited : Languages.Created),
                Languages.Accept);
             await Shell.Current.Navigation.PopAsync();
-            //await PetsPageViewModel.GetInstance().UpdateOwnerAsync();
+            await TripViewModel.GetInstance().UpdateUserData();
         }
 
         public ICommand DeleteCommand => new Command(AsyncDelete);
@@ -202,7 +201,7 @@ namespace GoViatic.ViewModels
             }
             IsEnable = true;
             await Shell.Current.Navigation.PopAsync();
-            //Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
+            //TODO:Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
         }
 
         private async Task<bool> ValidateData()

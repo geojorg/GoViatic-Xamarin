@@ -1,10 +1,12 @@
 ﻿using GoViatic.Common.Helpers;
 using GoViatic.Common.Models;
+using GoViatic.Common.Services;
 using GoViatic.Helpers;
 using GoViatic.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,15 +14,21 @@ namespace GoViatic.ViewModels
 {
     public class TripViewModel : BaseViewModel
     {
-        private string _firstName;
         private bool _isRefreshing;
+        private string _firstName;
         private TripResponse _selection;
         private string _viaticCount;
+        private TravelerResponse _traveler;
         private ObservableCollection<TripModel> trips;
+        private static TripViewModel _instance;
+        private readonly IApiService _apiService;
 
         public TripViewModel()
         {
             IsRefreshing = false;
+            _instance = this;
+            IApiService apiService = new ApiService();
+            _apiService = apiService;
             GetUserData();
             
             EditCommand = new Command<TripResponse>(async (t) =>
@@ -31,11 +39,20 @@ namespace GoViatic.ViewModels
                 await Shell.Current.GoToAsync($"//TripPage/EditTripPage?type={type}&id={id}");
             });
         }
+        public static TripViewModel GetInstance()
+        {
+            return _instance;
+        }
 
         public bool HasTrips { get; set; }
 
         public bool FirstTrip { get; set; }
 
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set { SetProperty(ref _isRefreshing, value); }
+        }
         public Command<TripResponse> EditCommand { get; set; }
 
         public string FirstName
@@ -48,11 +65,7 @@ namespace GoViatic.ViewModels
             get { return trips; }  
             set { SetProperty(ref trips, value); } 
         }
-        public bool IsRefreshing
-        {
-            get { return _isRefreshing; }
-            set { SetProperty(ref _isRefreshing, value); }
-        }
+       
         public TripResponse Selection
         {
             get { return _selection; }
@@ -99,11 +112,34 @@ namespace GoViatic.ViewModels
             }
         }
 
-        public ICommand RefreshCommand => new Command(Refresh);
-        public void Refresh()
+        public async Task UpdateUserData()
+        {
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            var email = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler).Email;
+
+            var response = await _apiService.GetTravelerByEmail(
+                url,
+                "/api",
+                "/Travelers/GetTravelerByEmail",
+                "bearer",
+                token.Token,
+                email);
+
+            if (response.IsSuccess)
+            {
+                var traveler = response.Result;
+                Settings.Traveler = JsonConvert.SerializeObject(traveler);
+                _traveler = traveler;
+                GetUserData();
+            }
+        }
+
+        public ICommand RefreshCommand => new Command(AsyncRefresh);
+        public async void AsyncRefresh()
         {
             IsRefreshing = true;
-            GetUserData();
+            await UpdateUserData();
             IsRefreshing = false;
         }
 
