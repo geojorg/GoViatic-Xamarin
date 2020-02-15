@@ -5,13 +5,50 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding NavTittle}"
+    Visual="Material"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid Margin="14" ColumnSpacing="0">
             <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+                Grid.Row="1"
+                Grid.Column="0"
+                FontFamily="Ubuntu"
+                FontSize="Body"
+                Text="Viatic"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Text=""
+                VerticalOptions="Center" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                FontFamily="Ubuntu"
+                FontSize="Body"
+                Text="Description"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Text=""
+                VerticalOptions="Center" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                FontFamily="Ubuntu"
+                FontSize="Body"
+                Text="Invoice Date"
+                VerticalOptions="Center" />
+            <DatePicker
+                Grid.Row="3"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Format="  dd/MM/yyyy"
+                Visual="Default" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

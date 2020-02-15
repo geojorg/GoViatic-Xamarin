@@ -61,6 +61,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept.
         /// </summary>
         internal static string Accept {
@@ -142,6 +151,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Travel Companion.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to edited.
         /// </summary>
         internal static string Edited {
@@ -174,6 +192,15 @@ namespace GoViatic.Resources {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for installing this App. You can support the developer by clicking occasionally on advertising..
+        /// </summary>
+        internal static string LargeMessage {
+            get {
+                return ResourceManager.GetString("LargeMessage", resourceCulture);
             }
         }
         
@@ -223,6 +250,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NEW VIATIC.
+        /// </summary>
+        internal static string NewViatic {
+            get {
+                return ResourceManager.GetString("NewViatic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string No {
@@ -264,6 +300,24 @@ namespace GoViatic.Resources {
         internal static string ViaticsD {
             get {
                 return ResourceManager.GetString("ViaticsD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit Profile.
+        /// </summary>
+        internal static string VisitProfile {
+            get {
+                return ResourceManager.GetString("VisitProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit Website.
+        /// </summary>
+        internal static string VisitWeb {
+            get {
+                return ResourceManager.GetString("VisitWeb", resourceCulture);
             }
         }
         

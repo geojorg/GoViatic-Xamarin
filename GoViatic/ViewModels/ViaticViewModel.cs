@@ -1,7 +1,5 @@
 ﻿using GoViatic.Common.Helpers;
 using GoViatic.Common.Models;
-using GoViatic.Common.Services;
-using GoViatic.Data;
 using GoViatic.Models;
 using GoViatic.Views;
 using Newtonsoft.Json;
@@ -13,80 +11,65 @@ using Xamarin.Forms;
 
 namespace GoViatic.ViewModels
 {
-    [QueryProperty("Trips", "id")]
+    [QueryProperty("CurrentTrip", "id")]
     public class ViaticViewModel : BaseViewModel
     {
-        private IList<ViaticT> _viaticsType;
-        private string _tittle;
-        private string _city;
-        private string _viaticName;
-        private ICollection<ViaticResponse> _viatics;
         private bool _isRefreshing;
+        private string _navTittle;
+        private IList<ViaticT> _viaticsType;
+        private string _viaticName;
         private ViaticResponse _selection;
+        private ICollection<ViaticResponse> _viatics;
 
         public ViaticViewModel()
         {
             IsRefreshing = false;
-            ViaticsType = ViaticsData.Viatics;
+            //TODO: REFACTOR VIATYCSTYPE
+            //ViaticsType = ViaticsData.Viatics;
         }
         public Command<ViaticResponse> EditCommand { get; set; }
 
 
         //TODO: ORGANIZE FOR THE NEW MODEL.
-        //public string Trips
-        //{
-        //    set
-        //    {
-        //        var allTrips = TripViewModel.trips;
-        //        TripResponse trip = allTrips.FirstOrDefault(t => t.Id.ToString() == Uri.UnescapeDataString(value));
-        //        if (trip != null)
-        //        {
-        //            City = trip.City;
-        //            Tittle = $"Viatics for {City}";
-        //            Viatics = trip.Viatics;
-        //            Id = value;
-        //        }
-        //    }
-        //}
 
-        public bool IsRefreshing
+        public string CurrentTrip
         {
-            get { return _isRefreshing; }
-            set { SetProperty(ref _isRefreshing, value); }
+            set
+            {
+                var currentTrip = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
+                Trip = currentTrip.Trips.FirstOrDefault(m => m.Id.ToString() == Uri.UnescapeDataString(value));
+                NavTittle = $"{Trip.City} List of Viatics";
+                Viatics = Trip.Viatics;
+            }
         }
 
+        public TripResponse Trip { get; private set; }
         public ICollection<ViaticResponse> Viatics
         {
             get { return _viatics; }
             set { SetProperty(ref _viatics, value); }
         }
 
-        public string Id { get; private set; }
-
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set { SetProperty(ref _isRefreshing, value); }
+        }
+        public string NavTittle
+        {
+            get { return _navTittle; }
+            set { SetProperty(ref _navTittle, value); }
+        }
         public IList<ViaticT> ViaticsType
         {
             get { return _viaticsType; }
             set { SetProperty(ref _viaticsType, value); }
         }
-
-        public string Tittle
-        {
-            get { return _tittle; }
-            set { SetProperty(ref _tittle, value); }
-        }
-
-        public string City
-        {
-            get { return _city; }
-            set { SetProperty(ref _city, value); }
-        }
-
         public string ViaticName
         {
             get { return _viaticName; }
             set { SetProperty(ref _viaticName, value); }
         }
-
         public ViaticResponse Selection
         {
             get { return _selection; }
@@ -98,7 +81,7 @@ namespace GoViatic.ViewModels
         {
             //TODO CHANGE THE GET DATA BUT BE TAKE INTO ACCOUNT HOW TO DO  IT FOR THE NEW VIATICS
             IsRefreshing = true;
-            GetData();
+            //GetData();
             IsRefreshing = false;
         }
 
@@ -108,31 +91,22 @@ namespace GoViatic.ViewModels
         {
             if (Selection != null)
             {
-                var name = Selection.Name;
-                Routing.RegisterRoute("EditViaticPage", typeof(EditViaticPage));
-                await Shell.Current.GoToAsync("//ViaticsPage/EditViaticPage");
+                var id = Selection.Id;
+                var type = "Edit";
+                Routing.RegisterRoute("ViaticsPage/EditViaticPage", typeof(EditViaticPage));
+                await Shell.Current.GoToAsync($"ViaticsPage/EditViaticPage?type={type}");
                 Selection = null;
             }
         }
 
-        //TODO: CHECK IF THIS IS THE BEST WAY TO IMPLEMENT THIS FUNCTIONALITY
-        public async void GetData()
+        public ICommand CreateCommand => new Command(Create);
+        private async void Create()
         {
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var token = LoginViewModel.token;
-            var email = LoginViewModel._email;
-            IApiService apiService = new ApiService();
-            var response2 = await apiService.GetTravelerByEmail(url, "api", "/Travelers/GetTravelerByEmail", "bearer", token, email);
-            var traveler = (TravelerResponse)response2.Result;
-            var trips = traveler.Trips;
-            var currenttrip = trips.FirstOrDefault(m => m.Id == Int32.Parse(Id));
-            Viatics = currenttrip.Viatics;
+            var type = "Create";
+            Routing.RegisterRoute("ViaticsPage/EditViaticPage", typeof(EditViaticPage));
+            await Shell.Current.GoToAsync($"ViaticsPage/EditViaticPage?type={type}");
         }
 
-        //private void GetUserData()
-        //{
-        //    var user = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
-            
-        //}
+
     }
 }

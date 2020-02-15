@@ -34,7 +34,7 @@
             <Label
                 Grid.Row="1"
                 Margin="30,0,150,0"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="26"
                 HeightRequest="57"
                 Text="HELLO THERE, TIME TO TRAVEL"
@@ -44,7 +44,7 @@
                 Grid.Row="2"
                 Margin="25,0,25,0"
                 BackgroundColor="Transparent"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 Keyboard="Email"
                 Placeholder="Email"
                 Text="{Binding Email}" />
@@ -52,7 +52,7 @@
                 Grid.Row="3"
                 Margin="25,0,25,0"
                 BackgroundColor="Transparent"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 Keyboard="Default"
                 Placeholder="Password"
                 Text="{Binding Password}">

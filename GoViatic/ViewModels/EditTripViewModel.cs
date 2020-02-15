@@ -87,7 +87,7 @@ namespace GoViatic.ViewModels
                 if (value == "Create")
                 {
                     Trip = new TripResponse { Date = DateTime.Today, EndDate = DateTime.Today.AddDays(2) };
-                    NavTittle = Languages.NavTittleCreateTripPage;
+                    NavTittle = Languages.NavTittleCreateViatic;
                     Tittle = Languages.CreateTripTittle;
                     ColumnSpan = "2";
                     SaveColumnSpan = "2";
@@ -95,7 +95,7 @@ namespace GoViatic.ViewModels
                 }
                 else
                 {
-                    NavTittle = Languages.NavTittleEditTripPage;
+                    NavTittle = Languages.NavTittleEditViatic;
                     Tittle = Languages.EditTripTittle;
                     ColumnSpan = "2";
                     DeleteVisible = "True";

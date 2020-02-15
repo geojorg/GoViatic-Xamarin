@@ -15,8 +15,8 @@ namespace GoViatic.Helpers
         }
 
         public static object Choose => Resource.Choose;
-        public static string NavTittleCreateTripPage => Resource.NavTittleCreateTripPage;
-        public static string NavTittleEditTripPage => Resource.NavTittleEditTripPage;
+        public static string NavTittleCreateViatic => Resource.NavTittleCreateTripPage;
+        public static string NavTittleEditViatic => Resource.NavTittleEditTripPage;
         public static string CreateTripTittle => Resource.CreateTripTittle;
         public static string EditTripTittle => Resource.EditTripTittle;
         public static string Error => Resource.Error;

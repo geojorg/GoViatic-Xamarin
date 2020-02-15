@@ -39,7 +39,7 @@
             <Label
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="20"
                 Text="{Binding Tittle}"
                 TextColor="Accent"
@@ -47,7 +47,7 @@
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                FontFamily="Ubuntu"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
                 Text="{i18n:Translate City}"
                 VerticalOptions="Center" />
@@ -60,7 +60,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 BackgroundColor="Transparent"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
                 Text="{i18n:Translate Budget}"
                 VerticalOptions="Center" />
@@ -73,7 +73,7 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
                 Text="{i18n:Translate StartDay}"
                 VerticalOptions="CenterAndExpand" />
@@ -87,7 +87,7 @@
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
                 Text="{i18n:Translate EndDay}"
                 VerticalOptions="Center" />

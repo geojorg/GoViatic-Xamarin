@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GoViatic.Views.AboutPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:i18n="clr-namespace:Goviatic.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
+    Title="{i18n:Translate About}"
+    mc:Ignorable="d">
+
+    <ContentPage.Content>
+        <Grid
+            x:DataType="viewModels:AboutViewModel"
+            BackgroundColor="Accent"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Margin="0,50,0,0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="34"
+                HorizontalOptions="CenterAndExpand"
+                Text="GoViatic"
+                TextColor="White" />
+            <Label
+                Grid.Row="1"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="{i18n:Translate Description}"
+                TextColor="White" />
+            <Label
+                Grid.Row="2"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Text="{Binding AppVersion}"
+                TextColor="White" />
+            <Label
+                Grid.Row="3"
+                Margin="0,0,0,40"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Text="{Binding BuildNumber}"
+                TextColor="White" />
+            <ScrollView Grid.Row="4" BackgroundColor="White">
+                <StackLayout>
+                    <Label
+                        Padding="30,40,30,0"
+                        FontSize="18"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="{i18n:Translate LargeMessage}" />
+                    <Image
+                        Margin="0,60,0,20"
+                        BackgroundColor="Transparent"
+                        HeightRequest="120"
+                        Source="LogoTest1" />
+                    <Button
+                        BackgroundColor="Accent"
+                        Command="{Binding GitCommand}"
+                        CornerRadius="7"
+                        HeightRequest="46"
+                        HorizontalOptions="Center"
+                        Text="{i18n:Translate VisitProfile}"
+                        TextColor="White"
+                        WidthRequest="190" />
+                    <Button
+                        BackgroundColor="Accent"
+                        Command="{Binding WebPageCommand}"
+                        CornerRadius="7"
+                        HeightRequest="46"
+                        HorizontalOptions="Center"
+                        Text="{i18n:Translate VisitWeb}"
+                        TextColor="White"
+                        WidthRequest="190" />
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

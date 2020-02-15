@@ -11,5 +11,8 @@
         <ResourceDictionary>
             <x:String x:Key="UrlAPI">https://goviatic.azurewebsites.net/</x:String>
         </ResourceDictionary>
+        <OnPlatform x:Key="UbuntuBold" x:TypeArguments="x:String">
+            <On Platform="Android">ubuntu-bold.ttf#Ubuntu Bold</On>
+        </OnPlatform>
     </Application.Resources>
 </Application>

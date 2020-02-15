@@ -35,7 +35,7 @@
             <Label
                 Grid.Row="1"
                 Margin="30,0,0,0"
-                FontFamily="UbuntuBold"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="26"
                 HeightRequest="57"
                 Text="GET ON BOARD"

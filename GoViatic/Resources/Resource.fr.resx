@@ -169,4 +169,22 @@
   <data name="No" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="NewViatic" xml:space="preserve">
+    <value>NOUVEAU VIATICUM</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="LargeMessage" xml:space="preserve">
+    <value>Merci d'avoir installé cette appli. Vous pouvez soutenir le développeur en cliquant occasionnellement sur la publicité.</value>
+  </data>
+  <data name="VisitProfile" xml:space="preserve">
+    <value>Voir le profil</value>
+  </data>
+  <data name="VisitWeb" xml:space="preserve">
+    <value>Visitez le site Web</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Ton meilleur compagnon de voyage</value>
+  </data>
 </root>
