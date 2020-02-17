@@ -10,6 +10,27 @@
     <Application.Resources>
         <ResourceDictionary>
             <x:String x:Key="UrlAPI">https://goviatic.azurewebsites.net/</x:String>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily">
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android">ubuntu.ttf#Ubuntu</On>
+                    </OnPlatform>
+                </Setter>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily">
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android">ubuntu.ttf#Ubuntu</On>
+                    </OnPlatform>
+                </Setter>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily">
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android">ubuntu.ttf#Ubuntu</On>
+                    </OnPlatform>
+                </Setter>
+            </Style>
         </ResourceDictionary>
         <OnPlatform x:Key="UbuntuBold" x:TypeArguments="x:String">
             <On Platform="Android">ubuntu-bold.ttf#Ubuntu Bold</On>

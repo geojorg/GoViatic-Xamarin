@@ -22,11 +22,10 @@ namespace GoViatic
 
         private async void ShareApp()
         {
-            //TODO: CHANGE LINK TO NEW NAME IN APP STORE FROM GOOGLE
             await Share.RequestAsync(new ShareTextRequest
             {
                 Title = "Compartir App",
-                Uri = "https://play.google.com/store/apps/details?id=com.geojorgco.sakuracards"
+                Uri = "https://play.google.com/store/apps/details?id=com.geojorgco.goviatic"
             });
         }
 

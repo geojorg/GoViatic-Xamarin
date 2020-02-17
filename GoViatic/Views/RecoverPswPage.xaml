@@ -62,7 +62,7 @@
                 Color="Accent" />
             <Button
                 Grid.Row="5"
-                Margin="0,0,0,50"
+                Margin="0,0,0,20"
                 BackgroundColor="#247D4D"
                 Command="{Binding RecoverPswCommand}"
                 CornerRadius="7"

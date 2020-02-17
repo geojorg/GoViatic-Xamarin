@@ -22,12 +22,13 @@
         <Grid
             Margin="14"
             x:DataType="viewModels:EditTripViewModel"
-            ColumnSpacing="0">
+            ColumnSpacing="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -98,11 +99,25 @@
                 Date="{Binding Trip.EndDate}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
+            <Label
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                FontSize="Body"
+                HorizontalOptions="Center"
+                Text="{Binding AlertDialog}"
+                TextColor="{Binding EntryEmpty}"
+                VerticalOptions="Center" />
+            <ActivityIndicator
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
+                HeightRequest="40"
+                IsRunning="{Binding IsRunning}"
+                Color="Accent" />
             <Button
-                Grid.Row="8"
+                Grid.Row="7"
                 Grid.Column="0"
                 Grid.ColumnSpan="{Binding SaveColumnSpan}"
-                Margin="0,0,0,30"
+                Margin="0,0,0,20"
                 BackgroundColor="Accent"
                 Command="{Binding SaveCommand}"
                 CornerRadius="7"
@@ -113,15 +128,16 @@
                 TextColor="White"
                 WidthRequest="190" />
             <Button
-                Grid.Row="8"
+                Grid.Row="7"
                 Grid.Column="1"
                 Grid.ColumnSpan="1"
-                Margin="0,0,0,30"
+                Margin="0,0,0,20"
                 BackgroundColor="Red"
                 Command="{Binding DeleteCommand}"
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
                 IsVisible="{Binding DeleteVisible}"
                 Text="{i18n:Translate Delete}"
                 TextColor="White"

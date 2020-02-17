@@ -125,7 +125,7 @@
                 Grid.ColumnSpan="4"
                 HeightRequest="40"
                 IsRunning="{Binding IsRunning}"
-                Color="#247D4D" />
+                Color="Accent" />
             <Label
                 Grid.Row="8"
                 Grid.ColumnSpan="4"

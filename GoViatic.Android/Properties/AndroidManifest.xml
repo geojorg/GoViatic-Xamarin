@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" android:versionName="Alpha0.2" package="com.geojorgco.goviatic" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="3" android:versionName="Alpha0.2" package="com.geojorgco.goviatic" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="29" />
 	<application android:label="GoViatic" android:icon="@mipmap/icon_round">
 		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />

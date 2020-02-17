@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -17,6 +16,9 @@ namespace GoViatic.ViewModels
     public class EditTripViewModel : BaseViewModel
     {
         private bool _isEnable;
+        private bool _isRunning;
+        private string _entryEmpty;
+        private string _alertDialog;
         private string _tittle;
         private string _columnSpan;
         private string _navTittle;
@@ -28,6 +30,7 @@ namespace GoViatic.ViewModels
         public EditTripViewModel()
         {
             IsEnable = true;
+            EntryEmpty = "Transparent";
             IApiService apiService = new ApiService();
             _apiService = apiService;
         }
@@ -37,6 +40,21 @@ namespace GoViatic.ViewModels
         {
             get { return _isEnable; }
             set { SetProperty(ref _isEnable, value); }
+        }
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set { SetProperty(ref _isRunning, value); }
+        }
+        public string EntryEmpty
+        {
+            get { return _entryEmpty; }
+            set { SetProperty(ref _entryEmpty, value); }
+        }
+        public string AlertDialog
+        {
+            get { return _alertDialog; }
+            set { SetProperty(ref _alertDialog, value); }
         }
         public string NavTittle
         {
@@ -109,13 +127,15 @@ namespace GoViatic.ViewModels
         public ICommand SaveCommand => new Command(SaveAsync);
         private async void SaveAsync()
         {
-            var isValid = await ValidateData();
+            EntryEmpty = "Transparent";
+            var isValid = ValidateData();
             if (!isValid)
             {
                 return;
             }
 
             IsEnable = false;
+            IsRunning = true;
             var url = App.Current.Resources["UrlAPI"].ToString();
             var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             var traveler = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
@@ -154,6 +174,7 @@ namespace GoViatic.ViewModels
             }
 
             IsEnable = true;
+            IsRunning = false;
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
@@ -200,15 +221,17 @@ namespace GoViatic.ViewModels
                 return;
             }
             IsEnable = true;
+            await TripViewModel.GetInstance().UpdateUserData();
+            await Application.Current.MainPage.DisplayAlert("Message", "Trips has been deleted", "Accept");
             await Shell.Current.Navigation.PopAsync();
-            //TODO:Application.Current.MainPage.DisplayAlert("Mensaje", "Pendiente Implementar", "Ok");
         }
 
-        private async Task<bool> ValidateData()
+        private bool ValidateData()
         {
             if (string.IsNullOrEmpty(Trip.City))
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, "NO PUSISTE LA CIUDAD", Languages.Accept);
+                AlertDialog = "Please insert a valid City";
+                EntryEmpty = "Red";
                 return false;
             }
             return true;
