@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1009489259995",
+    "firebase_url": "https://goviatic.firebaseio.com",
+    "project_id": "goviatic",
+    "storage_bucket": "goviatic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009489259995:android:eadd767e88bac887788bfe",
+        "android_client_info": {
+          "package_name": "com.geojorgco.goviatic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009489259995-di1c6ko9ajp73ikbmpo6upcv1tifiu8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3DehGB33NnzENjxlDgk1xONfmW9JDdRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009489259995-di1c6ko9ajp73ikbmpo6upcv1tifiu8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
