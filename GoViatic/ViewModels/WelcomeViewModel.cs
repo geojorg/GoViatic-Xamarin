@@ -49,7 +49,7 @@ namespace GoViatic.ViewModels
             {
                 Icon = "ic_goviatic",
                 Header = "Welcome to GoViatic",
-                Body = "Make control of your viatics easy"
+                Body = "Make control of your viatics easy as you travel."
             });
             source.Add(new Carousel
             {

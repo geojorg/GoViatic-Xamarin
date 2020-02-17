@@ -175,7 +175,8 @@ namespace GoViatic.ViewModels
         public ICommand RecoverPswCommand => new Command(Recovery);
         private void Recovery()
         {
-            Shell.Current.Navigation.PushAsync(new RecoverPswPage());
+            Routing.RegisterRoute("RecoverPswPage", typeof(RecoverPswPage));
+            Shell.Current.GoToAsync("RecoverPswPage");
         }
     }
 }

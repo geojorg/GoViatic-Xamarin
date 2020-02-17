@@ -2,6 +2,7 @@
 using GoViatic.Common.Models;
 using GoViatic.Common.Services;
 using GoViatic.Helpers;
+using GoViatic.Models;
 using GoViatic.Views;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;

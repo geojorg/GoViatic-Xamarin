@@ -1,8 +1,8 @@
 ﻿using GoViatic.Common.Models;
 
-namespace GoViatic.ViewModels
+namespace GoViatic.Models
 {
-    public class TripModel : TripResponse
+    public class TripModel: TripResponse
     {
     }
 }

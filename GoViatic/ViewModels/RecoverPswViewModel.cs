@@ -10,7 +10,7 @@ namespace GoViatic.ViewModels
     public class RecoverPswViewModel : BaseViewModel
     {
         private bool _isRunning;
-        private bool _isVisible;
+        private string _isVisible;
         private string _imageSource;
         private string _message;
         private readonly IApiService _apiService;
@@ -20,7 +20,7 @@ namespace GoViatic.ViewModels
             IApiService apiService = new ApiService();
             _apiService = apiService;
             ImageSource = "ic_lock_open";
-            IsVisible = true;
+            IsVisible = "1";
             Message = "Just enter the email address you've use to register in GoViatic";
         }
 
@@ -41,7 +41,7 @@ namespace GoViatic.ViewModels
             get { return _isRunning; }
             set { SetProperty(ref _isRunning, value); }
         }
-        public bool IsVisible
+        public string IsVisible
         {
             get { return _isVisible; }
             set { SetProperty(ref _isVisible, value); }
@@ -74,7 +74,7 @@ namespace GoViatic.ViewModels
                 await App.Current.MainPage.DisplayAlert("Error", response.Message,"Accept");
                 return;
             }
-            IsVisible = false;
+            IsVisible = "0";
             ImageSource = "ic_email";
             Message = "Please check your inbox for the password reset link.";
         }

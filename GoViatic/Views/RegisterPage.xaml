@@ -8,7 +8,7 @@
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     BackgroundColor="White"
     Shell.NavBarIsVisible="False"
-    Shell.PresentationMode="Modal"
+    Shell.PresentationMode="ModalAnimated"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -16,15 +16,10 @@
         <Grid x:DataType="viewModels:RegisterViewModel" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="4*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -34,61 +29,72 @@
                 Source="loginheader" />
             <Label
                 Grid.Row="1"
-                Margin="30,0,0,0"
+                Margin="30,0,0,12"
                 FontFamily="{StaticResource UbuntuBold}"
-                FontSize="26"
-                HeightRequest="57"
+                FontSize="20"
                 Text="GET ON BOARD"
-                TextColor="#247D4D"
+                TextColor="Accent"
                 WidthRequest="200" />
-            <Entry
-                Grid.Row="2"
-                Margin="25,0,25,0"
-                BackgroundColor="Transparent"
-                Placeholder="First Name"
-                Text="{Binding FirstName}" />
-            <Entry
-                Grid.Row="3"
-                Margin="25,0,25,0"
-                BackgroundColor="Transparent"
-                Placeholder="Last Name"
-                Text="{Binding LastName}" />
-            <Entry
-                Grid.Row="4"
-                Margin="25,0,25,0"
-                BackgroundColor="Transparent"
-                Placeholder="Company"
-                Text="{Binding Company}" />
-            <Entry
-                Grid.Row="5"
-                Margin="25,0,25,0"
-                BackgroundColor="Transparent"
-                Keyboard="Email"
-                Placeholder="Email"
-                Text="{Binding Email}" />
-            <Entry
-                Grid.Row="6"
-                Margin="25,0,25,0"
-                BackgroundColor="Transparent"
-                IsPassword="True"
-                Placeholder="Password"
-                Text="{Binding Password}" />
-            <Entry
-                Grid.Row="7"
-                Margin="25,0,25,0"
-                BackgroundColor="Transparent"
-                IsPassword="True"
-                Placeholder="Confirm Password"
-                Text="{Binding PasswordConfirm}" />
+            <ScrollView Grid.Row="2">
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Entry
+                        Grid.Row="0"
+                        Margin="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        Placeholder="First Name"
+                        Text="{Binding FirstName}" />
+                    <Entry
+                        Grid.Row="1"
+                        Margin="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        Placeholder="Last Name"
+                        Text="{Binding LastName}" />
+                    <Entry
+                        Grid.Row="2"
+                        Margin="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        Placeholder="Company"
+                        Text="{Binding Company}" />
+                    <Entry
+                        Grid.Row="3"
+                        Margin="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        Keyboard="Email"
+                        Placeholder="Email"
+                        Text="{Binding Email}" />
+                    <Entry
+                        Grid.Row="4"
+                        Margin="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        IsPassword="True"
+                        Placeholder="Password"
+                        Text="{Binding Password}" />
+                    <Entry
+                        Grid.Row="5"
+                        Margin="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        IsPassword="True"
+                        Placeholder="Confirm Password"
+                        Text="{Binding PasswordConfirm}" />
+                </Grid>
+            </ScrollView>
             <Label
-                Grid.Row="8"
+                Grid.Row="3"
                 FontSize="Body"
                 HorizontalOptions="Center"
                 Text="{Binding AlertDialog}"
                 TextColor="{Binding EntryEmpty}" />
             <Label
-                Grid.Row="9"
-                Margin="60,10,60,10"
+                Grid.Row="4"
+                Margin="60,5,60,5"
                 FontSize="Body"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center">
@@ -110,14 +116,13 @@
                 </Label.FormattedText>
             </Label>
             <ActivityIndicator
-                Grid.Row="10"
-                Margin="0,10,0,10"
-                HeightRequest="50"
+                Grid.Row="5"
+                HeightRequest="40"
                 IsRunning="{Binding IsRunning}"
-                Color="#247D4D" />
+                Color="Accent" />
             <Button
-                Grid.Row="11"
-                Margin="0,0,0,30"
+                Grid.Row="6"
+                Margin="0,0,0,20"
                 BackgroundColor="#247D4D"
                 Command="{Binding RegisterCommand}"
                 CornerRadius="7"

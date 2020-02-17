@@ -7,13 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     Title="Recover Password"
+    Shell.PresentationMode="ModalAnimated"
     Visual="Material"
     mc:Ignorable="d">
 
     <ContentPage.Content>
         <Grid x:DataType="viewModels:RecoverPswViewModel" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="3*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="2*" />
@@ -49,8 +50,8 @@
                 Grid.Row="3"
                 Margin="14,0,14,0"
                 BackgroundColor="Transparent"
-                IsVisible="{Binding IsVisible}"
                 Keyboard="Email"
+                Opacity="{Binding IsVisible}"
                 Placeholder="Email"
                 Text="{Binding Email}" />
             <ActivityIndicator
@@ -67,7 +68,7 @@
                 CornerRadius="7"
                 HeightRequest="46"
                 HorizontalOptions="Center"
-                IsVisible="{Binding IsVisible}"
+                Opacity="{Binding IsVisible}"
                 Text="Submit"
                 TextColor="White"
                 WidthRequest="190" />
