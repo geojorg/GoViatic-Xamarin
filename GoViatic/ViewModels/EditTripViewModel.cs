@@ -105,7 +105,7 @@ namespace GoViatic.ViewModels
                 if (value == "Create")
                 {
                     Trip = new TripResponse { Date = DateTime.Today, EndDate = DateTime.Today.AddDays(2) };
-                    NavTittle = Languages.NavTittleCreateViatic;
+                    NavTittle = Languages.NavTittleCreateTrip;
                     Tittle = Languages.CreateTripTittle;
                     ColumnSpan = "2";
                     SaveColumnSpan = "2";
@@ -113,8 +113,8 @@ namespace GoViatic.ViewModels
                 }
                 else
                 {
-                    NavTittle = Languages.NavTittleEditViatic;
-                    Tittle = Languages.EditTripTittle;
+                    NavTittle = Languages.NavTittleEditTrip;
+                    Tittle = Languages.EditViaticTittle;
                     ColumnSpan = "2";
                     DeleteVisible = "True";
                     SaveColumnSpan = "1";
@@ -193,7 +193,7 @@ namespace GoViatic.ViewModels
         {
             var answer = await App.Current.MainPage.DisplayAlert(
                 Languages.Confirm,
-                Languages.Question,
+                Languages.QuestionV,
                 Languages.Yes,
                 Languages.No);
 

@@ -187,4 +187,34 @@
   <data name="Description" xml:space="preserve">
     <value>Tu mejor compañero de viaje</value>
   </data>
+  <data name="NavTittleEditViaticPage" xml:space="preserve">
+    <value>Editar Viaticos</value>
+  </data>
+  <data name="NavTittleCreateViaticPage" xml:space="preserve">
+    <value>Crear Viaticos</value>
+  </data>
+  <data name="Viatic" xml:space="preserve">
+    <value>Viatico</value>
+  </data>
+  <data name="CreateViaticTittle" xml:space="preserve">
+    <value>Crea tu nuevo Viatico</value>
+  </data>
+  <data name="EditViaticTittle" xml:space="preserve">
+    <value>Edita tu Viatico</value>
+  </data>
+  <data name="ViaticDescription" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="InvoiceDate" xml:space="preserve">
+    <value>Fecha de factura</value>
+  </data>
+  <data name="InvoiceAmmount" xml:space="preserve">
+    <value>Valor de la Factura</value>
+  </data>
+  <data name="ViaticCategory" xml:space="preserve">
+    <value>Tipo de Viático:</value>
+  </data>
+  <data name="QuestionV" xml:space="preserve">
+    <value>Desea eliminar el viático actual?</value>
+  </data>
 </root>

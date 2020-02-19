@@ -4,51 +4,152 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:i18n="clr-namespace:Goviatic.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
     Title="{Binding NavTittle}"
     Visual="Material"
     mc:Ignorable="d">
+
+
     <ContentPage.Content>
-        <Grid Margin="14" ColumnSpacing="0">
+        <Grid
+            Margin="14"
+            x:DataType="viewModels:EditViaticViewModel"
+            ColumnSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="20"
+                Text="{Binding Tittle}"
+                TextColor="Accent"
+                VerticalOptions="CenterAndExpand" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                FontFamily="Ubuntu"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
-                Text="Viatic"
+                Text="{i18n:Translate Viatic}"
                 VerticalOptions="Center" />
             <Entry
                 Grid.Row="1"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
-                Text=""
-                VerticalOptions="Center" />
+                Text="{Binding Viatic.Name}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                FontFamily="Ubuntu"
+                BackgroundColor="Transparent"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
-                Text="Description"
+                Text="{i18n:Translate ViaticDescription}"
                 VerticalOptions="Center" />
             <Entry
                 Grid.Row="2"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
-                Text=""
-                VerticalOptions="Center" />
+                Keyboard="Plain"
+                Text="{Binding Viatic.Description}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                FontFamily="Ubuntu"
+                FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
-                Text="Invoice Date"
-                VerticalOptions="Center" />
+                Text="{i18n:Translate InvoiceDate}"
+                VerticalOptions="CenterAndExpand" />
             <DatePicker
                 Grid.Row="3"
                 Grid.Column="1"
                 BackgroundColor="Transparent"
+                Date="{Binding Viatic.InvoiceDate}"
                 Format="  dd/MM/yyyy"
                 Visual="Default" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="Body"
+                Text="{i18n:Translate InvoiceAmmount}"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="4"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Keyboard="Numeric"
+                Text="{Binding Viatic.InvoiceAmmount}" />
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                FontFamily="{StaticResource UbuntuBold}"
+                FontSize="Body"
+                Text="{i18n:Translate ViaticCategory}"
+                VerticalOptions="Center" />
+            <Picker
+                Grid.Row="5"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding ViaticCat}"
+                SelectedItem="{Binding SelectedViaticType}" />
+            <Label
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
+                FontSize="Body"
+                HorizontalOptions="Center"
+                Text="{Binding AlertDialog}"
+                TextColor="{Binding EntryEmpty}"
+                VerticalOptions="Center" />
+            <ActivityIndicator
+                Grid.Row="7"
+                Grid.ColumnSpan="2"
+                HeightRequest="40"
+                IsRunning="{Binding IsRunning}"
+                Color="Accent" />
+            <Button
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="{Binding SaveColumnSpan}"
+                Margin="0,0,0,20"
+                BackgroundColor="Accent"
+                Command="{Binding SaveCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
+                Text="{i18n:Translate Save}"
+                TextColor="White"
+                WidthRequest="190" />
+            <Button
+                Grid.Row="8"
+                Grid.Column="1"
+                Grid.ColumnSpan="1"
+                Margin="0,0,0,20"
+                BackgroundColor="Red"
+                Command="{Binding DeleteCommand}"
+                CornerRadius="7"
+                HeightRequest="46"
+                HorizontalOptions="Center"
+                IsEnabled="{Binding IsEnable}"
+                IsVisible="{Binding DeleteVisible}"
+                Text="{i18n:Translate Delete}"
+                TextColor="White"
+                WidthRequest="190" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

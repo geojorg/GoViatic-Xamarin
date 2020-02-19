@@ -142,6 +142,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create your new Viatic.
+        /// </summary>
+        internal static string CreateViaticTittle {
+            get {
+                return ResourceManager.GetString("CreateViaticTittle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string Delete {
@@ -178,6 +187,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit your Viatic.
+        /// </summary>
+        internal static string EditViaticTittle {
+            get {
+                return ResourceManager.GetString("EditViaticTittle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ending Day:.
         /// </summary>
         internal static string EndDay {
@@ -192,6 +210,24 @@ namespace GoViatic.Resources {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice Ammount.
+        /// </summary>
+        internal static string InvoiceAmmount {
+            get {
+                return ResourceManager.GetString("InvoiceAmmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice Date.
+        /// </summary>
+        internal static string InvoiceDate {
+            get {
+                return ResourceManager.GetString("InvoiceDate", resourceCulture);
             }
         }
         
@@ -214,11 +250,29 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Viatic.
+        /// </summary>
+        internal static string NavTittleCreateViaticPage {
+            get {
+                return ResourceManager.GetString("NavTittleCreateViaticPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Trip.
         /// </summary>
         internal static string NavTittleEditTripPage {
             get {
                 return ResourceManager.GetString("NavTittleEditTripPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Viatic.
+        /// </summary>
+        internal static string NavTittleEditViaticPage {
+            get {
+                return ResourceManager.GetString("NavTittleEditViaticPage", resourceCulture);
             }
         }
         
@@ -277,6 +331,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete the current viatic ?.
+        /// </summary>
+        internal static string QuestionV {
+            get {
+                return ResourceManager.GetString("QuestionV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
@@ -291,6 +354,33 @@ namespace GoViatic.Resources {
         internal static string StartDay {
             get {
                 return ResourceManager.GetString("StartDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viatic.
+        /// </summary>
+        internal static string Viatic {
+            get {
+                return ResourceManager.GetString("Viatic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viatic Type:.
+        /// </summary>
+        internal static string ViaticCategory {
+            get {
+                return ResourceManager.GetString("ViaticCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string ViaticDescription {
+            get {
+                return ResourceManager.GetString("ViaticDescription", resourceCulture);
             }
         }
         

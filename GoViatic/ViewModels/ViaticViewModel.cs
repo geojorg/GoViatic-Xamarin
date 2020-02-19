@@ -16,10 +16,10 @@ namespace GoViatic.ViewModels
     {
         private bool _isRefreshing;
         private string _navTittle;
-        private IList<ViaticT> _viaticsType;
         private string _viaticName;
         private ViaticResponse _selection;
         private ICollection<ViaticResponse> _viatics;
+        private string _tripId;
 
         public ViaticViewModel()
         {
@@ -40,6 +40,7 @@ namespace GoViatic.ViewModels
                 Trip = currentTrip.Trips.FirstOrDefault(m => m.Id.ToString() == Uri.UnescapeDataString(value));
                 NavTittle = $"{Trip.City} List of Viatics";
                 Viatics = Trip.Viatics;
+                TripId = Trip.Id.ToString(); 
             }
         }
 
@@ -60,11 +61,6 @@ namespace GoViatic.ViewModels
             get { return _navTittle; }
             set { SetProperty(ref _navTittle, value); }
         }
-        public IList<ViaticT> ViaticsType
-        {
-            get { return _viaticsType; }
-            set { SetProperty(ref _viaticsType, value); }
-        }
         public string ViaticName
         {
             get { return _viaticName; }
@@ -74,6 +70,11 @@ namespace GoViatic.ViewModels
         {
             get { return _selection; }
             set { SetProperty(ref _selection, value); }
+        }
+        public string TripId
+        {
+            get { return _tripId; }
+            set { SetProperty(ref _tripId, value); }
         }
 
         public ICommand RefreshCommand => new Command(Refresh);
@@ -91,10 +92,10 @@ namespace GoViatic.ViewModels
         {
             if (Selection != null)
             {
-                var id = Selection.Id;
                 var type = "Edit";
+                var viaticid = Selection.Id;
                 Routing.RegisterRoute("ViaticsPage/EditViaticPage", typeof(EditViaticPage));
-                await Shell.Current.GoToAsync($"ViaticsPage/EditViaticPage?type={type}");
+                await Shell.Current.GoToAsync($"ViaticsPage/EditViaticPage?type={type}&tripid={TripId}&viaticid={viaticid}");
                 Selection = null;
             }
         }
@@ -104,9 +105,7 @@ namespace GoViatic.ViewModels
         {
             var type = "Create";
             Routing.RegisterRoute("ViaticsPage/EditViaticPage", typeof(EditViaticPage));
-            await Shell.Current.GoToAsync($"ViaticsPage/EditViaticPage?type={type}");
+            await Shell.Current.GoToAsync($"ViaticsPage/EditViaticPage?type={type}&tripid={TripId}");
         }
-
-
     }
 }

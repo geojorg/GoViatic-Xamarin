@@ -79,7 +79,6 @@
                                         HorizontalTextAlignment="Center"
                                         Text="{Binding InvoiceAmmount}"
                                         TextColor="White" />
-
                                 </Grid>
                             </Frame>
                         </DataTemplate>
