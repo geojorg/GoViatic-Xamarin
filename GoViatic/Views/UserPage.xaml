@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-    Title="Profile"
+    Shell.PresentationMode="ModalAnimated"
     Visual="Material"
     mc:Ignorable="d">
 
@@ -14,9 +14,6 @@
         <Grid x:DataType="viewModels:UserViewModel" RowSpacing="40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -58,38 +55,49 @@
                 Source="ic_camera"
                 VerticalOptions="Center"
                 WidthRequest="40" />
-            <Entry
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="14,0,14,0"
-                BackgroundColor="Transparent"
-                Placeholder="First Name"
-                Text="{Binding Traveler.FirstName}" />
-            <Entry
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Margin="14,0,14,0"
-                BackgroundColor="Transparent"
-                Placeholder="Last Name"
-                Text="{Binding Traveler.LastName}" />
-            <Entry
-                Grid.Row="3"
-                Grid.ColumnSpan="2"
-                Margin="14,0,14,0"
-                BackgroundColor="Transparent"
-                Placeholder="Company"
-                Text="{Binding Traveler.Company}" />
-            <Label
-                Grid.Row="4"
-                Grid.ColumnSpan="2"
-                FontSize="Body"
-                HorizontalOptions="Center"
-                Text="{Binding AlertDialog}"
-                TextColor="{Binding EntryEmpty}" />
+            <ScrollView Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Entry
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        Margin="14,0,14,0"
+                        BackgroundColor="Transparent"
+                        Placeholder="First Name"
+                        Text="{Binding Traveler.FirstName}" />
+                    <Entry
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Margin="14,0,14,0"
+                        BackgroundColor="Transparent"
+                        Placeholder="Last Name"
+                        Text="{Binding Traveler.LastName}" />
+                    <Entry
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="14,0,14,0"
+                        BackgroundColor="Transparent"
+                        Placeholder="Company"
+                        Text="{Binding Traveler.Company}" />
+                    <Label
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        FontSize="Body"
+                        HorizontalOptions="Center"
+                        Text="{Binding AlertDialog}"
+                        TextColor="{Binding EntryEmpty}" />
+
+                </Grid>
+            </ScrollView>
             <Button
-                Grid.Row="5"
+                Grid.Row="2"
                 Grid.Column="0"
-                Margin="0,0,0,50"
+                Margin="14,0,0,20"
                 BackgroundColor="#247D4D"
                 Command="{Binding UpdateCommand}"
                 CornerRadius="7"
@@ -100,9 +108,9 @@
                 TextColor="White"
                 WidthRequest="190" />
             <Button
-                Grid.Row="5"
+                Grid.Row="2"
                 Grid.Column="1"
-                Margin="0,0,0,50"
+                Margin="0,0,14,20"
                 BackgroundColor="#247D4D"
                 Command="{Binding PswChangeCommand}"
                 CornerRadius="7"

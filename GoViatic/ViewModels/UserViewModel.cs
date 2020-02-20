@@ -98,13 +98,13 @@ namespace GoViatic.ViewModels
         public ICommand UpdateCommand => new Command(UpdateAsync);
         private async void UpdateAsync()
         {
-            IsEnable = false;
             var isValid = ValidateData();
             if (!isValid)
             {
                 return;
             }
 
+            IsEnable = false;
             var userRequest = new UserRequest
             {
                 Email = Traveler.Email,

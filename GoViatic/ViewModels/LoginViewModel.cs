@@ -125,7 +125,7 @@ namespace GoViatic.ViewModels
                 Settings.Token = JsonConvert.SerializeObject(tokenData);
                 Settings.IsRemembered = IsRemember;
 
-                await Shell.Current.GoToAsync("//TripPage");
+                await Shell.Current.GoToAsync("trippage");
                 EntryEmpty = "Transparent";
                 AlertDialog = string.Empty;
                 IsEnable = true;
@@ -169,14 +169,14 @@ namespace GoViatic.ViewModels
         private void Register()
         {
             Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
-            Shell.Current.GoToAsync("RegisterPage");
+            Shell.Current.GoToAsync("registerpage");
         }
 
         public ICommand RecoverPswCommand => new Command(Recovery);
         private void Recovery()
         {
             Routing.RegisterRoute("RecoverPswPage", typeof(RecoverPswPage));
-            Shell.Current.GoToAsync("RecoverPswPage");
+            Shell.Current.GoToAsync("recoverpswpage");
         }
     }
 }

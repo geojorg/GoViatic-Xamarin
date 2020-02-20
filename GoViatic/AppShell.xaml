@@ -44,48 +44,46 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Route="LoginPage">
+        <ShellContent Route="loginpage">
             <views:LoginPage />
         </ShellContent>
-        <ShellContent Route="WelcomePage">
+        <ShellContent Route="welcomepage">
             <views:WelcomePage />
         </ShellContent>
     </TabBar>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" FlyoutIcon="ic_action_trip">
         <ShellContent
-            Title="Trips"
+            Title="List of Trips"
             ContentTemplate="{DataTemplate views:TripPage}"
-            Icon="ic_action_trip"
-            Route="TripPage" />
-        <ShellContent
-            Title="User Data"
-            ContentTemplate="{DataTemplate views:UserPage}"
-            Icon="ic_action_user"
-            Route="UserPage" />
+            Route="trippage"
+            Icon="ic_action_trip" />
         <ShellContent
             Title="Analysis"
             ContentTemplate="{DataTemplate views:AnalysisPage}"
-            Icon="ic_action_delete"
-            Route="AnalysisPage" />
+            Icon="ic_action_delete" />
     </FlyoutItem>
 
+
     <MenuItem
-        Command="{Binding LogoutCommand}"
-        IconImageSource="ic_action_exit_to_app"
-        Text="Logout" />
+        Command="{Binding UserCommand}"
+        IconImageSource="ic_action_user"
+        Text="My Profile" />
+    <MenuItem
+        Command="{Binding ShareAppCommand}"
+        IconImageSource="ic_action_share"
+        Text="Share" />
     <MenuItem
         Command="{Binding RateCommand}"
         CommandParameter="https://play.google.com/store/apps/details?id=com.geojorgco.sakuracards"
         IconImageSource="ic_action_star_rate"
         Text="Rate" />
     <MenuItem
-        Command="{Binding ShareAppCommand}"
-        IconImageSource="ic_action_share"
-        Text="Share" />
-    <ShellContent
-        Title="{i18n:Translate About}"
-        ContentTemplate="{DataTemplate views:AboutPage}"
-        Icon="ic_action_info"
-        Route="AboutPage" />
+        Command="{Binding AboutCommand}"
+        IconImageSource="ic_action_info"
+        Text="About" />
+    <MenuItem
+        Command="{Binding LogoutCommand}"
+        IconImageSource="ic_action_exit_to_app"
+        Text="Logout" />
 </Shell>

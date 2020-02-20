@@ -36,8 +36,7 @@ namespace GoViatic.ViewModels
             {
                 var id = t.Id;
                 var type = "Edit";
-                Routing.RegisterRoute("TripPage/EditTripPage", typeof(EditTripPage));
-                await Shell.Current.GoToAsync($"//TripPage/EditTripPage?type={type}&id={id}");
+                await Shell.Current.GoToAsync($"edittrippage?type={type}&id={id}");
             });
         }
         public static TripViewModel GetInstance()
@@ -66,7 +65,6 @@ namespace GoViatic.ViewModels
             get { return trips; }  
             set { SetProperty(ref trips, value); } 
         }
-       
         public TripResponse Selection
         {
             get { return _selection; }
@@ -150,8 +148,8 @@ namespace GoViatic.ViewModels
             if (Selection != null)
             {
                 var id = Selection.Id;
-                Routing.RegisterRoute("TripPage/ViaticsPage", typeof(ViaticsPage));
-                await Shell.Current.GoToAsync($"//TripPage/ViaticsPage?id={id}");
+                
+                await Shell.Current.GoToAsync($"viaticpage?id={id}");
                 Selection = null;
             }
         }
@@ -160,8 +158,7 @@ namespace GoViatic.ViewModels
         private async void Create()
         {
             var type = "Create";
-            Routing.RegisterRoute("TripPage/EditTripPage", typeof(EditTripPage));
-            await Shell.Current.GoToAsync($"//TripPage/EditTripPage?type={type}");
+            await Shell.Current.GoToAsync($"edittrippage?type={type}");
         }
     }
 }

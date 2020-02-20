@@ -7,7 +7,7 @@
     xmlns:i18n="clr-namespace:Goviatic.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:GoViatic.ViewModels"
-    Title="{i18n:Translate About}"
+    Shell.PresentationMode="ModalAnimated"
     mc:Ignorable="d">
 
     <ContentPage.Content>

@@ -134,7 +134,7 @@
                                                     VerticalOptions="Center">
                                                     <Label.FormattedText>
                                                         <FormattedString>
-                                                            <Span Text="{i18n:Translate ViaticsD}" />
+                                                            <Span Text="{i18n:Translate ViaticsD} " />
                                                             <Span Text="{Binding ViaticCount}" />
                                                         </FormattedString>
                                                     </Label.FormattedText>
@@ -171,7 +171,7 @@
                                                     <Label.FormattedText>
                                                         <FormattedString>
                                                             <Span Text="{i18n:Translate Budget}" />
-                                                            <Span Text="{Binding Budget, StringFormat='{}{0:C}'}" />
+                                                            <Span Text="{Binding Budget, StringFormat='{} {0:C0}'}" />
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>

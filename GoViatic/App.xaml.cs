@@ -1,6 +1,5 @@
 ﻿using GoViatic.Common.Helpers;
 using GoViatic.Common.Models;
-using GoViatic.Views;
 using Newtonsoft.Json;
 using System;
 using Xamarin.Forms;
@@ -19,19 +18,18 @@ namespace GoViatic
             
             if (firstime == true)
             {
-                Routing.RegisterRoute("WelcomePage", typeof(WelcomePage));
-                Shell.Current.GoToAsync("WelcomePage");
+                Shell.Current.GoToAsync("welcomepage");
             }
             else
             {
                 var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
                 if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
                 {
-                    Shell.Current.GoToAsync("//TripPage");
+                    Shell.Current.GoToAsync("//trippage");
                 }
                 else
                 {
-                    Shell.Current.GoToAsync("//LoginPage");
+                    Shell.Current.GoToAsync("//loginpage");
                 }
             }
         }

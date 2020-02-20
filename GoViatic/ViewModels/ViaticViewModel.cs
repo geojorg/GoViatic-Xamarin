@@ -24,13 +24,8 @@ namespace GoViatic.ViewModels
         public ViaticViewModel()
         {
             IsRefreshing = false;
-            //TODO: REFACTOR VIATYCSTYPE
-            //ViaticsType = ViaticsData.Viatics;
         }
         public Command<ViaticResponse> EditCommand { get; set; }
-
-
-        //TODO: ORGANIZE FOR THE NEW MODEL.
 
         public string CurrentTrip
         {

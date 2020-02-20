@@ -208,7 +208,7 @@ namespace GoViatic.ViewModels
                 return;
             }
             await App.Current.MainPage.DisplayAlert(
-               Languages.Accept,
+               Languages.TripEditCreation,
                string.Format(Languages.CreateEditTripConfirm, IsEdit ? Languages.Edited : Languages.Created),
                Languages.Accept);
             await Shell.Current.Navigation.PopAsync();

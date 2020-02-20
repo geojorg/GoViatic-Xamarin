@@ -94,7 +94,7 @@ namespace GoViatic.ViewModels
             set
             {
                 var allTrips = JsonConvert.DeserializeObject<TravelerResponse>(Settings.Traveler);
-                Trip = allTrips.Trips.FirstOrDefault(m => m.Id.ToString() == Uri.UnescapeDataString(value));
+                 Trip = allTrips.Trips.FirstOrDefault(m => m.Id.ToString() == Uri.UnescapeDataString(value));
             }
         }
 
@@ -180,12 +180,12 @@ namespace GoViatic.ViewModels
                 await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
+            await TripViewModel.GetInstance().UpdateUserData();
             await App.Current.MainPage.DisplayAlert(
                Languages.Accept,
                string.Format(Languages.CreateEditTripConfirm, IsEdit ? Languages.Edited : Languages.Created),
                Languages.Accept);
-            await Shell.Current.Navigation.PopAsync();
-            await TripViewModel.GetInstance().UpdateUserData();
+            await Shell.Current.Navigation.PopToRootAsync();
         }
 
         public ICommand DeleteCommand => new Command(AsyncDelete);
@@ -193,7 +193,7 @@ namespace GoViatic.ViewModels
         {
             var answer = await App.Current.MainPage.DisplayAlert(
                 Languages.Confirm,
-                Languages.QuestionV,
+                Languages.QuestionT,
                 Languages.Yes,
                 Languages.No);
 
@@ -222,8 +222,8 @@ namespace GoViatic.ViewModels
             }
             IsEnable = true;
             await TripViewModel.GetInstance().UpdateUserData();
-            await Application.Current.MainPage.DisplayAlert("Message", "Trips has been deleted", "Accept");
-            await Shell.Current.Navigation.PopAsync();
+            await Application.Current.MainPage.DisplayAlert("Trip Information", "Trips has been deleted", "Accept");
+            await Shell.Current.Navigation.PopToRootAsync();
         }
 
         private bool ValidateData()

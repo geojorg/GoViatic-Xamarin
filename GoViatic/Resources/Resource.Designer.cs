@@ -324,9 +324,9 @@ namespace GoViatic.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to delete the current trip ?.
         /// </summary>
-        internal static string Question {
+        internal static string QuestionT {
             get {
-                return ResourceManager.GetString("Question", resourceCulture);
+                return ResourceManager.GetString("QuestionT", resourceCulture);
             }
         }
         
@@ -358,6 +358,15 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trip Message.
+        /// </summary>
+        internal static string TripEditCreation {
+            get {
+                return ResourceManager.GetString("TripEditCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Viatic.
         /// </summary>
         internal static string Viatic {
@@ -385,7 +394,7 @@ namespace GoViatic.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VIATICS:.
+        ///   Looks up a localized string similar to VIATICS: .
         /// </summary>
         internal static string ViaticsD {
             get {

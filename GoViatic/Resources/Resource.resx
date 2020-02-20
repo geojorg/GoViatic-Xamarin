@@ -130,7 +130,7 @@
     <value>Budget:</value>
   </data>
   <data name="ViaticsD" xml:space="preserve">
-    <value>VIATICS:</value>
+    <value>VIATICS: </value>
   </data>
   <data name="NavTittleTripsPage" xml:space="preserve">
     <value>List of Trips</value>
@@ -180,7 +180,7 @@
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
-  <data name="Question" xml:space="preserve">
+  <data name="QuestionT" xml:space="preserve">
     <value>Do you want to delete the current trip ?</value>
   </data>
   <data name="Yes" xml:space="preserve">
@@ -236,5 +236,8 @@
   </data>
   <data name="QuestionV" xml:space="preserve">
     <value>Do you want to delete the current viatic ?</value>
+  </data>
+  <data name="TripEditCreation" xml:space="preserve">
+    <value>Trip Message</value>
   </data>
 </root>

@@ -15,7 +15,7 @@ namespace Goviatic.CustomRenderers
         {
             //TODO CHANGE DE CA-APP-PUB CAMBIAR EL CODIGO
             interstitialAd = new InterstitialAd(Android.App.Application.Context);
-            interstitialAd.AdUnitId = "";
+            interstitialAd.AdUnitId = "ca-app-pub-5943072479494249/4544389012";
             LoadAd();
         }
 

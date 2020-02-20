@@ -24,7 +24,7 @@ namespace GoViatic.Helpers
         public static string Created => Resource.Created;
         public static string CreateEditTripConfirm => Resource.CreateEditTripConfirm;
         public static string Confirm => Resource.Confirm;
-        public static string Question => Resource.Question;
+        public static string QuestionT => Resource.QuestionT;
         public static string QuestionV => Resource.QuestionV;
         public static string Yes => Resource.Yes;
         public static string No => Resource.No;
@@ -32,5 +32,7 @@ namespace GoViatic.Helpers
         public static string NavTittleEditViatic => Resource.NavTittleEditViaticPage;
         public static string CreateViaticTittle => Resource.CreateViaticTittle;
         public static string EditViaticTittle => Resource.EditViaticTittle;
+
+        public static string TripEditCreation => Resource.TripEditCreation;
     }
 }

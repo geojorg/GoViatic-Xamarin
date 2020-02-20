@@ -12,12 +12,6 @@
     Visual="Material"
     mc:Ignorable="d">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converter:CurrencyConverter x:Key="currencyConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
         <Grid
             Margin="14"
@@ -30,7 +24,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -70,7 +64,7 @@
                 Grid.Column="1"
                 BackgroundColor="Transparent"
                 Keyboard="Numeric"
-                Text="{Binding Trip.Budget, Converter={StaticResource currencyConverter}}" />
+                Text="{Binding Trip.Budget}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -83,11 +77,10 @@
                 Grid.Column="1"
                 BackgroundColor="Transparent"
                 Date="{Binding Trip.Date}"
-                Format="  dd/MM/yyyy"
-                Visual="Default" />
+                Format="dd/MM/yyyy"/>
             <Label
                 Grid.Row="4"
-                Grid.Column="0"
+                Grid.Column="0" 
                 FontFamily="{StaticResource UbuntuBold}"
                 FontSize="Body"
                 Text="{i18n:Translate EndDay}"
@@ -97,8 +90,7 @@
                 Grid.Column="1"
                 BackgroundColor="Transparent"
                 Date="{Binding Trip.EndDate}"
-                Format="  dd/MM/yyyy"
-                Visual="Default" />
+                Format="dd/MM/yyyy" />
             <Label
                 Grid.Row="5"
                 Grid.ColumnSpan="2"
@@ -110,6 +102,7 @@
             <ActivityIndicator
                 Grid.Row="6"
                 Grid.ColumnSpan="2"
+                Margin="0,0,0,50"
                 HeightRequest="40"
                 IsRunning="{Binding IsRunning}"
                 Color="Accent" />
@@ -132,7 +125,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Margin="0,0,0,20"
-                BackgroundColor="Red"
+                BackgroundColor="#FE6464"
                 Command="{Binding DeleteCommand}"
                 CornerRadius="7"
                 HeightRequest="46"

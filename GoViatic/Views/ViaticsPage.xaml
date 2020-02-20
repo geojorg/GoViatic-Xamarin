@@ -46,18 +46,12 @@
                                 <Grid ColumnSpacing="0" RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image
-                                        Grid.Row="0"
-                                        Grid.RowSpan="3"
-                                        Grid.Column="0"
-                                        Aspect="AspectFill"
-                                        HeightRequest="100"
-                                        Source="{Binding ImageUrl}"
-                                        WidthRequest="100" />
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="1"
@@ -70,14 +64,7 @@
                                         Grid.Column="1"
                                         FontSize="Body"
                                         HorizontalTextAlignment="Center"
-                                        Text="{Binding ViaticType}"
-                                        TextColor="White" />
-                                    <Label
-                                        Grid.Row="2"
-                                        Grid.Column="1"
-                                        FontSize="Body"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{Binding InvoiceAmmount}"
+                                        Text="{Binding InvoiceAmmount , StringFormat='{0:C0}'}"
                                         TextColor="White" />
                                 </Grid>
                             </Frame>

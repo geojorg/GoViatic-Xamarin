@@ -13,22 +13,22 @@ namespace GoViatic.Models
 			ViaticsList.Add(new ViaticType
 			{
 				Name = "Food",
-				Icon = ""
+				Icon = "ic_email"
 			});
 			ViaticsList.Add(new ViaticType
 			{
 				Name = "Transport",
-				Icon = ""
+				Icon = "ic_email"
 			});
 			ViaticsList.Add(new ViaticType
 			{
 				Name = "Accommodation",
-				Icon = ""
+				Icon = "ic_email"
 			});
 			ViaticsList.Add(new ViaticType
 			{
 				Name = "Other",
-				Icon = ""
+				Icon = "ic_email"
 			});
 
 		}
